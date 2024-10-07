@@ -1,0 +1,36 @@
+(function () {
+  var myConnector = tableau.makeConnector();
+
+  myConnector.getSchema = function (schemaCallback) {
+    var cols = [
+      { id: "date", alias: "Date", dataType: tableau.dataTypeEnum.string },
+      { id: "price", alias: "Price", dataType: tableau.dataTypeEnum.float },
+      { id: "market_cap", alias: "Market Cap", dataType: tableau.dataTypeEnum.float }
+    ];
+
+    var tableSchema = {
+      id: "cryptoData",
+      alias: "Crypto Data from CoinGecko",
+      columns: cols
+    };
+
+    schemaCallback([tableSchema]);
+  };
+
+  myConnector.getData = function (table, doneCallback) {
+    $.getJSON("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true", function (resp) {
+      var tableData = [];
+
+      tableData.push({
+        date: new Date().toISOString(),
+        price: resp.bitcoin.usd,
+        market_cap: resp.bitcoin.usd_market_cap
+      });
+
+      table.appendRows(tableData);
+      doneCallback();
+    });
+  };
+
+  tableau.registerConnector(myConnector);
+})();
