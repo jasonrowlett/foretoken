@@ -8,53 +8,84 @@
     <script type="text/javascript">
         (function() {
             var myConnector = tableau.makeConnector();
-            
-            // Define the schema here
+
+            // Define the schema
             myConnector.getSchema = function(schemaCallback) {
                 var cols = [{
                     id: "id",
+                    alias: "Asset ID",
                     dataType: tableau.dataTypeEnum.string
                 }, {
                     id: "value",
+                    alias: "Price",
                     dataType: tableau.dataTypeEnum.float
                 }];
 
                 var tableSchema = {
                     id: "apiData",
-                    alias: "API Data",
+                    alias: "Combined API Data",
                     columns: cols
                 };
 
                 schemaCallback([tableSchema]);
             };
 
-            // Get the data
+            // Get Data function for APIs
             myConnector.getData = function(table, doneCallback) {
-                var apiUrl = "https://api.yourdata.com/v1/endpoint"; // Replace with your API endpoint
-                fetch(apiUrl)
+                var xautApiUrl = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=tether-gold";
+                var goldApiUrl = "https://api.api-ninjas.com/v1/gold";
+                var tableData = [];
+
+                // Fetch Tether XAUT data from CoinGecko API
+                fetch(xautApiUrl)
                     .then(response => response.json())
-                    .then(data => {
-                        var tableData = [];
-                        
-                        // Parse the API response data
-                        data.forEach(function(item) {
+                    .then(dataXaut => {
+                        dataXaut.forEach(function(item) {
                             tableData.push({
                                 "id": item.id,
-                                "value": item.value
+                                "value": item.current_price
                             });
                         });
 
+                        // Fetch physical gold price from Ninja API
+                        return fetch(goldApiUrl, {
+                            method: 'GET',
+                            headers: {
+                                'X-Api-Key': 'your_actual_api_key_here' // Replace with your actual API key
+                            });
+                    })
+                    .then(response => response.json())
+                    .then(dataGold => {
+                        // Assuming the API returns a 'price' field
+                        tableData.push({
+                            "id": "physical-gold",
+                            "value": dataGold.price
+                        });
+
+                        // Append both datasets
                         table.appendRows(tableData);
                         doneCallback();
+                    })
+                    .catch(error => {
+                        console.error("Error fetching data: ", error);
+                        doneCallback(); // Complete callback in case of error
                     });
+                })
+                .catch(error => {
+                    console.error("Error fetching XAUT data: ", error);
+                    doneCallback(); // Complete callback in case of error
+                });
             };
 
+            // Register the connector
             tableau.registerConnector(myConnector);
 
-            // Event Listener for WDC Button
-            document.querySelector("#submitButton").addEventListener("click", function() {
-                tableau.connectionName = "My API Data"; // Name of the data source in Tableau
-                tableau.submit();
+            // DOM Content Loaded Event Listener
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelector("#submitButton").addEventListener("click", function() {
+                    tableau.connectionName = "My API Data";
+                    tableau.submit();
+                });
             });
         })();
     </script>
