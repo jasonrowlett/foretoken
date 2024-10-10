@@ -7,3 +7,119 @@ amplify/
 .atom/
 .config/
 .gitignore
+
+# Additional untracked files to ignore
+.CFUserTextEncoding
+.DS_Store
+.Trash/
+.amplify/
+.arduinoIDE/
+atom/
+.babel.7.14.3.production.json
+.cache/
+.config/
+.cups/
+.gitconfig
+.idlerc/
+.keras/
+.kite/
+.lesshst
+.local/
+.matplotlib/
+.mono/
+.netrc
+.ngrok2/
+.node_repl_history
+.npm/
+.pyenv/
+.python_history
+.python_history-01492.tmp
+.python_history-13924.tmp
+.python_history-21791.tmp
+.ssh/
+.swiftpm/
+.viminfo
+.zcompdump-Jason\342\200\231s MacBook Air-5.8
+.zprofile
+.zprofile.save
+.zprofile.save.1
+.zsh_history
+.zsh_sessions/
+.zshrc
+.zshrc.omz-uninstalled-2021-06-14_15-12-31
+.zshrc.swp
+Applications/
+Desktop/
+.DS_Store
+.localized
+ADHD/
+Certificate.pdf
+DL_back.png
+DL_front.png
+DL_front_holding.png
+Dutch/
+FPN_090624.aup3
+FPN_090624.aup3-shm
+FPN_090624.aup3-wal
+IBC NDA - 11-04-2024.pdf
+Jason_D_Rowlett_Passport.png
+Jay_Cryptogeld_Profile_0824.png
+Jay_Cryptogeld_Profile_0824_small.png
+Jay_Cryptogeld_small.png
+My Tableau Repository/
+Passport.png
+RWA_Lending_Pools_eBook_Defactor.pdf
+RealT-backup-codes.png
+Screenshot 2024-08-03 at 10.14.58\342\200\257AM.png
+Screenshot 2024-08-17 at 10.22.09\342\200\257AM.png
+Screenshot 2024-08-23 at 1.05.24\342\200\257PM.png
+Screenshot 2024-08-23 at 1.05.40\342\200\257PM.png
+Screenshot 2024-08-26 at 10.49.29\342\200\257AM.png
+Screenshot 2024-08-27 at 12.35.47\342\200\257PM.png
+Self-Esteem.jpg
+September_2024_-_Duty_Roster_v2.pdf
+Tokenized_Oil.png
+Tokenized_RWA (1).png
+Tokenized_RWA (2).png
+UFCU_password.png
+_ICA - IBC X Jason Douglas Rowlett (1).pdf
+bible/
+business/(1) Foretoken/
+business/(2) SoundStamp/
+business/.DS_Store
+business/boat/
+business/clients/
+business/images/
+business/legal/
+business/writing/
+.DS_Store
+devSite/.DS_Store
+files/
+finance/
+jasonrowlett085.png
+photos/
+resum\303\251s/
+rowlettjason.png
+travel/
+work/
+Downloads/
+Intro_to_GraphQL_Powered_by_Shopify/
+Library/
+Movies/
+Music/
+New document 1.2022_01_05_12_23_43.0.svg
+Pictures/
+Public/
+amplify/
+burger-api/
+connect-googleapps/
+customs_and_currency/
+draggable/
+foretoken_concourse/
+js-buy-sdk/
+my-app/
+package-lock.json
+package.json
+slate/
+theme-scripts/
+xtcryptosignals/
