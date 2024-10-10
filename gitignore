@@ -1,0 +1,9 @@
+# Ignore system files
+.DS_Store
+.Trash/
+.cache/
+node_modules/
+amplify/
+.atom/
+.config/
+.gitignore
