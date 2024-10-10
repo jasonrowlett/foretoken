@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Web Data Connector</title>
+    <script src="https://connectors.tableau.com/libs/tableauwdc-2.3.0.js"></script>
+    <script type="text/javascript">
+        (function() {
+            var myConnector = tableau.makeConnector();
+
+            // Define the schema
+            myConnector.getSchema = function(schemaCallback) {
+                var cols = [{
+                    id: "id",
+                    alias: "Asset ID",
+                    dataType: tableau.dataTypeEnum.string
+                }, {
+                    id: "value",
+                    alias: "Price",
+                    dataType: tableau.dataTypeEnum.float
+                }];
+
+                var tableSchema = {
+                    id: "apiData",
+                    alias: "Combined API Data",
+                    columns: cols
+                };
+
+                schemaCallback([tableSchema]);
+            };
+
+            // Get Data function for APIs
+            myConnector.getData = function(table, doneCallback) {
+                var xautApiUrl = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=tether-gold";
+                var goldApiUrl = "https://api.api-ninjas.com/v1/gold";
+                var tableData = [];
+
+                // Fetch Tether XAUT data from CoinGecko API
+                fetch(xautApiUrl)
+                    .then(response => response.json())
+                    .then(dataXaut => {
+                        dataXaut.forEach(function(item) {
+                            tableData.push({
+                                "id": item.id,
+                                "value": item.current_price
+                            });
+                        });
+
+                        // Fetch physical gold price from Ninja API
+                        return fetch(goldApiUrl, {
+                            method: 'GET',
+                            headers: {
+                                'X-Api-Key': 'ft4paYNO0+m9RmXhNKE9Hg==22g2rtHLLrlENuPy' // Replace with your actual API key
+                            });
+                    })
+                    .then(response => response.json())
+                    .then(dataGold => {
+                        // Assuming the API returns a 'price' field
+                        tableData.push({
+                            "id": "physical-gold",
+                            "value": dataGold.price
+                        });
+
+                        // Append both datasets
+                        table.appendRows(tableData);
+                        doneCallback();
+                    })
+                    .catch(error => {
+                        console.error("Error fetching data: ", error);
+                        doneCallback(); // Complete callback in case of error
+                    });
+                })
+                .catch(error => {
+                    console.error("Error fetching XAUT data: ", error);
+                    doneCallback(); // Complete callback in case of error
+                });
+            };
+
+            // Register the connector
+            tableau.registerConnector(myConnector);
+
+            // DOM Content Loaded Event Listener
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelector("#submitButton").addEventListener("click", function() {
+                    tableau.connectionName = "My API Data";
+                    tableau.submit();
+                });
+            });
+        })();
+    </script>
+</head>
+<body>
+    <h1>Tableau Web Data Connector</h1>
+    <button id="submitButton">Get Data</button>
+</body>
+</html>
