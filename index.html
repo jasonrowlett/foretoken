@@ -79,11 +79,18 @@
             };
 
             // Register the connector
-            tableau.registerConnector(myConnector);  // Ensure this is called after connector definition
+            tableau.registerConnector(myConnector);
 
             // DOM Content Loaded Event Listener
             document.addEventListener("DOMContentLoaded", function() {
+                // Initialize Tableau
+                tableau.init({
+                    interactive: true
+                });
+
+                // Add event listener for Get Data button
                 document.querySelector("#submitButton").addEventListener("click", function() {
+                    console.log("Get Data button clicked!");
                     tableau.connectionName = "My API Data";
                     tableau.submit();
                 });
