@@ -32,8 +32,6 @@
 
             // Get Data function for APIs
             myConnector.getData = function(table, doneCallback) {
-                tableau.init(); // Initialize Tableau before making API calls
-
                 var xautApiUrl = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=tether-gold";
                 var goldApiUrl = "https://api.api-ninjas.com/v1/gold";
                 var tableData = [];
@@ -41,11 +39,10 @@
                 // Fetch Tether XAUT data from CoinGecko API
                 fetch(xautApiUrl)
                     .then(response => {
-                        console.log(response);  // Debugging: log the response for XAUT API
+                        if (!response.ok) throw new Error("Network response was not OK");
                         return response.json();
                     })
                     .then(dataXaut => {
-                        console.log(dataXaut);  // Debugging: log the data received for XAUT
                         dataXaut.forEach(function(item) {
                             tableData.push({
                                 "id": item.id,
@@ -62,12 +59,10 @@
                         });
                     })
                     .then(response => {
-                        console.log(response);  // Debugging: log the response for Gold API
+                        if (!response.ok) throw new Error("Network response was not OK");
                         return response.json();
                     })
                     .then(dataGold => {
-                        console.log(dataGold);  // Debugging: log the data received for Gold API
-                        // Assuming the API returns a 'price' field
                         tableData.push({
                             "id": "physical-gold",
                             "value": dataGold.price
@@ -81,15 +76,10 @@
                         console.error("Error fetching data: ", error);
                         doneCallback(); // Complete callback in case of error
                     });
-                })
-                .catch(error => {
-                    console.error("Error fetching XAUT data: ", error);
-                    doneCallback(); // Complete callback in case of error
-                });
             };
 
             // Register the connector
-            tableau.registerConnector(myConnector);  // Ensure this is called correctly
+            tableau.registerConnector(myConnector);  // Ensure this is called after connector definition
 
             // DOM Content Loaded Event Listener
             document.addEventListener("DOMContentLoaded", function() {
