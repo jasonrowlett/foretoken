@@ -7,6 +7,11 @@
     <script src="https://connectors.tableau.com/libs/tableauwdc-2.3.0.js"></script>
     <script type="text/javascript">
         (function() {
+            // Register the connector early
+            tableau.init({
+                interactive: true
+            });
+
             var myConnector = tableau.makeConnector();
 
             // Define the schema
@@ -78,17 +83,10 @@
                     });
             };
 
-            // Register the connector
-            tableau.registerConnector(myConnector);
+            tableau.registerConnector(myConnector);  // Ensure this is called after the connector definition
 
             // DOM Content Loaded Event Listener
             document.addEventListener("DOMContentLoaded", function() {
-                // Initialize Tableau
-                tableau.init({
-                    interactive: true
-                });
-
-                // Add event listener for Get Data button
                 document.querySelector("#submitButton").addEventListener("click", function() {
                     console.log("Get Data button clicked!");
                     tableau.connectionName = "My API Data";
