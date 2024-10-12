@@ -57,9 +57,10 @@
                         });
 
                         console.log("Fetching Gold data...");
+                    });
                         
                         // Fetch physical gold price from Ninja API
-                        return fetch(goldApiUrl, {
+                        fetch(goldApiUrl, {
                             method: 'GET',
                             headers: {
                                 'X-Api-Key': 'ft4paYNO0+m9RmXhNKE9Hg==22g2rtHLLrlENuPy' // Replace with your actual API key
@@ -76,6 +77,7 @@
                             "id": "physical-gold",
                             "value": dataGold.price
                         });
+                    })
 
                         console.log("Appending rows to Tableau: ", tableData);
                         table.appendRows(tableData);
