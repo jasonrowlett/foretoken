@@ -6,6 +6,7 @@
     <title>Tableau Web Data Connector</title>
     <script src="https://connectors.tableau.com/libs/tableauwdc-2.3.0.js"></script>
     <script type="text/javascript">
+        tableau.registerConnector(myConnector);
         (function() {
             tableau.init({
                 interactive: true
@@ -88,8 +89,6 @@
                         doneCallback(); // Complete callback in case of error
                     });
             };
-
-            tableau.registerConnector(myConnector);
 
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelector("#submitButton").addEventListener("click", function() {
