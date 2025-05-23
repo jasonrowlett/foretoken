@@ -1,26 +1,17 @@
-// App.tsx
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Home from "./pages/Home";
-import RWA101 from "./pages/RWA101";
-import NotFound from "./pages/NotFound";
+import React from 'react';
+import Navbar from './components/navbar';
+import Footer from './components/footer';
 
-function App() {
+const App = () => {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/rwa101" element={<RWA101 />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </Router>
+    <div className="bg-black text-white min-h-screen flex flex-col justify-between">
+      <Navbar />
+      <main className="flex-grow flex items-center justify-center">
+        <h1 className="text-4xl font-bold text-purple-400">Foretoken is live!</h1>
+      </main>
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
