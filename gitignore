@@ -6,11 +6,12 @@
 # Ignore Node.js packages and project dependencies
 node_modules/
 package-lock.json
-package.json
 
 # Ignore all files in specific directories
-amplify/
+.amplify/
 .atom/
 .config/
 .git/
 .npm/
+dist/
+.env
