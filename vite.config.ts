@@ -10,12 +10,20 @@ const __dirname = dirname(__filename);
 export default defineConfig({
   plugins: [react()],
   server: {
-  host: "0.0.0.0",
-  port: parseInt(process.env.PORT) || 3000,
+    host: "0.0.0.0",
+    port: 4173,
+    proxy: {
+      "/api": "http://localhost:3000",
+    },
   },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  preview: {
+    port: 4173,
+    host: "0.0.0.0",
+    allowedHosts: ["foretoken.onrender.com"]
+  }
 });
