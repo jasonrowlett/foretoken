@@ -1,0 +1,29 @@
+Terms of Service (TOS)
+
+Effective Date: May 30, 2025
+
+Welcome to Foretoken, a product of RGI Enterprises LLC (“Foretoken,” “we,” “our,” or “us”). By accessing or using our website, services, data dashboards, or any other Foretoken product (“Services”), you agree to be bound by these Terms of Service. If you do not agree, please do not use our Services.
+
+1. Use of Services
+Foretoken is a platform that offers data insights, educational content, and financial comparisons regarding real-world asset (RWA) tokenization. You may not use our Services for any illegal or unauthorized purpose. You agree to comply with all applicable laws and regulations.
+
+2. User Accounts
+To access certain features, you may be required to create an account. You agree to provide accurate, complete, and current information. You are solely responsible for maintaining the confidentiality of your account and password.
+
+3. Intellectual Property
+All content, data, branding, and trademarks on this site are the property of RGI Enterprises LLC or its licensors. You may not copy, distribute, or reverse engineer any part of our Services without our explicit written permission.
+
+4. Data Accuracy and Third-Party APIs
+Foretoken aggregates data from multiple third-party sources and APIs (e.g., CoinGecko, FRED, API Ninjas, Yahoo Finance). While we strive for accuracy, we do not guarantee the completeness, accuracy, or reliability of third-party data. You agree to use the information at your own risk.
+
+5. No Financial Advice
+Foretoken does not offer investment, legal, tax, or financial advice. All content is for educational and informational purposes only. You agree not to treat any information obtained through our Services as a recommendation to buy or sell any asset.
+
+6. Limitation of Liability
+To the fullest extent permitted by law, RGI Enterprises LLC shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from your use of the Services.
+
+7. Termination
+We reserve the right to suspend or terminate your access to the Services at our sole discretion, with or without cause or notice.
+
+8. Changes to Terms
+We may update these Terms at any time. Your continued use of the Services after such changes constitutes acceptance of the new Terms.

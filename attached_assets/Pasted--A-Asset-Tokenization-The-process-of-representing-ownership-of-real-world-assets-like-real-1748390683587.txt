@@ -1,0 +1,55 @@
+### A
+**Asset Tokenization** – The process of representing ownership of real-world assets (like real estate or commodities) on a blockchain as digital tokens.  
+**Automated Market Maker (AMM)** – A smart contract-based system for swapping assets without traditional order books.
+
+### B
+**Blockchain** – A decentralized, cryptographically secure ledger for recording digital transactions.  
+**Bond Token** – A digital token that represents a share of a bond or fixed income instrument.
+
+### C
+**CBDC (Central Bank Digital Currency)** – A digital currency issued by a central bank.  
+**Collateralization** – Using one asset to back the value of another, often used in DeFi.
+
+### D
+**DAO (Decentralized Autonomous Organization)** – An on-chain governance model for community-led operations.  
+**DeFi (Decentralized Finance)** – A system of financial products operating on public blockchains without intermediaries.
+
+### E
+**Ethereum** – A smart contract blockchain that enables tokenized applications and DeFi.
+
+### F
+**Fiat Currency** – Government-issued currency not backed by a physical commodity.
+
+### G
+**Governance Token** – A token that gives holders voting rights in a protocol or DAO.
+
+### H
+**Hard Asset** – A tangible, physical asset like gold, real estate, or equipment.
+
+### I
+**Interoperability** – The ability for blockchains and platforms to work together and share data.
+
+### K
+**KYC (Know Your Customer)** – A regulatory process for verifying user identity.
+
+### L
+**Liquidity** – How easily an asset can be bought or sold without affecting price.
+
+### M
+**Market Cap** – The total value of all tokens in circulation, calculated by price × supply.  
+**MiCA** – Markets in Crypto Assets regulation from the EU governing digital assets.
+
+### P
+**Private Credit Token** – A token representing debt or fixed yield not available to public investors.
+
+### R
+**Real-World Asset (RWA)** – A physical or financial asset represented digitally on-chain.
+
+### S
+**Stablecoin** – A token pegged to a fiat currency, like USDC or USDT.
+
+### T
+**Tokenization** – Converting rights to an asset into a digital token on the blockchain.
+
+### V
+**Volatility** – The degree of variation in an asset’s price over time.

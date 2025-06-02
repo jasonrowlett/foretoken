@@ -1,0 +1,99 @@
+Build me a full React + TailwindCSS website for my brand "Foretoken".
+
+The design should use:
+
+A dark black background
+
+Inter font throughout
+
+Accents in purple and white
+
+Sleek UI cards and smooth shadows
+
+Rounded corners (2xl)
+
+Proper padding and section spacing
+
+Icons from Lucide
+
+Modern dropdowns, navbars, tooltips, and hover effects
+
+Structure the site with these pages:
+
+Homepage:
+
+Bold tagline: "Tokenized Insight. Real-World Impact."
+
+Subtext: "Compare tokenized and traditional assets through analysis, education, and vision."
+
+Two buttons: “Learn the Basics” and “Subscribe for Updates”
+
+Hero section image or card with a “Concourse Coming Soon” banner
+
+RWA 101:
+
+Educational article-style layout with headers for:
+
+What Are RWAs?
+
+Why Tokenize?
+
+Investor Benefits
+
+Risks and Considerations
+
+Foretoken’s Role
+
+Format like a digital reading experience (max width 3xl, good spacing)
+
+Library Page:
+
+Grid of article cards with hover animation
+
+Each card: title, short summary, “Read More” link
+
+Podcast Page:
+
+Split section: “Foretoken Podcast” and “The Rowlett Report”
+
+Each with image thumbnail, short blurb, and buttons to “Listen on Spotify / Apple”
+
+Glossary Page:
+
+Alphabetized list of 60+ crypto and RWA terms with definitions
+
+Optional dropdown or filter bar at top to jump to terms A–Z
+
+About Page:
+
+Split section: "About Foretoken" and "About Jay Rowlett"
+
+Include short founder bio and Foretoken mission:
+“Helping investors bridge the gap between traditional and tokenized finance.”
+
+Subscribe Page:
+
+Email input form with simple CTA: “Subscribe for insights, updates, and research.”
+
+Style it with glowing border input field, call-to-action button, and privacy disclaimer
+
+Navbar:
+
+Black background with purple accent border at bottom
+
+White Foretoken logo left-aligned
+
+Nav links: Home, RWA 101, Library, Podcast, Glossary, About, Subscribe
+
+“Concourse (Coming Soon)” grayed out or tooltipped
+
+Footer:
+
+Purple top border
+
+White text
+
+Include © {current year} Foretoken. "Built for clarity in tokenized finance."
+
+Social media links (X, LinkedIn, Email)
+

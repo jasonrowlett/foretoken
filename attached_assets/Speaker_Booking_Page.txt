@@ -1,0 +1,26 @@
+Foretoken Connect – Speaker Booking Page
+Effective Date: May 30, 2025
+
+Book Jason Rowlett for your next conference, panel, or executive briefing. Jason delivers compelling insights on RWA tokenization, regulation, and crypto adoption for both traditional and digital finance audiences.
+
+Form Fields:
+- Full Name
+- Email
+- Organization Name
+- Phone Number (optional)
+- Event Location
+- Event Date
+- Event Description
+- Estimated Audience Size
+- Virtual or In-Person?
+- Time Zone (for scheduling follow-ups)
+- Upload button (event briefs or promotional materials)
+- Checkbox to agree to terms and conditions
+- Additional Notes
+
+Cost Breakdown:
+- Speaking Fee: Starting at $2,500 USD
+- Travel + Lodging: Covered by event host
+- Custom Presentations: Additional research or tailored topics may incur additional costs
+- Virtual Events: $1,000 flat fee (no travel required)
+- All prices are negotiable depending on audience, budget, and partnership opportunities.
