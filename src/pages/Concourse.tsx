@@ -8,16 +8,15 @@ const Concourse: React.FC = () => {
       <p className="text-lg text-gray-300 mb-6">
         Real-time comparisons between tokenized real-world assets and their traditional market counterparts.
       </p>
-
       <div className="aspect-w-16 aspect-h-9 w-full max-w-6xl mx-auto shadow-lg rounded-xl overflow-hidden">
         <iframe
-          title="Foretoken Concourse Looker Studio"
+          title="Foretoken Concourse Dashboard"
           width="100%"
           height="800"
-          src="https://lookerstudio.google.com/embed/reporting/your-report-id/page/xyz"
-          frameBorder="0"
+          src="https://lookerstudio.google.com/embed/reporting/a37bb396-b347-4ed5-872b-c884cd3bb03b/page/tgwNF"
           style={{ border: 0 }}
           allowFullScreen
+          sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
         />
       </div>
     </div>
