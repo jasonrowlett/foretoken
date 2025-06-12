@@ -13,7 +13,9 @@ export default defineConfig({
     proxy: {
       "/api": "http://localhost:3000",
     },
+    historyApiFallback: true,
   },
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

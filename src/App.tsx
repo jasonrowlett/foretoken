@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
+import Concourse from "@/pages/Concourse";
 import RWA101 from "@/pages/RWA101";
 import Library from "@/pages/Library";
 import Podcast from "@/pages/Podcast";
@@ -27,6 +28,7 @@ import NotFound from "@/pages/not-found";
 function Router() {
   return (
     <div className="min-h-screen bg-black text-white">
+      <Route path="/concourse" component={Concourse} />
       <Navbar />
       <Switch>
         <Route path="/" component={Home} />
