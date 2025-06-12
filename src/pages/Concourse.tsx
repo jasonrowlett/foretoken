@@ -13,7 +13,7 @@ const Concourse: React.FC = () => {
           title="Foretoken Concourse Dashboard"
           width="100%"
           height="800"
-          src="https://lookerstudio.google.com/embed/reporting/a37bb396-b347-4ed5-872b-c884cd3bb03b/page/tgwNF"
+          src="https://lookerstudio.google.com/embed/reporting/c2b05ede-56cb-403b-9edd-c10ae3fcdeb1/page/tgwNF"
           style={{ border: 0 }}
           allowFullScreen
           sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
