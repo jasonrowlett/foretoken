@@ -136,7 +136,19 @@ const Navbar = () => {
               >
                 Podcasts
               </Link>
-              
+
+              {/* Concourse */}
+              <Link
+                href="/concourse"
+                className={`px-3 py-2 text-sm font-medium transition-colors duration-200 whitespace-nowrap ${
+                  location === "/concourse"
+                    ? "text-white"
+                    : "text-gray-300 hover:text-purple-400"
+                }`}
+              >
+                Concourse
+              </Link>
+
               {/* Subscribe */}
               <Link
                 href="/subscribe"
