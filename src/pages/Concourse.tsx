@@ -4,7 +4,7 @@ const Concourse: React.FC = () => {
   return (
     <div className="bg-[#0E0E0E] text-[#f2f2f2] font-sans min-h-screen">
       <header className="bg-[#111111] border-b border-[#222] text-center py-5">
-        <h1 className="text-2xl font-bold text-white">Concourse: Live Tokenized Gold Dashboard</h1>
+        <h1 className="text-2xl font-bold text-white">Concourse: Live Tokenized & Traditional Asset Comparison Dashboard</h1>
       </header>
 
       <main className="max-w-5xl mx-auto px-5 py-10">
