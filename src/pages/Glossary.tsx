@@ -127,7 +127,6 @@ const Glossary = () => {
         {/* Terms Display */}
         <div className="space-y-12">
           {searchTerm ? (
-            // Search Results
             <div>
               <h2 className="text-2xl font-bold mb-6 text-purple-400">
                 Search Results ({filteredTerms.length} terms)
@@ -142,22 +141,15 @@ const Glossary = () => {
                     <p className="text-gray-300 leading-relaxed">{term.definition}</p>
                   </div>
                 ))}
-                {filteredTerms.length === 0 && (
-                  <div className="text-center py-12">
-                    <p className="text-gray-400">No terms found matching your search.</p>
-                  </div>
-                )}
               </div>
             </div>
           ) : (
-            // Grouped by Letter
             alphabetLetters.map((letter) => (
               <div key={letter} id={`section-${letter}`} className="scroll-mt-24">
                 <div className="flex items-center mb-6">
-                  <div className="bg-purple-500 text-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold mr-4">
+                  <div className="bg-purple-500 text-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold">
                     {letter}
                   </div>
-                  <h2 className="text-3xl font-bold text-white">{letter}</h2>
                 </div>
                 <div className="space-y-4">
                   {groupedTerms[letter].map((term, index) => (
@@ -175,7 +167,6 @@ const Glossary = () => {
           )}
         </div>
 
-        {/* Back to Top */}
         {!searchTerm && (
           <div className="mt-16 text-center">
             <button
