@@ -11,7 +11,7 @@ const Concourse: React.FC = () => {
         <a href="/" className="text-yellow-400 text-sm mb-6 inline-block hover:underline">← Back to Home</a>
         
         <p className="text-[#cccccc] text-base leading-relaxed mb-8">
-          Concourse is a live dashboard from Foretoken comparing the market performance of tokenized gold assets (XAUT, PAXG, KAU) to physical gold prices. Use the date filter in the upper right to explore 7-day, 30-day, and YTD performance, and monitor how token prices track — or diverge from — spot gold.
+          Concourse is a live dashboard from Foretoken comparing the market performance of traditional assets to their tokenized asset counterparts. For example, compare gold-baked RWA tokens XAUT, PAXG, and KAU to physical gold prices. Investors can use this tool to benchmark token performance, assess volatility, track trading premiums, and evaluate liquidity trends over time. Use the date filter in the upper right to explore 7-day, 30-day, and YTD performance, and monitor how token prices track — or diverge from — spot gold.
         </p>
 
         <div className="rounded-lg shadow-lg overflow-hidden">
