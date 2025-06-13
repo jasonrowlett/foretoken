@@ -7,8 +7,8 @@ const Header = () => {
       <Link to="/">
         <div className="w-12 h-12 border border-red-500">
           <img
-            src="https://via.placeholder.com/48x48.png?text=FT"
-            alt="Test Logo"
+            src="/assets/foretoken_logo_websafe.png"
+            alt="Foretoken Logo"
             className="object-contain w-full h-full"
           />
         </div>
