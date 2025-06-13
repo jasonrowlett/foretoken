@@ -38,9 +38,9 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-3">
-              <img 
-                src="/assets/foretoken_logo_websafe.png" 
-                alt="Foretoken Logo" 
+              <img
+                src="/assets/foretoken_logo_websafe.png"
+                alt="Foretoken Logo"
                 className="w-10 h-10 object-cover rounded-full"
               />
               <span className="text-2xl font-bold text-white">Foretoken</span>
