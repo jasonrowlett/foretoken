@@ -1,16 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Foretoken | Real-World Asset Insights</title>
-  <link rel="stylesheet" href="concourse_gold.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concourse Dashboard | Foretoken</title>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ccc;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid #888;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 280px;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      border-color: #9b5de5;
+    }
+
+    a {
+      text-decoration: none;
+      color: #9b5de5;
+      font-size: 1.2rem;
+    }
+
+    .subtitle {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Foretoken</h1>
-  <p>Explore tokenized vs traditional markets:</p>
-  <ul>
-    <li><a href="concourse.html">Gold Dashboard</a></li>
-    <li><a href="concourse_treasuries.html">Treasuries Dashboard</a></li>
-  </ul>
+  <h1>Concourse Dashboard</h1>
+
+  <div class="grid">
+    <div class="card">
+      <a href="gold.html">Gold: Tokenized vs Traditional</a>
+      <div class="subtitle">Compare XAUT, PAXG with physical gold</div>
+    </div>
+
+    <div class="card">
+      <a href="treasuries.html">Treasuries: Tokenized vs Traditional</a>
+      <div class="subtitle">Compare ONDO, TBILL with T-Bill yields</div>
+    </div>
+
+    <!-- Future Sector Cards -->
+    <div class="card">
+      <a href="#">Real Estate (Coming Soon)</a>
+      <div class="subtitle">Fractional REITs vs tokenized real estate</div>
+    </div>
+
+    <div class="card">
+      <a href="#">Private Credit (Coming Soon)</a>
+      <div class="subtitle">On-chain yields vs high-yield bonds</div>
+    </div>
+  </div>
 </body>
 </html>
