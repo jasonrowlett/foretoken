@@ -1,56 +1,58 @@
-fetch("https://script.google.com/macros/s/AKfycbwGatO0iiamJHceCf9oo0f5ah9IJgpAfxK52BuwIf_c-poj64n8sWXjK7S7Yt5qXb5uAw/exec")
-  .then(res => res.json())
-  .then(data => {
-    const labels = data.map(row => row.Date);
-    const physical = data.map(row => parseFloat(row.Physical_Gold));
-    const xaut = data.map(row => parseFloat(row.XAUT));
-    const paxg = data.map(row => parseFloat(row.PAXG));
-    const kau = data.map(row => parseFloat(row.KAU));
+document.addEventListener("DOMContentLoaded", function () {
+  const canvas = document.getElementById("goldChart");
 
-    const ctx = document.getElementById("goldChart").getContext("2d");
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Physical Gold",
-            data: physical,
-            borderColor: "gold",
-            borderWidth: 2
+  if (!canvas) {
+    console.error("Canvas element not found!");
+    return;
+  }
+
+  const ctx = canvas.getContext("2d");
+  
+  console.log("Canvas context:", ctx);
+  console.log("Chart is:", Chart);
+  
+  const goldChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: ["10:00", "10:05", "10:10", "10:15", "10:20"],
+      datasets: [
+        {
+          label: "Tokenized Gold (XAUT)",
+          data: [2300, 2312, 2305, 2320, 2315],
+          borderColor: "rgba(153, 102, 255, 1)",
+          backgroundColor: "rgba(153, 102, 255, 0.2)",
+          tension: 0.4,
+        },
+        {
+          label: "Physical Gold",
+          data: [2295, 2301, 2300, 2310, 2308],
+          borderColor: "rgba(255, 206, 86, 1)",
+          backgroundColor: "rgba(255, 206, 86, 0.2)",
+          tension: 0.4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: {
+            color: "#fff",
           },
-          {
-            label: "XAUT",
-            data: xaut,
-            borderColor: "purple",
-            borderWidth: 2
-          },
-          {
-            label: "PAXG",
-            data: paxg,
-            borderColor: "green",
-            borderWidth: 2
-          },
-          {
-            label: "KAU",
-            data: kau,
-            borderColor: "orange",
-            borderWidth: 2
-          }
-        ]
+        },
       },
-      options: {
-        responsive: true,
-        scales: {
-          x: {
-            title: { display: true, text: 'Date' }
+      scales: {
+        x: {
+          ticks: {
+            color: "#fff",
           },
-          y: {
-            title: { display: true, text: 'USD' },
-            beginAtZero: false
-          }
-        }
-      }
-    });
-  })
-  .catch(err => console.error("Data fetch error:", err));
+        },
+        y: {
+          ticks: {
+            color: "#fff",
+          },
+        },
+      },
+    },
+  });
+});
