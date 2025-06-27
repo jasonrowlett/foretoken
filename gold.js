@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const endpoint =
     "https://script.google.com/macros/s/AKfycbwGatO0iiamJHceCf9oo0f5ah9IJgpAfxK52BuwIf_c-poj64n8sWXjK7S7Yt5qXb5uAw/exec";
   const ctx = document.getElementById("concourseChart").getContext("2d");
+  const canvasEl = document.getElementById("concourseChart");
+    console.log("Canvas Element:", canvasEl);
+    const ctx = canvasEl.getContext("2d");
 
   fetchDataAndRenderChart(endpoint, ctx);
 });
@@ -67,35 +70,37 @@ function renderChart(ctx, { labels, physicalGold, tokenizedGold }) {
         },
       ],
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: false,
-          ticks: { color: "#ffffff" },
-        },
-        x: {
-          ticks: {
-            maxRotation: 45,
-            minRotation: 45,
-            color: "#ffffff",
-          },
-        },
+   options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: {
+      duration: 600,
+      easing: 'easeOutQuart',
+    },
+    scales: {
+      y: {
+        beginAtZero: false,
+        ticks: { color: "#ffffff" },
       },
-      plugins: {
-        legend: {
-          labels: {
-            color: "#ffffff",
-            boxWidth: 12,
-            font: { size: 12 },
-          },
-        },
-        tooltip: {
-          mode: "index",
-          intersect: false,
+      x: {
+        ticks: {
+          maxRotation: 45,
+          minRotation: 45,
+          color: "#ffffff",
         },
       },
     },
-  });
+    plugins: {
+      legend: {
+        labels: {
+          color: "#ffffff",
+          boxWidth: 12,
+          font: { size: 12 },
+        },
+      },
+      tooltip: {
+        mode: "index",
+        intersect: false,
+      },
+  },
 }
