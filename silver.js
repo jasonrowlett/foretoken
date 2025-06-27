@@ -3,44 +3,32 @@ async function fetchSilverData() {
   const data = await response.json();
 
   const labels = data.map(row => row.Date);
-  const physical = data.map(row => +row["Physical Silver"]);
-  const kag = data.map(row => +row.KAG || null);
-  const grams = data.map(row => +row.GRAMS || null);
+  const physical = data.map(row => row.Physical_Silver);
+  const tokenized = data.map(row => row.Tokenized_Silver);
 
-  canvasEl.height = 400;
-  canvasEl.width = canvasEl.offsetWidth;
-
-  const ctx = document.getElementById("silverChart").getContext("2d");
+  const ctx = document.getElementById("concourseChart").getContext("2d");
 
   new Chart(ctx, {
     type: "line",
     data: {
-      labels,
+      labels: labels,
       datasets: [
         {
+          label: "Tokenized Silver (USD)",
+          borderColor: "#38bdf8",
+          data: tokenized,
+          backgroundColor: "transparent",
+          borderWidth: 2,
+          tension: 0.3,
+        },
+        {
           label: "Physical Silver (USD)",
+          borderColor: "#facc15",
           data: physical,
-          borderColor: "gray",
-          backgroundColor: "gray",
+          backgroundColor: "transparent",
           borderWidth: 2,
-          pointRadius: 0,
-        },
-        {
-          label: "KAG (USD)",
-          data: kag,
-          borderColor: "lightblue",
-          backgroundColor: "lightblue",
-          borderWidth: 2,
-          pointRadius: 0,
-        },
-        {
-          label: "GRAMS (USD)",
-          data: grams,
-          borderColor: "white",
-          backgroundColor: "white",
-          borderWidth: 2,
-          pointRadius: 0,
-        },
+          tension: 0.3,
+        }
       ],
     },
     options: {
@@ -48,24 +36,24 @@ async function fetchSilverData() {
       plugins: {
         legend: {
           labels: {
-            color: "white",
-          },
-        },
-        tooltip: {
-          mode: "index",
-          intersect: false,
-        },
+            color: "white"
+          }
+        }
       },
       scales: {
         x: {
-          ticks: { color: "white", maxRotation: 45, minRotation: 45 },
+          ticks: {
+            color: "white"
+          }
         },
         y: {
-          ticks: { color: "white" },
-        },
-      },
-    },
+          ticks: {
+            color: "white"
+          }
+        }
+      }
+    }
   });
 }
 
-fetchSilverData();
+document.addEventListener("DOMContentLoaded", fetchSilverData);
