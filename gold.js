@@ -70,37 +70,39 @@ function renderChart(ctx, { labels, physicalGold, tokenizedGold }) {
         },
       ],
     },
-   options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: {
-      duration: 600,
-      easing: 'easeOutQuart',
-    },
-    scales: {
-      y: {
-        beginAtZero: false,
-        ticks: { color: "#ffffff" },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuart',
       },
-      x: {
-        ticks: {
-          maxRotation: 45,
-          minRotation: 45,
-          color: "#ffffff",
+      scales: {
+        y: {
+          beginAtZero: false,
+          ticks: { color: "#ffffff" },
+        },
+        x: {
+          ticks: {
+            maxRotation: 45,
+            minRotation: 45,
+            color: "#ffffff",
+          },
         },
       },
-    },
-    plugins: {
-      legend: {
-        labels: {
-          color: "#ffffff",
-          boxWidth: 12,
-          font: { size: 12 },
+      plugins: {
+        legend: {
+          labels: {
+            color: "#ffffff",
+            boxWidth: 12,
+            font: { size: 12 },
+          },
         },
-      },
-      tooltip: {
-        mode: "index",
-        intersect: false,
-      },
-  },
+        tooltip: {
+          mode: "index",
+          intersect: false,
+        },
+      }
+    }
+  });
 }
