@@ -1,7 +1,6 @@
 // LINE 1
 document.addEventListener("DOMContentLoaded", () => {
-  const endpoint =
-    "https://script.google.com/macros/s/AKfycbwGatO0iiamJHceCf9oo0f5ah9IJgpAfxK52BuwIf_c-poj64n8sWXjK7S7Yt5qXb5uAw/exec";
+  const endpoint = "https://script.googleusercontent.com/a/macros/foretoken.co/echo?user_content_key=AehSKLhy7m5EVnBhw4xPXXRNiMQ4mCpUJcRoyq1vjttG1ND8Ph0WXz_RATtP6QOHFB_r6bE1dWIfeDoXvqCjZwERjh2blurDKox9n4WgA7D4BcqmgYQg9r46KSlN9-o7LgnXF9wx8IsvgnynGtMlfUXmRt-OWVwGr9UNf0IvKL0sgMoWzHXyJo6LBX_C8GG5WVKg58U3VK3l58HutRyng0890mBTpgQg9ZIdjRXY0tHuyjlYayVyTAHa2qYnHu1DcLxSkCFzImzp8n8BNflBVilkNtzJPQF_elv4iIUcdSz6yypf8Dld1QBtnXrSmN1uFA&lib=MotHaa_POeJ4AJP0vIwToN_Dd4ZPdTta9";
   const canvasEl = document.getElementById("concourseChart");
   console.log("Canvas Element:", canvasEl);
   const ctx = canvasEl.getContext("2d");
@@ -15,6 +14,7 @@ async function fetchDataAndRenderChart(endpoint, ctx) {
     const response = await fetch(endpoint);
     if (!response.ok) throw new Error("Network response was not ok");
     const rawData = await response.json();
+    console.log("Raw API response:", rawData);
     const parsedData = parseChartData(rawData);
     renderChart(ctx, parsedData);
   } catch (error) {
@@ -34,7 +34,7 @@ function parseChartData(data) {
     const paxg = parseFloat(entry["PAXG"]);
     // const xaut = parseFloat(entry["XAUT"]); // if added later
 
-    if (!isNaN(physical) && !isNaN(paxg)) {
+    if (entry["Date"] && (!isNaN(physical) || !isNaN(paxg))) {
       labels.push(date.toLocaleDateString("en-US"));
       physicalGold.push(physical);
       tokenizedGold.push(paxg); // Option: (paxg + xaut) / 2
