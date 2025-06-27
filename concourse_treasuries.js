@@ -9,6 +9,9 @@ fetch("https://script.google.com/macros/s/AKfycbywNH3QFWNKmxRMUzOstgJCU7AtDSeAkD
     const dtb3 = data.map(row => parseFloat(row.DTB3));
     const dtb6 = data.map(row => parseFloat(row.DTB6));
 
+    canvasEl.height = 400;
+    canvasEl.width = canvasEl.offsetWidth;
+
     const ctx = document.getElementById("treasuryChart").getContext("2d");
     new Chart(ctx, {
       type: 'line',
