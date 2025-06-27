@@ -1,58 +1,65 @@
-const apiUrl = 'https://script.google.com/macros/s/AKfycbywNH3QFWNKmxRMUzOstgJCU7AtDSeAkDWeRScb35Eg4jLh7VH_PSh4Wt8f9aZ3pcnd/exec';
+// treasuries.js
 
-fetch(apiUrl)
+fetch("https://script.google.com/macros/s/AKfycbywNH3QFWNKmxRMUzOstgJCU7AtDSeAkDWeRScb35Eg4jLh7VH_PSh4Wt8f9aZ3pcnd/exec")
   .then(response => response.json())
   .then(data => {
-    console.log("Treasuries Sample Data:", data.slice(0, 5));
-
-    const dates = data.map(entry => entry.date);
-    const tokenized = data.map(entry => parseFloat(entry.tokenized) || null);
-    const physical = data.map(entry => parseFloat(entry.physical) || null);
-
     const ctx = document.getElementById('comparisonChart').getContext('2d');
 
-    const myChart = new Chart(ctx, {
+    new Chart(ctx, {
       type: 'line',
       data: {
-        labels: dates,
+        labels: data.map(d => d.Date),
         datasets: [
           {
             label: 'Tokenized Treasuries (USD)',
+            data: data.map(d => d.Tokenized),
             borderColor: 'violet',
-            backgroundColor: 'transparent',
-            data: tokenized
+            fill: false
           },
           {
             label: 'T-Bills (USD)',
-            borderColor: 'gold',
-            backgroundColor: 'transparent',
-            data: physical
+            data: data.map(d => d.Physical),
+            borderColor: 'yellow',
+            fill: false
           }
         ]
       },
       options: {
-        scales: {
-          x: { ticks: { color: 'white' }},
-          y: { ticks: { color: 'white' }}
-        },
+        responsive: true,
         plugins: {
-          legend: { labels: { color: 'white' }},
+          legend: {
+            labels: {
+              color: 'white'
+            }
+          },
           zoom: {
             pan: {
               enabled: true,
-              mode: 'xy',
-              modifierKey: 'ctrl'
+              mode: 'x',
             },
             zoom: {
-              wheel: { enabled: true },
-              pinch: { enabled: true },
-              mode: 'xy'
+              wheel: {
+                enabled: true
+              },
+              pinch: {
+                enabled: true
+              },
+              mode: 'x'
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: 'white'
+            }
+          },
+          y: {
+            ticks: {
+              color: 'white'
             }
           }
         }
       }
     });
-
-    window.myChart = myChart;
-  })
-  .catch(error => console.error('Error fetching treasuries chart data:', error));
+  });
