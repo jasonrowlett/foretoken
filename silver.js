@@ -10,7 +10,7 @@ async function fetchSilverData() {
 
   const ctx = document.getElementById("concourseChart").getContext("2d");
 
-  new Chart(ctx, {
+  const myChart = new Chart(ctx, {
     type: "line",
     data: {
       labels,
@@ -36,8 +36,18 @@ async function fetchSilverData() {
     options: {
       responsive: true,
       plugins: {
-        legend: {
-          labels: { color: "white" }
+        legend: { labels: { color: "white" }},
+        zoom: {
+          pan: {
+            enabled: true,
+            mode: "xy",
+            modifierKey: "ctrl"
+          },
+          zoom: {
+            wheel: { enabled: true },
+            pinch: { enabled: true },
+            mode: "xy"
+          }
         }
       },
       scales: {
@@ -46,6 +56,8 @@ async function fetchSilverData() {
       }
     }
   });
+
+  window.myChart = myChart;
 }
 
 document.addEventListener("DOMContentLoaded", fetchSilverData);
