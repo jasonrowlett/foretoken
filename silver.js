@@ -1,63 +1,65 @@
-async function fetchSilverData() {
-  const response = await fetch("https://script.google.com/macros/s/AKfycbwVq44QxnKWSxXFZKx38-fwTI4I0Sp-euacurUTNSlzBOE9TaQdI86NqZqlZcsvDqcS_A/exec");
-  const data = await response.json();
+// silver.js
 
-  const labels = data.map(row => row.Date);
-  const physical = data.map(row => parseFloat(row.Physical_Silver) || null);
-  const tokenized = data.map(row => parseFloat(row.Tokenized_Silver) || null);
+fetch("https://script.google.com/macros/s/AKfycbwVq44QxnKWSxXFZKx38-fwTI4I0Sp-euacurUTNSlzBOE9TaQdI86NqZqlZcsvDqcS_A/exec")
+  .then(response => response.json())
+  .then(data => {
+    const ctx = document.getElementById('concourseChart').getContext('2d');
 
-  console.log("Silver Sample Data:", data.slice(0, 5));
-
-  const ctx = document.getElementById("concourseChart").getContext("2d");
-
-  const myChart = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels,
-      datasets: [
-        {
-          label: "Tokenized Silver (USD)",
-          borderColor: "#38bdf8",
-          data: tokenized,
-          backgroundColor: "transparent",
-          borderWidth: 2,
-          tension: 0.3,
-        },
-        {
-          label: "Physical Silver (USD)",
-          borderColor: "#facc15",
-          data: physical,
-          backgroundColor: "transparent",
-          borderWidth: 2,
-          tension: 0.3,
-        }
-      ],
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { labels: { color: "white" }},
-        zoom: {
-          pan: {
-            enabled: true,
-            mode: "xy",
-            modifierKey: "ctrl"
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: data.map(d => d.Date),
+        datasets: [
+          {
+            label: 'Tokenized Silver (USD)',
+            data: data.map(d => d.Tokenized),
+            borderColor: 'deepskyblue',
+            fill: false
+          },
+          {
+            label: 'Physical Silver (USD)',
+            data: data.map(d => d.Physical),
+            borderColor: 'gold',
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white'
+            }
           },
           zoom: {
-            wheel: { enabled: true },
-            pinch: { enabled: true },
-            mode: "xy"
+            pan: {
+              enabled: true,
+              mode: 'x',
+            },
+            zoom: {
+              wheel: {
+                enabled: true
+              },
+              pinch: {
+                enabled: true
+              },
+              mode: 'x'
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: 'white'
+            }
+          },
+          y: {
+            ticks: {
+              color: 'white'
+            }
           }
         }
-      },
-      scales: {
-        x: { ticks: { color: "white" }},
-        y: { ticks: { color: "white" }}
       }
-    }
+    });
   });
-
-  window.myChart = myChart;
-}
-
-document.addEventListener("DOMContentLoaded", fetchSilverData);
