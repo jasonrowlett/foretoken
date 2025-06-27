@@ -1,7 +1,6 @@
 // LINE 1
 document.addEventListener("DOMContentLoaded", () => {
-  const endpoint = "https://script.googleusercontent.com/a/macros/foretoken.co/echo?user_content_key=AehSKL..."; // your long key
-
+  const endpoint = "https://script.google.com/macros/s/AKfycbwGatO0iiamJHceCf9oo0f5ah9IJgpAfxK52BuwIf_c-poj64n8sWXjK7S7Yt5qXb5uAw/exec"
   const canvasEl = document.getElementById("concourseChart");
   canvasEl.height = 400; // lock height at render-time
   canvasEl.width = canvasEl.offsetWidth; // match width dynamically
@@ -11,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetchDataAndRenderChart(endpoint, ctx);
 });
-
 
 async function fetchDataAndRenderChart(endpoint, ctx) {
   try {
