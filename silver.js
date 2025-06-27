@@ -1,65 +1,71 @@
-// silver.js
-
-fetch("https://script.google.com/macros/s/AKfycbwVq44QxnKWSxXFZKx38-fwTI4I0Sp-euacurUTNSlzBOE9TaQdI86NqZqlZcsvDqcS_A/exec")
-  .then(response => response.json())
-  .then(data => {
-    const ctx = document.getElementById('concourseChart').getContext('2d');
-
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: data.map(d => d.Date),
-        datasets: [
-          {
-            label: 'Tokenized Silver (USD)',
-            data: data.map(d => d.Tokenized),
-            borderColor: 'deepskyblue',
-            fill: false
-          },
-          {
-            label: 'Physical Silver (USD)',
-            data: data.map(d => d.Physical),
-            borderColor: 'gold',
-            fill: false
-          }
-        ]
+const ctx = document.getElementById('concourseChart').getContext('2d');
+const chart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: [], // Replace with actual labels
+    datasets: [
+      {
+        label: 'Tokenized Asset (USD)',
+        data: [], // Replace with tokenized data
+        borderColor: '#AA00FF',
+        backgroundColor: 'transparent',
+        borderWidth: 2
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            labels: {
-              color: 'white'
-            }
-          },
-          zoom: {
-            pan: {
-              enabled: true,
-              mode: 'x',
-            },
-            zoom: {
-              wheel: {
-                enabled: true
-              },
-              pinch: {
-                enabled: true
-              },
-              mode: 'x'
-            }
+      {
+        label: 'Physical Asset (USD)',
+        data: [], // Replace with physical data
+        borderColor: '#FFD700',
+        backgroundColor: 'transparent',
+        borderWidth: 2
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        type: 'time',
+        time: {
+          unit: 'month',
+          tooltipFormat: 'yyyy-MM-dd',
+          displayFormats: {
+            month: 'MMM yyyy'
           }
         },
-        scales: {
-          x: {
-            ticks: {
-              color: 'white'
-            }
-          },
-          y: {
-            ticks: {
-              color: 'white'
-            }
-          }
+        ticks: {
+          color: '#ffffff'
+        }
+      },
+      y: {
+        beginAtZero: false,
+        ticks: {
+          color: '#ffffff'
         }
       }
-    });
-  });
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: '#ffffff'
+        }
+      },
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'x',
+          modifierKey: 'ctrl'
+        },
+        zoom: {
+          wheel: {
+            enabled: true
+          },
+          pinch: {
+            enabled: true
+          },
+          mode: 'x'
+        }
+      }
+    }
+  }
+});
