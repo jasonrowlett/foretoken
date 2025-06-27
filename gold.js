@@ -2,10 +2,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   const endpoint =
     "https://script.google.com/macros/s/AKfycbwGatO0iiamJHceCf9oo0f5ah9IJgpAfxK52BuwIf_c-poj64n8sWXjK7S7Yt5qXb5uAw/exec";
-  const ctx = document.getElementById("concourseChart").getContext("2d");
   const canvasEl = document.getElementById("concourseChart");
-    console.log("Canvas Element:", canvasEl);
-    const ctx = canvasEl.getContext("2d");
+  console.log("Canvas Element:", canvasEl);
+  const ctx = canvasEl.getContext("2d");
+
 
   fetchDataAndRenderChart(endpoint, ctx);
 });
