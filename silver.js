@@ -7,6 +7,9 @@ async function fetchSilverData() {
   const kag = data.map(row => +row.KAG || null);
   const grams = data.map(row => +row.GRAMS || null);
 
+  canvasEl.height = 400;
+  canvasEl.width = canvasEl.offsetWidth;
+
   const ctx = document.getElementById("silverChart").getContext("2d");
 
   new Chart(ctx, {
