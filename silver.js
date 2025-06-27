@@ -3,15 +3,17 @@ async function fetchSilverData() {
   const data = await response.json();
 
   const labels = data.map(row => row.Date);
-  const physical = data.map(row => row.Physical_Silver);
-  const tokenized = data.map(row => row.Tokenized_Silver);
+  const physical = data.map(row => parseFloat(row.Physical_Silver) || null);
+  const tokenized = data.map(row => parseFloat(row.Tokenized_Silver) || null);
+
+  console.log("Silver Sample Data:", data.slice(0, 5));
 
   const ctx = document.getElementById("concourseChart").getContext("2d");
 
   new Chart(ctx, {
     type: "line",
     data: {
-      labels: labels,
+      labels,
       datasets: [
         {
           label: "Tokenized Silver (USD)",
@@ -35,22 +37,12 @@ async function fetchSilverData() {
       responsive: true,
       plugins: {
         legend: {
-          labels: {
-            color: "white"
-          }
+          labels: { color: "white" }
         }
       },
       scales: {
-        x: {
-          ticks: {
-            color: "white"
-          }
-        },
-        y: {
-          ticks: {
-            color: "white"
-          }
-        }
+        x: { ticks: { color: "white" }},
+        y: { ticks: { color: "white" }}
       }
     }
   });
