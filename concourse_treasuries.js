@@ -9,10 +9,12 @@ fetch("https://script.google.com/macros/s/AKfycbywNH3QFWNKmxRMUzOstgJCU7AtDSeAkD
     const dtb3 = data.map(row => parseFloat(row.DTB3));
     const dtb6 = data.map(row => parseFloat(row.DTB6));
 
+    const canvasEl = document.getElementById("concourseChart");
     canvasEl.height = 400;
     canvasEl.width = canvasEl.offsetWidth;
 
-    const ctx = document.getElementById("treasuryChart").getContext("2d");
+    const ctx = canvasEl.getContext("2d");
+
     new Chart(ctx, {
       type: 'line',
       data: {
