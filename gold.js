@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("Gold Sample Data:", rwaData.slice(0, 5));
 
-      new Chart(canvasEl, {
+      const myChart = new Chart(canvasEl, {
         type: "line",
         data: {
           labels,
@@ -37,8 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
         options: {
           responsive: true,
           plugins: {
-            legend: {
-              labels: { color: "white" }
+            legend: { labels: { color: "white" }},
+            zoom: {
+              pan: {
+                enabled: true,
+                mode: "xy",
+                modifierKey: "ctrl"
+              },
+              zoom: {
+                wheel: { enabled: true },
+                pinch: { enabled: true },
+                mode: "xy"
+              }
             }
           },
           scales: {
@@ -47,6 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         }
       });
+
+      window.myChart = myChart; // Enable Reset Zoom access
     })
     .catch(error => {
       console.error("Gold Chart Error:", error);

@@ -10,7 +10,8 @@ fetch(apiUrl)
     const physical = data.map(entry => parseFloat(entry.physical) || null);
 
     const ctx = document.getElementById('comparisonChart').getContext('2d');
-    new Chart(ctx, {
+
+    const myChart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: dates,
@@ -35,9 +36,23 @@ fetch(apiUrl)
           y: { ticks: { color: 'white' }}
         },
         plugins: {
-          legend: { labels: { color: 'white' }}
+          legend: { labels: { color: 'white' }},
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: 'xy',
+              modifierKey: 'ctrl'
+            },
+            zoom: {
+              wheel: { enabled: true },
+              pinch: { enabled: true },
+              mode: 'xy'
+            }
+          }
         }
       }
     });
+
+    window.myChart = myChart;
   })
   .catch(error => console.error('Error fetching treasuries chart data:', error));
