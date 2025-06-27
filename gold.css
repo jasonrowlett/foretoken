@@ -15,8 +15,11 @@ canvas {
   background-color: #111;
   border: 1px solid #333;
   border-radius: 8px;
-  width: 90%;
-  max-width: 800px;
-  height: 400px; /* or 500px if you want taller */
   margin-top: 30px;
+}
+
+#concourseChart {
+  height: 400px !important;
+  width: 100% !important;
+  display: block;
 }
