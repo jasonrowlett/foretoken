@@ -11,7 +11,9 @@ if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
 }
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2025-05-28' // or whatever version you're using
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Create test products for development (one-time setup)
