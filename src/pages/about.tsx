@@ -1,4 +1,4 @@
-import profileImage from "@assets/Prinsengracht_profile(1)_1751045076966.png";
+import profileImage from "/attached_assets/Prinsengracht_profile(1)_1751045076966.png";
 
 export default function About() {
   return (
