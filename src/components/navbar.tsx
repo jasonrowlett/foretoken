@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/use-auth";
-import logoImg from "@assets/neon-logo-1_1751042774945.png";
+import logoImg from "/attached_assets/neon-logo-1_1751042774945.png";
 
 export default function Navbar() {
   const [location] = useLocation();
