@@ -1,0 +1,14 @@
+# Node dependencies
+node_modules/
+
+# Vite build outputs
+dist/
+docs/assets/index-*.css
+docs/assets/index-*.js
+docs/assets/*.map
+
+# OS files
+.DS_Store
+
+# Environment files
+.env
