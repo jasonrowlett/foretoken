@@ -4,14 +4,16 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig({
-  base: '/',
+  base: './',  // 👈 crucial for GitHub Pages
+  plugins: [react()],
   build: {
     outDir: 'docs',
     emptyOutDir: true,
     rollupOptions: {
-      input: "./index.html",    // ✅ entry point for Vite build
-    },
-    copyPublicDir: true         // ✅ copies /public to /docs
+      input: {
+        main: 'index.html'
+      }
+    }
   },
   resolve: {
     alias: {
