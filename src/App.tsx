@@ -48,6 +48,7 @@ function Router() {
       <Navbar />
       <Switch>
         <Route path="/" component={Home} />
+          <div className="text-red-500">Hello Test</div>
         <Route path="/about" component={About} />
         <Route path="/library" component={Library} />
         <Route path="/podcasts" component={Podcast} />
