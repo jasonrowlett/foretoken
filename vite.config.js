@@ -4,11 +4,10 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig({
-  plugins: [react()],
-  root: "./",
+  base: '/',
   build: {
-    outDir: "docs",             // ✅ GitHub Pages expects /docs
-    emptyOutDir: false,         // ✅ Don't delete CNAME on build
+    outDir: 'docs',
+    emptyOutDir: true,
     rollupOptions: {
       input: "./index.html",    // ✅ entry point for Vite build
     },
