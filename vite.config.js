@@ -10,10 +10,15 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@assets': path.resolve(__dirname, './attached_assets'),
       '@components': path.resolve(__dirname, './src/components'),
-      '@shared': path.resolve(__dirname, './shared'), // ✅ this is the fix
-    }
+      '@shared': path.resolve(__dirname, './shared'),
+    },
   },
   build: {
     outDir: 'docs',
-  }
+    emptyOutDir: true,
+    rollupOptions: {
+      input: './index.html', // ← ✅ if your actual HTML entry is here, fine
+    },
+   copyPublicDir: true, // ✅ ensure it copies public/CNAME 
+  },
 });
