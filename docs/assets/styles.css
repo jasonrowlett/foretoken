@@ -1,0 +1,30 @@
+/* Global Styles for Foretoken */
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  margin-top: 60px;
+}
+
+.logo img {
+  width: 200px;
+  height: auto;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-top: 20px;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #aaa;
+  max-width: 600px;
+  margin: 20px auto;
+}
