@@ -5,11 +5,11 @@ import { FaSpotify, FaApple } from "react-icons/fa";
 import { SiIheartradio } from "react-icons/si";
 
 // Import podcast images
-import ForetokenNewswireImg from "@assets/Foretoken_Newswire_1750868888898.png";
-import AfricaRWAImg from "@assets/Africa_RWA_Report_1750868888897.png";
-import AsiaRWAImg from "@assets/Asia_RWA_Report_1750868888898.png";
-import EuropeRWAImg from "@assets/Europe_RWA_Report_1750868888898.png";
-import AmericasRWAImg from "@assets/The_Americas_RWA_Report_1750868888897.png";
+const ForetokenNewswireImg = "/assets/Foretoken_Newswire_1750868888898-GHymnjxm.png";
+const AfricaRWAImg = "/assets/Africa_RWA_Report_1750868888897-DOR5F7C1.png";
+const AsiaRWAImg = "/assets/Asia_RWA_Report_1750868888898-CA2ZaAbr.png";
+const EuropeRWAImg = "/assets/Europe_RWA_Report_1750868888898-C-XgnGpU.png";
+const AmericasRWAImg = "/assets/The_Americas_RWA_Report_1750868888897-DG5fISy9.png";
 
 export default function Podcast() {
   const podcasts = [
