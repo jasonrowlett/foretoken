@@ -1,31 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Notable&display=swap');
+
 body {
-  background-color: #000;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
-  text-align: center;
   margin: 0;
   padding: 0;
-}
-
-.logo {
-  margin-top: 60px;
-}
-
-.logo img {
-  width: 200px;
-  height: auto;
+  background-color: black;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 h1 {
+  font-family: 'Notable', sans-serif;
   font-size: 3rem;
-  font-weight: 800;
   margin-top: 20px;
-  color: #f0f0f0;
 }
 
 p {
-  font-size: 1.25rem;
-  color: #aaa;
-  max-width: 640px;
-  margin: 20px auto;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-top: 10px;
+}
+
+img {
+  margin-top: 40px;
+  width: 150px;
+  height: auto;
 }
