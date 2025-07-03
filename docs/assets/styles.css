@@ -1,4 +1,3 @@
-/* Global Styles for Foretoken */
 body {
   background-color: #000;
   color: #fff;
@@ -18,13 +17,15 @@ body {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
+  font-weight: 800;
   margin-top: 20px;
+  color: #f0f0f0;
 }
 
 p {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: #aaa;
-  max-width: 600px;
+  max-width: 640px;
   margin: 20px auto;
 }
