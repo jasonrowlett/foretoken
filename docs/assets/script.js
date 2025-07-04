@@ -1,7 +1,8 @@
 // Line 1 - script.js
 document.addEventListener("DOMContentLoaded", () => {
-  loadPartial("header", "/docs/assets/header.html");
-  loadPartial("footer", "/docs/assets/footer.html");
+  loadPartial("header", "/assets/header.html");
+  loadPartial("footer", "/assets/footer.html");
+
 });
 
 function loadPartial(id, url) {
