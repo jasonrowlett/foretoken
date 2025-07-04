@@ -2,6 +2,8 @@ import HeroSection from "@/components/hero-section";
 import NewsletterSignup from "@/components/newsletter-signup";
 import LiveMarketData from "@/components/live-market-data";
 
+<div id="header"></div>
+
 export default function Home() {
   return (
     <div className="bg-black">
@@ -11,3 +13,5 @@ export default function Home() {
     </div>
   );
 }
+
+<div id="footer" />

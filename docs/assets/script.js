@@ -1,8 +1,14 @@
-// Vanilla JS version of React render
-document.getElementById("root").innerHTML = `
-  <div class="logo">
-    <img src="./assets/neon-logo.png" alt="Foretoken Logo" />
-  </div>
-  <h1>Welcome to Foretoken</h1>
-  <p>Comparing tokenized and traditional markets, live.</p>
-`;
+// Line 1 - script.js
+document.addEventListener("DOMContentLoaded", () => {
+  loadPartial("header", "/docs/assets/header.html");
+  loadPartial("footer", "/docs/assets/footer.html");
+});
+
+function loadPartial(id, url) {
+  fetch(url)
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById(id).innerHTML = html;
+    })
+    .catch(error => console.error(`Error loading ${url}:`, error));
+}
