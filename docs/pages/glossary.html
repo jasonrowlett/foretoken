@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Glossary | Foretoken</title>
+<link href="/docs/assets/styles.css" rel="stylesheet"/>
+<script defer="" src="/docs/assets/script.js"></script>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
+<body>
+<div id="header"></div>
+<main>
+<pre>import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ArrowLeft, Search, BookOpen } from "lucide-react";
+import { Link } from "wouter";
+
+export default function Glossary() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const glossaryTerms = [
+    {
+      term: "AML (Anti-Money Laundering)",
+      definition: "Procedures aimed at preventing the illegal use of financial systems.",
+      category: "Regulation"
+    },
+    {
+      term: "Asset-Backed Token",
+      definition: "Token directly backed by a physical or financial asset.",
+      category: "Token Types"
+    },
+    {
+      term: "Blockchain",
+      definition: "Distributed ledger technology enabling transparent transactions.",
+      category: "Technology"
+    },
+    {
+      term: "Burning",
+      definition: "Permanently removing tokens from circulation.",
+      category: "Token Operations"
+    },
+    {
+      term: "Cold Wallet",
+      definition: "Offline crypto wallet offering high security.",
+      category: "Security"
+    },
+    {
+      term: "Collateralization",
+      definition: "Using assets as security for a loan in DeFi.",
+      category: "Finance"
+    },
+    {
+      term: "Commodity Tokenization",
+      definition: "Tokenizing physical goods like gold or oil.",
+      category: "Asset Types"
+    },
+    {
+      term: "Composability",
+      definition: "Interoperability of assets and protocols across DeFi.",
+      category: "Technology"
+    },
+    {
+      term: "Custodian",
+      definition: "A third party that securely holds the physical asset backing a token.",
+      category: "Infrastructure"
+    },
+    {
+      term: "DAO (Decentralized Autonomous Organization)",
+      definition: "Organization run by smart contracts and governed by token holders.",
+      category: "Governance"
+    },
+    {
+      term: "DeFi (Decentralized Finance)",
+      definition: "Financial services using blockchain technology without intermediaries.",
+      category: "Finance"
+    },
+    {
+      term: "Digital Twin",
+      definition: "A digital representation of a real-world asset.",
+      category: "Technology"
+    },
+    {
+      term: "ERC-20",
+      definition: "Standard for fungible tokens on Ethereum.",
+      category: "Standards"
+    },
+    {
+      term: "ERC-721",
+      definition: "Standard for NFTs on Ethereum.",
+      category: "Standards"
+    },
+    {
+      term: "ERC-1155",
+      definition: "Multi-token standard supporting fungible and non-fungible tokens.",
+      category: "Standards"
+    },
+    {
+      term: "Fractional Ownership",
+      definition: "Allows multiple individuals to own a share of an asset through tokenization.",
+      category: "Core"
+    },
+    {
+      term: "Gas Fees",
+      definition: "Transaction fees on a blockchain network.",
+      category: "Technology"
+    },
+    {
+      term: "Hot Wallet",
+      definition: "Online wallet for quick access to tokens.",
+      category: "Security"
+    },
+    {
+      term: "KYC (Know Your Customer)",
+      definition: "Process of verifying the identity of users.",
+      category: "Regulation"
+    },
+    {
+      term: "Layer 1 Blockchain",
+      definition: "Base network like Ethereum or Bitcoin.",
+      category: "Technology"
+    },
+    {
+      term: "Layer 2 Solution",
+      definition: "Scalability protocols built on Layer 1 chains.",
+      category: "Technology"
+    },
+    {
+      term: "Ledger",
+      definition: "A record of all transactions on a blockchain.",
+      category: "Technology"
+    },
+    {
+      term: "Legal Wrapper",
+      definition: "Legal structure that ties on-chain tokens to off-chain legal rights.",
+      category: "Legal"
+    },
+    {
+      term: "Liquidity",
+      definition: "Ease with which an asset can be bought or sold without affecting its price.",
+      category: "Finance"
+    },
+    {
+      term: "Minting",
+      definition: "Creating new tokens and adding them to circulation.",
+      category: "Token Operations"
+    },
+    {
+      term: "Non-Fungible Token (NFT)",
+      definition: "Unique digital token that represents a distinct asset.",
+      category: "Token Types"
+    },
+    {
+      term: "Off-Chain",
+      definition: "Assets or activities that exist outside the blockchain.",
+      category: "Technology"
+    },
+    {
+      term: "On-Chain",
+      definition: "Data or transactions recorded directly on the blockchain.",
+      category: "Technology"
+    },
+    {
+      term: "Oracles",
+      definition: "Entities that bring off-chain data onto the blockchain.",
+      category: "Technology"
+    },
+    {
+      term: "Primary Market",
+      definition: "Initial issuance of a tokenized asset.",
+      category: "Markets"
+    },
+    {
+      term: "Private Key",
+      definition: "Confidential key used to authorize transactions.",
+      category: "Security"
+    },
+    {
+      term: "Programmable Asset",
+      definition: "Asset with embedded logic via smart contracts.",
+      category: "Technology"
+    },
+    {
+      term: "Proof-of-Reserve",
+      definition: "Verification that tokens are backed 1:1 by real assets.",
+      category: "Security"
+    },
+    {
+      term: "Public Key",
+      definition: "Cryptographic key used to receive assets.",
+      category: "Security"
+    },
+    {
+      term: "Real Estate Tokenization",
+      definition: "Tokenizing ownership rights in real property.",
+      category: "Asset Types"
+    },
+    {
+      term: "Real-World Asset (RWA)",
+      definition: "A tangible or intangible asset that exists off-chain (in the traditional financial or physical world), such as real estate, commodities, or bonds, which can be tokenized on a blockchain.",
+      category: "Core"
+    },
+    {
+      term: "RegTech",
+      definition: "Technology used to ensure regulatory compliance.",
+      category: "Regulation"
+    },
+    {
+      term: "Secondary Market",
+      definition: "Where tokenized assets are traded post-issuance.",
+      category: "Markets"
+    },
+    {
+      term: "Security Token",
+      definition: "A digital token representing ownership in a real-world financial asset, subject to securities regulations.",
+      category: "Token Types"
+    },
+    {
+      term: "Security Token Offering (STO)",
+      definition: "A fundraising event issuing security tokens.",
+      category: "Events"
+    },
+    {
+      term: "Settlement Layer",
+      definition: "Layer of blockchain where asset ownership is recorded.",
+      category: "Technology"
+    },
+    {
+      term: "Smart Contract",
+      definition: "Self-executing code on a blockchain that enforces agreement terms.",
+      category: "Technology"
+    },
+    {
+      term: "Stablecoin",
+      definition: "A cryptocurrency pegged to a stable asset such as fiat currency or gold.",
+      category: "Token Types"
+    },
+    {
+      term: "Staking",
+      definition: "Locking tokens to support a network and earn rewards.",
+      category: "Finance"
+    },
+    {
+      term: "Synthetic Asset",
+      definition: "A tokenized derivative mirroring the price of an underlying asset.",
+      category: "Token Types"
+    },
+    {
+      term: "Token Generation Event (TGE)",
+      definition: "Initial creation and distribution of tokens.",
+      category: "Events"
+    },
+    {
+      term: "Token Standard",
+      definition: "Set of rules a token follows on a blockchain (e.g., ERC-20).",
+      category: "Standards"
+    },
+    {
+      term: "Tokenization",
+      definition: "The process of converting rights to a real-world asset into a digital token on a blockchain.",
+      category: "Core"
+    },
+    {
+      term: "Treasury Tokenization",
+      definition: "Issuing blockchain-based tokens backed by government bonds.",
+      category: "Asset Types"
+    },
+    {
+      term: "Utility Token",
+      definition: "A token used to access a product or service within a blockchain ecosystem.",
+      category: "Token Types"
+    },
+    {
+      term: "Whitepaper",
+      definition: "A document explaining the technical and financial details of a token or platform.",
+      category: "Documentation"
+    },
+    {
+      term: "Yield Token",
+      definition: "Token representing cash flows from a yield-bearing asset.",
+      category: "Token Types"
+    }
+  ];
+
+  const categories = ["All", "Core", "Token Types", "Technology", "Finance", "Security", "Regulation"];
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filteredTerms = glossaryTerms.filter(item =&gt; {
+    const matchesSearch = item.term.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         item.definition.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = activeCategory === "All" || item.category === activeCategory;
+    return matchesSearch &amp;&amp; matchesCategory;
+  });
+
+  return (
+    <div classname="bg-gray-950 min-h-screen pt-16">
+      <div classname="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        {/* Back Button */}
+        <div classname="mb-8">
+          <link href="/library"/>
+            <button classname="neon-glow border-gray-400 text-gray-300 hover:bg-purple-400 hover:text-black hover:border-purple-400 transition-all duration-300" variant="outline">
+              <arrowleft classname="w-4 h-4 mr-2"></arrowleft>
+              Back to Library
+            </button>
+          
+        </div>
+
+        {/* Header */}
+        <div classname="mb-12">
+          <div classname="flex items-center gap-3 mb-4">
+            <bookopen classname="w-8 h-8 text-purple-400"></bookopen>
+            <h1 classname="font-notable text-4xl md:text-5xl text-white">RWA TOKENIZATION GLOSSARY</h1>
+          </div>
+          <p classname="text-xl text-gray-300">Comprehensive definitions of real-world asset tokenization terminology</p>
+        </div>
+
+        {/* Search Bar */}
+        <div classname="mb-8">
+          <div classname="relative max-w-md">
+            <search classname="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"></search>
+            <input =="" onchange="{(e)" placeholder="Search terms..." type="text" value="{searchTerm}"/> setSearchTerm(e.target.value)}
+              className="pl-10 bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-purple-400"
+            /&gt;
+          </div>
+        </div>
+
+        {/* Category Filters */}
+        <div classname="flex flex-wrap gap-3 mb-12">
+          {categories.map((category) =&gt; (
+            <button =="" key="{category}" onclick="{()"> setActiveCategory(category)}
+              variant={activeCategory === category ? "default" : "outline"}
+              size="sm"
+              className={`neon-glow font-medium rounded-full ${
+                activeCategory === category
+                  ? "bg-purple-400 text-black hover:bg-purple-300"
+                  : "border-gray-600 text-gray-300 hover:border-purple-400 hover:text-purple-400"
+              }`}
+            &gt;
+              {category}
+            </button>
+          ))}
+        </div>
+
+        {/* Results Count */}
+        <div classname="mb-6">
+          <badge classname="border-purple-400 text-purple-400" variant="outline">
+            {filteredTerms.length} {filteredTerms.length === 1 ? 'term' : 'terms'} found
+          </badge>
+        </div>
+
+        {/* Glossary Terms Grid */}
+        <div classname="grid md:grid-cols-2 gap-6">
+          {filteredTerms.map((item, index) =&gt; (
+            <card classname="data-card hover:scale-105 transition-transform duration-300" key="{index}">
+              <cardcontent classname="p-6">
+                <div classname="flex items-start justify-between mb-3">
+                  <h3 classname="text-xl font-bold text-white">{item.term}</h3>
+                  <badge classname="border-purple-400 text-purple-400 text-xs ml-2" variant="outline">
+                    {item.category}
+                  </badge>
+                </div>
+                <p classname="text-gray-300 leading-relaxed">{item.definition}</p>
+              </cardcontent>
+            </card>
+          ))}
+        </div>
+
+        {/* No Results */}
+        {filteredTerms.length === 0 &amp;&amp; (
+          <div classname="text-center py-12">
+            <div classname="text-gray-400 text-lg mb-4">No terms found matching your search.</div>
+            <button =="" onclick="{()"> {
+                setSearchTerm("");
+                setActiveCategory("All");
+              }}
+              variant="outline"
+              className="neon-glow border-gray-400 text-gray-300 hover:bg-purple-400 hover:text-black hover:border-purple-400"
+            &gt;
+              Clear Filters
+            </button>
+          </div>
+        )}
+
+        {/* Stats Footer */}
+        <div classname="mt-16 text-center">
+          <div classname="bg-gray-800 border border-gray-700 rounded-lg p-6 inline-block">
+            <div classname="grid grid-cols-3 gap-8 text-center">
+              <div>
+                <div classname="text-2xl font-bold text-purple-400">{glossaryTerms.length}</div>
+                <div classname="text-gray-400 text-sm">Total Terms</div>
+              </div>
+              <div>
+                <div classname="text-2xl font-bold text-purple-400">{categories.length - 1}</div>
+                <div classname="text-gray-400 text-sm">Categories</div>
+              </div>
+              <div>
+                <div classname="text-2xl font-bold text-purple-400">100%</div>
+                <div classname="text-gray-400 text-sm">Industry Coverage</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}</pre>
+</main>
+<div id="footer"></div>
+</body>
+</html>

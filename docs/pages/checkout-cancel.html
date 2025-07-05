@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout Cancel | Foretoken</title>
+<link href="/docs/assets/styles.css" rel="stylesheet"/>
+<script defer="" src="/docs/assets/script.js"></script>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
+<body>
+<div id="header"></div>
+<main>
+<pre>import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { X, ArrowLeft, CreditCard } from "lucide-react";
+import { Link } from "wouter";
+
+export default function CheckoutCancel() {
+  useEffect(() =&gt; {
+    // Clear any loading states or redirect tracking
+    window.history.replaceState({}, '', '/checkout-cancel');
+  }, []);
+
+  return (
+    <div classname="bg-black min-h-screen pt-16">
+      <div classname="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div classname="text-center">
+          <card classname="data-card">
+            <cardcontent classname="p-12">
+              <div classname="flex justify-center mb-6">
+                <div classname="w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center">
+                  <x classname="text-white" size="{32}"></x>
+                </div>
+              </div>
+              
+              <h1 classname="font-notable text-4xl text-white mb-4">
+                PAYMENT CANCELED
+              </h1>
+              
+              <p classname="text-xl text-gray-300 mb-8">
+                Your payment was canceled. No charges were made to your account.
+              </p>
+              
+              <div classname="text-gray-400 mb-8">
+                <p>You can try again anytime or contact us if you need assistance.</p>
+              </div>
+              
+              <div classname="space-y-4">
+                <link to="/subscribe"/>
+                  <button classname="neon-glow bg-purple-400 text-black hover:bg-purple-300 transition-all duration-300 font-medium">
+                    <creditcard classname="mr-2" size="{16}"></creditcard>
+                    Try Again
+                  </button>
+                
+                
+                <div>
+                  <link to="/"/>
+                    <button classname="neon-glow border border-gray-400 text-gray-300 hover:bg-gray-300 hover:text-black transition-all duration-300" variant="outline">
+                      <arrowleft classname="mr-2" size="{16}"></arrowleft>
+                      Back to Home
+                    </button>
+                  
+                </div>
+              </div>
+            </cardcontent>
+          </card>
+        </div>
+      </div>
+    </div>
+  );
+}</pre>
+</main>
+<div id="footer"></div>
+</body>
+</html>

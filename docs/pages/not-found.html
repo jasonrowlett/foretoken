@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Not Found | Foretoken</title>
+<link href="/docs/assets/styles.css" rel="stylesheet"/>
+<script defer="" src="/docs/assets/script.js"></script>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
+<body>
+<div id="header"></div>
+<main>
+<pre>import { Card, CardContent } from "@/components/ui/card";
+import { AlertCircle } from "lucide-react";
+
+export default function NotFound() {
+  return (
+    <div classname="min-h-screen w-full flex items-center justify-center bg-gray-50">
+      <card classname="w-full max-w-md mx-4">
+        <cardcontent classname="pt-6">
+          <div classname="flex mb-4 gap-2">
+            <alertcircle classname="h-8 w-8 text-red-500"></alertcircle>
+            <h1 classname="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
+          </div>
+
+          <p classname="mt-4 text-sm text-gray-600">
+            Did you forget to add the page to the router?
+          </p>
+        </cardcontent>
+      </card>
+    </div>
+  );
+}</pre>
+</main>
+<div id="footer"></div>
+</body>
+</html>

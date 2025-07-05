@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Signup | Foretoken</title>
+<link href="/docs/assets/styles.css" rel="stylesheet"/>
+<script defer="" src="/docs/assets/script.js"></script>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
+<body>
+<div id="header"></div>
+<main>
+<pre>import { useState } from "react";
+import { Link, useLocation } from "wouter";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Eye, EyeOff, UserPlus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useToast } from "@/hooks/use-toast";
+import { signupUserSchema, type SignupUser } from "@shared/schema";
+import { apiRequest } from "@/lib/queryClient";
+
+export default function Signup() {
+  const [, setLocation] = useLocation();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  const form = useForm<signupuser>({
+    resolver: zodResolver(signupUserSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const signupMutation = useMutation({
+    mutationFn: async (data: SignupUser) =&gt; {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Signup failed");
+      }
+      
+      return response.json();
+    },
+    onSuccess: (data) =&gt; {
+      toast({
+        title: "Account Created!",
+        description: data.message || "Welcome to our platform!",
+      });
+      // Invalidate auth queries to refresh user state
+      queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
+      // Redirect to welcome page
+      setLocation("/welcome");
+    },
+    onError: (error: any) =&gt; {
+      toast({
+        title: "Signup Failed",
+        description: error.message || "Failed to create account",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const onSubmit = (data: SignupUser) =&gt; {
+    signupMutation.mutate(data);
+  };
+
+  return (
+    <div classname="min-h-screen bg-black flex items-center justify-center p-4">
+      <div classname="w-full max-w-md">
+        <card classname="bg-gray-900 border-gray-800">
+          <cardheader classname="space-y-1">
+            <cardtitle classname="text-2xl font-bold text-center text-white">
+              Create Account
+            </cardtitle>
+            <carddescription classname="text-center text-gray-400">
+              Sign up to get started with our platform
+            </carddescription>
+          </cardheader>
+          <cardcontent>
+            <form {...form}="">
+              <form classname="space-y-4" onsubmit="{form.handleSubmit(onSubmit)}">
+                <formfield control="{form.control}" field="" name="username" render="{({" })=""> (
+                    <formitem>
+                      <formlabel classname="text-white">Username</formlabel>
+                      <formcontrol>
+                        <input classname="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-purple-500" placeholder="Choose a username" type="text" {...field}=""/>
+                      </formcontrol>
+                      <formmessage></formmessage>
+                    </formitem>
+                  )}
+                /&gt;
+
+                <formfield control="{form.control}" field="" name="email" render="{({" })=""> (
+                    <formitem>
+                      <formlabel classname="text-white">Email</formlabel>
+                      <formcontrol>
+                        <input classname="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-purple-500" placeholder="Enter your email" type="email" {...field}=""/>
+                      </formcontrol>
+                      <formmessage></formmessage>
+                    </formitem>
+                  )}
+                /&gt;
+
+                <formfield control="{form.control}" field="" name="password" render="{({" })=""> (
+                    <formitem>
+                      <formlabel classname="text-white">Password</formlabel>
+                      <formcontrol>
+                        <div classname="relative">
+                          <input "password"}="" "text"="" :="" ?="" classname="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-purple-500 pr-10" placeholder="Create a password (min 6 characters)" type="{showPassword" {...field}=""/>
+                          <button =="" classname="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-gray-400 hover:text-gray-300" onclick="{()" size="sm" type="button" variant="ghost"> setShowPassword(!showPassword)}
+                          &gt;
+                            {showPassword ? (
+                              <eyeoff classname="h-4 w-4"></eyeoff>
+                            ) : (
+                              <eye classname="h-4 w-4"></eye>
+                            )}
+                          </button>
+                        </div>
+                      </formcontrol>
+                      <formmessage></formmessage>
+                    </formitem>
+                  )}
+                /&gt;
+
+                <formfield control="{form.control}" field="" name="confirmPassword" render="{({" })=""> (
+                    <formitem>
+                      <formlabel classname="text-white">Confirm Password</formlabel>
+                      <formcontrol>
+                        <div classname="relative">
+                          <input "password"}="" "text"="" :="" ?="" classname="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-purple-500 pr-10" placeholder="Confirm your password" type="{showConfirmPassword" {...field}=""/>
+                          <button =="" classname="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-gray-400 hover:text-gray-300" onclick="{()" size="sm" type="button" variant="ghost"> setShowConfirmPassword(!showConfirmPassword)}
+                          &gt;
+                            {showConfirmPassword ? (
+                              <eyeoff classname="h-4 w-4"></eyeoff>
+                            ) : (
+                              <eye classname="h-4 w-4"></eye>
+                            )}
+                          </button>
+                        </div>
+                      </formcontrol>
+                      <formmessage></formmessage>
+                    </formitem>
+                  )}
+                /&gt;
+
+                <button classname="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white" disabled="{signupMutation.isPending}" type="submit">
+                  {signupMutation.isPending ? (
+                    "Creating account..."
+                  ) : (
+                    &lt;&gt;
+                      <userplus classname="mr-2 h-4 w-4"></userplus>
+                      Create Account
+                    
+                  )}
+                </button>
+              </formfield></formfield></formfield></formfield></form>
+            </form>
+
+            <div classname="mt-6 text-center">
+              <p classname="text-gray-400">
+                Already have an account?{" "}
+                <link href="/login"/>
+                  <span classname="text-purple-400 hover:text-purple-300 font-medium cursor-pointer">
+                    Sign in
+                  </span>
+                
+              </p>
+            </div>
+          </cardcontent>
+        </card>
+      </div>
+    </div>
+  );
+}</signupuser></pre>
+</main>
+<div id="footer"></div>
+</body>
+</html>
