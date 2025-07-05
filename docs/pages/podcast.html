@@ -5,12 +5,17 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Podcast | Foretoken</title>
-<link href="/docs/assets/styles.css" rel="stylesheet"/>
-<script defer="" src="/docs/assets/script.js"></script>
+<link href="/assets/styles.css" rel="stylesheet"/>
+<script defer="" src="/assets/script.js"></script>
 <link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
 <body>
 <div id="header"></div>
 <main>
+<pre>import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ExternalLink } from "lucide-react";
+import { FaSpotify, FaApple } from "react-icons/fa";
+import { SiIheartradio } from "react-icons/si";
 
 // Import podcast images
 const ForetokenNewswireImg = "/assets/Foretoken_Newswire_1750868888898-GHymnjxm.png";
@@ -19,6 +24,7 @@ const AsiaRWAImg = "/assets/Asia_RWA_Report_1750868888898-CA2ZaAbr.png";
 const EuropeRWAImg = "/assets/Europe_RWA_Report_1750868888898-C-XgnGpU.png";
 const AmericasRWAImg = "/assets/The_Americas_RWA_Report_1750868888897-DG5fISy9.png";
 
+export default function Podcast() {
   const podcasts = [
     {
       id: "foretoken-newswire",

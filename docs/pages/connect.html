@@ -5,13 +5,29 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Connect | Foretoken</title>
-<link href="/docs/assets/styles.css" rel="stylesheet"/>
-<script defer="" src="/docs/assets/script.js"></script>
+<link href="/assets/styles.css" rel="stylesheet"/>
+<script defer="" src="/assets/script.js"></script>
 <link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
 <body>
 <div id="header"></div>
 <main>
+<pre>import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Mail, Phone, MapPin, Mic, TrendingUp, Users, Calendar, Globe, Award } from "lucide-react";
+import { FaTwitter, FaLinkedin, FaYoutube, FaTelegram } from "react-icons/fa";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
+import cryptoAiCon2 from "@assets/CryptoAI_CON_2_1750886318343.png";
+import cryptoAiConLisbon from "@assets/CryptoAI_CON_Lisbon_Nov_2024_1750886318343.png";
+import cryptoAiConPanel from "@assets/CryptoAI_CON_panel_1750886318343.png";
+import web3Amsterdam from "@assets/Web3Amsterdam-4_1750886362838.png";
 
+export default function Connect() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
