@@ -1,204 +1,26 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Podcast | Foretoken</title>
-<link href="/assets/styles.css" rel="stylesheet"/>
-<script defer="" src="/assets/script.js"></script>
-<link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Podcasts | Foretoken</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <script defer src="/assets/script.js"></script>
+</head>
 <body>
-<div id="header"></div>
-<main>
-<pre>import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLink } from "lucide-react";
-import { FaSpotify, FaApple } from "react-icons/fa";
-import { SiIheartradio } from "react-icons/si";
+  <div id="navbar"></div>
 
-// Import podcast images
-const ForetokenNewswireImg = "/assets/Foretoken_Newswire_1750868888898-GHymnjxm.png";
-const AfricaRWAImg = "/assets/Africa_RWA_Report_1750868888897-DOR5F7C1.png";
-const AsiaRWAImg = "/assets/Asia_RWA_Report_1750868888898-CA2ZaAbr.png";
-const EuropeRWAImg = "/assets/Europe_RWA_Report_1750868888898-C-XgnGpU.png";
-const AmericasRWAImg = "/assets/The_Americas_RWA_Report_1750868888897-DG5fISy9.png";
-
-export default function Podcast() {
-  const podcasts = [
-    {
-      id: "foretoken-newswire",
-      title: "Foretoken Newswire",
-      image: ForetokenNewswireImg,
-      embedSrc: "https://embed.acast.com/682b9cacbc0e758152321dec?feed=true",
-      description: "Stay ahead of the tokenization curve with breaking news, market analysis, and insider insights from the world of real-world asset tokenization.",
-      links: {
-        apple: "https://podcasts.apple.com/us/podcast/foretoken-newswire/id1822379157",
-        spotify: "https://open.spotify.com/show/1OJbSDAJftc164PE5la9wz?si=bd00e9127cd24fea",
-        iheart: "https://iheart.com/podcast/282587964/"
-      }
-    },
-    {
-      id: "africa-rwa",
-      title: "Africa RWA Report",
-      image: AfricaRWAImg,
-      embedSrc: "https://embed.acast.com/6858baf0cb9b8b85b9903735?feed=true",
-      description: "Explore the emerging tokenization landscape across African markets, from real estate to commodities and infrastructure development.",
-      links: {
-        apple: "https://podcasts.apple.com/us/podcast/africa-rwa-report/id1822383433",
-        spotify: "https://open.spotify.com/show/5uHVJ6Gl8vdRAPArG3vZiq?si=a6e4d140ba3e4327",
-        iheart: "https://iheart.com/podcast/282760688/"
-      }
-    },
-    {
-      id: "asia-rwa",
-      title: "Asia RWA Report",
-      image: AsiaRWAImg,
-      embedSrc: "https://embed.acast.com/6858bdc0cb9b8b85b991152f?feed=true",
-      description: "Deep dive into Asia-Pacific tokenization trends, regulatory developments, and investment opportunities across the region.",
-      links: {
-        apple: "https://podcasts.apple.com/us/podcast/asia-rwa-report/id1822383900",
-        spotify: "https://open.spotify.com/show/1fEQFWSgR43lKlOEs0VwKB?si=2c7a9974b2c441a3",
-        iheart: "https://iheart.com/podcast/282587952/"
-      }
-    },
-    {
-      id: "europe-rwa",
-      title: "Europe RWA Report",
-      image: EuropeRWAImg,
-      embedSrc: "https://embed.acast.com/6858bcfdcb9b8b85b990ed04?feed=true",
-      description: "Navigate European tokenization regulations, market developments, and institutional adoption across the continent.",
-      links: {
-        apple: "https://podcasts.apple.com/us/podcast/europe-rwa-report/id1822384288",
-        spotify: "https://open.spotify.com/show/0Kwo4srhm08XsbPXfEtnof?si=b839fa9d3dbc47e4",
-        iheart: "https://iheart.com/podcast/282587955/"
-      }
-    },
-    {
-      id: "americas-rwa",
-      title: "The Americas RWA Report",
-      image: AmericasRWAImg,
-      embedSrc: "https://embed.acast.com/6858be98dc316de3df2586e0?feed=true",
-      description: "Comprehensive coverage of tokenization initiatives across North and South America, from policy to practice.",
-      links: {
-        apple: "https://podcasts.apple.com/us/podcast/the-americas-rwa-report/id1822378526",
-        spotify: "https://open.spotify.com/show/3Qzh5jUks4Lj73P3y7X6WV?si=3947267a63ea400e",
-        iheart: "https://iheart.com/podcast/282587974/"
-      }
-    }
-  ];
-
-  return (
-    <div classname="bg-black min-h-screen pt-16">
-      <div classname="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        {/* Header Section */}
-        <div classname="text-center mb-16">
-          <h1 classname="font-notable text-6xl text-white mb-6">FORETOKEN SIGNAL NETWORK</h1>
-          <p classname="text-xl text-gray-300 max-w-3xl mx-auto">
-            Your global intelligence network for real-world asset tokenization. Regional reports and breaking news from every corner of the tokenization ecosystem.
-          </p>
-        </div>
-
-        {/* Featured Podcast - Foretoken Newswire */}
-        <div classname="mb-20">
-          <card classname="data-card glow-effect">
-            <cardcontent classname="p-8">
-              <div classname="grid lg:grid-cols-2 gap-8 items-center">
-                <div>
-                  <img alt="Foretoken Newswire" classname="w-full max-w-md rounded-lg mx-auto" src="{ForetokenNewswireImg}"/>
-                </div>
-                <div>
-                  <h2 classname="font-notable text-3xl text-white mb-4">FORETOKEN NEWSWIRE</h2>
-                  <p classname="text-gray-300 mb-6 text-lg">
-                    Stay ahead of the tokenization curve with breaking news, market analysis, and insider insights from the world of real-world asset tokenization.
-                  </p>
-                  
-                  {/* Streaming Links */}
-                  <div classname="flex flex-wrap gap-4 mb-6">
-                    <button aschild="" classname="neon-glow bg-green-600 text-white hover:bg-green-700 flex items-center gap-2">
-                      <a href="https://open.spotify.com/show/1OJbSDAJftc164PE5la9wz?si=bd00e9127cd24fea" rel="noopener noreferrer" target="_blank">
-                        <faspotify size="{16}"></faspotify>
-                        Spotify
-                      </a>
-                    </button>
-                    <button aschild="" classname="neon-glow bg-gray-800 text-white hover:bg-gray-700 flex items-center gap-2" variant="secondary">
-                      <a href="https://podcasts.apple.com/us/podcast/foretoken-newswire/id1822379157" rel="noopener noreferrer" target="_blank">
-                        <faapple size="{16}"></faapple>
-                        Apple
-                      </a>
-                    </button>
-                    <button aschild="" classname="neon-glow border-red-500 text-red-400 hover:bg-red-500 hover:text-white flex items-center gap-2" variant="outline">
-                      <a href="https://iheart.com/podcast/282587964/" rel="noopener noreferrer" target="_blank">
-                        <siiheartradio size="{16}"></siiheartradio>
-                        iHeart
-                      </a>
-                    </button>
-                  </div>
-
-                  {/* Embedded Player */}
-                  <div classname="rounded-lg overflow-hidden">
-                    <iframe classname="w-full" frameborder="0" height="400px" src="https://embed.acast.com/682b9cacbc0e758152321dec?feed=true" width="100%"></iframe>
-                  </div>
-                </div>
-              </div>
-            </cardcontent>
-          </card>
-        </div>
-
-        {/* Regional Reports */}
-        <div classname="mb-12">
-          <h2 classname="font-notable text-4xl text-white text-center mb-4">REGIONAL REPORTS</h2>
-          <p classname="text-xl text-gray-300 text-center mb-16">
-            In-depth analysis from every major tokenization market worldwide
-          </p>
-          
-          <div classname="grid lg:grid-cols-2 gap-8">
-            {podcasts.slice(1).map((podcast) =&gt; (
-              <card classname="data-card hover:glow-effect transition-all duration-300" key="{podcast.id}">
-                <cardcontent classname="p-6">
-                  <div classname="text-center mb-6">
-                    <img alt="{podcast.title}" classname="w-48 h-48 rounded-lg mx-auto mb-4 object-cover" src="{podcast.image}"/>
-                    <h3 classname="font-notable text-2xl text-white mb-3">{podcast.title.toUpperCase()}</h3>
-                    <p classname="text-gray-300 mb-6">
-                      {podcast.description}
-                    </p>
-                  </div>
-
-                  {/* Streaming Links */}
-                  <div classname="flex justify-center gap-3 mb-6">
-                    <button aschild="" classname="bg-green-600 text-white hover:bg-green-700" size="sm">
-                      <a href="{podcast.links.spotify}" rel="noopener noreferrer" target="_blank">
-                        <faspotify size="{14}"></faspotify>
-                      </a>
-                    </button>
-                    <button aschild="" classname="bg-gray-800 text-white hover:bg-gray-700" size="sm" variant="secondary">
-                      <a href="{podcast.links.apple}" rel="noopener noreferrer" target="_blank">
-                        <faapple size="{14}"></faapple>
-                      </a>
-                    </button>
-                    <button aschild="" classname="border-red-500 text-red-400 hover:bg-red-500 hover:text-white" size="sm" variant="outline">
-                      <a href="{podcast.links.iheart}" rel="noopener noreferrer" target="_blank">
-                        <siiheartradio size="{14}"></siiheartradio>
-                      </a>
-                    </button>
-                  </div>
-
-                  {/* Embedded Player */}
-                  <div classname="rounded-lg overflow-hidden">
-                    <iframe classname="w-full" frameborder="0" height="300px" src="{podcast.embedSrc}" width="100%"></iframe>
-                  </div>
-                </cardcontent>
-              </card>
-            ))}
-          </div>
-        </div>
-
-
+  <main class="container">
+    <section class="section">
+      <h1 class="page-title">Foretoken Signal Network</h1>
+      <p>Listen to the latest insights, news, and interviews on the tokenized RWA market:</p>
+      <div class="podcast-player">
+        <iframe src="https://open.spotify.com/embed/show/xyz123" width="100%" height="152" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
       </div>
-    </div>
-  );
-}</pre>
-</main>
-<div id="footer"></div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
 </body>
 </html>
