@@ -1,162 +1,32 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Login | Foretoken</title>
-<link href="/assets/styles.css" rel="stylesheet"/>
-<script defer="" src="/assets/script.js"></script>
-<link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | Foretoken</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <script defer src="/assets/script.js"></script>
+</head>
 <body>
-<div id="header"></div>
-<main>
-<pre>import { useState } from "react";
-import { Link, useLocation } from "wouter";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Eye, EyeOff, LogIn } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useToast } from "@/hooks/use-toast";
-import { loginUserSchema, type LoginUser } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
+  <div id="navbar"></div>
 
-export default function Login() {
-  const [, setLocation] = useLocation();
-  const [showPassword, setShowPassword] = useState(false);
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
+  <main class="container center">
+    <section class="auth-section">
+      <h1 class="page-title">Login to Foretoken</h1>
+      <form action="/login" method="post" class="form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        
+        <button type="submit">Login</button>
+      </form>
+      <p>New here? <a href="/pages/signup.html">Create an account</a>.</p>
+    </section>
+  </main>
 
-  const form = useForm<loginuser>({
-    resolver: zodResolver(loginUserSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-
-  const loginMutation = useMutation({
-    mutationFn: async (data: LoginUser) =&gt; {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || "Login failed");
-      }
-      
-      return response.json();
-    },
-    onSuccess: (data) =&gt; {
-      toast({
-        title: "Success!",
-        description: data.message || "Welcome back!",
-      });
-      // Invalidate auth queries to refresh user state
-      queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
-      // Redirect to welcome page
-      setLocation("/welcome");
-    },
-    onError: (error: any) =&gt; {
-      toast({
-        title: "Login Failed",
-        description: error.message || "Invalid email or password",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const onSubmit = (data: LoginUser) =&gt; {
-    loginMutation.mutate(data);
-  };
-
-  return (
-    <div classname="min-h-screen bg-black flex items-center justify-center p-4">
-      <div classname="w-full max-w-md">
-        <card classname="bg-gray-900 border-gray-800">
-          <cardheader classname="space-y-1">
-            <cardtitle classname="text-2xl font-bold text-center text-white">
-              Welcome Back
-            </cardtitle>
-            <carddescription classname="text-center text-gray-400">
-              Sign in to your account to continue
-            </carddescription>
-          </cardheader>
-          <cardcontent>
-            <form {...form}="">
-              <form classname="space-y-4" onsubmit="{form.handleSubmit(onSubmit)}">
-                <formfield control="{form.control}" field="" name="email" render="{({" })=""> (
-                    <formitem>
-                      <formlabel classname="text-white">Email</formlabel>
-                      <formcontrol>
-                        <input classname="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-purple-500" placeholder="Enter your email" type="email" {...field}=""/>
-                      </formcontrol>
-                      <formmessage></formmessage>
-                    </formitem>
-                  )}
-                /&gt;
-
-                <formfield control="{form.control}" field="" name="password" render="{({" })=""> (
-                    <formitem>
-                      <formlabel classname="text-white">Password</formlabel>
-                      <formcontrol>
-                        <div classname="relative">
-                          <input "password"}="" "text"="" :="" ?="" classname="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-purple-500 pr-10" placeholder="Enter your password" type="{showPassword" {...field}=""/>
-                          <button =="" classname="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-gray-400 hover:text-gray-300" onclick="{()" size="sm" type="button" variant="ghost"> setShowPassword(!showPassword)}
-                          &gt;
-                            {showPassword ? (
-                              <eyeoff classname="h-4 w-4"></eyeoff>
-                            ) : (
-                              <eye classname="h-4 w-4"></eye>
-                            )}
-                          </button>
-                        </div>
-                      </formcontrol>
-                      <formmessage></formmessage>
-                    </formitem>
-                  )}
-                /&gt;
-
-                <button classname="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white" disabled="{loginMutation.isPending}" type="submit">
-                  {loginMutation.isPending ? (
-                    "Signing in..."
-                  ) : (
-                    &lt;&gt;
-                      <login classname="mr-2 h-4 w-4"></login>
-                      Sign In
-                    
-                  )}
-                </button>
-              </formfield></formfield></form>
-            </form>
-
-            <div classname="mt-6 text-center">
-              <p classname="text-gray-400">
-                Don't have an account?{" "}
-                <link href="/signup"/>
-                  <span classname="text-purple-400 hover:text-purple-300 font-medium cursor-pointer">
-                    Sign up
-                  </span>
-                
-              </p>
-            </div>
-          </cardcontent>
-        </card>
-      </div>
-    </div>
-  );
-}</loginuser></pre>
-</main>
-<div id="footer"></div>
+  <div id="footer"></div>
 </body>
 </html>
