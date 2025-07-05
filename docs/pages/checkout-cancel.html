@@ -11,13 +11,7 @@
 <body>
 <div id="header"></div>
 <main>
-<pre>import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { X, ArrowLeft, CreditCard } from "lucide-react";
-import { Link } from "wouter";
 
-export default function CheckoutCancel() {
   useEffect(() =&gt; {
     // Clear any loading states or redirect tracking
     window.history.replaceState({}, '', '/checkout-cancel');
