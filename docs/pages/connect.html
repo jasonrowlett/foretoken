@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Connect | Foretoken</title>
+<link href="/docs/assets/styles.css" rel="stylesheet"/>
+<script defer="" src="/docs/assets/script.js"></script>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
+<body>
+<div id="header"></div>
+<main>
+<pre>import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Mail, Phone, MapPin, Mic, TrendingUp, Users, Calendar, Globe, Award } from "lucide-react";
+import { FaTwitter, FaLinkedin, FaYoutube, FaTelegram } from "react-icons/fa";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
+import cryptoAiCon2 from "@assets/CryptoAI_CON_2_1750886318343.png";
+import cryptoAiConLisbon from "@assets/CryptoAI_CON_Lisbon_Nov_2024_1750886318343.png";
+import cryptoAiConPanel from "@assets/CryptoAI_CON_panel_1750886318343.png";
+import web3Amsterdam from "@assets/Web3Amsterdam-4_1750886362838.png";
+
+export default function Connect() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) =&gt; {
+    e.preventDefault();
+    
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      toast({
+        title: "Please fill in all fields",
+        description: "All fields are required to submit your message.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await apiRequest("POST", "/api/contact", formData);
+      const result = await response.json();
+      
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. We'll get back to you soon.",
+      });
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+      });
+    } catch (error) {
+      console.error("Contact form submission error:", error);
+      toast({
+        title: "Failed to send message",
+        description: "Please try again later or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleInputChange = (field: string, value: string) =&gt; {
+    setFormData(prev =&gt; ({ ...prev, [field]: value }));
+  };
+
+  return (
+    <div classname="bg-gray-950 min-h-screen pt-16">
+      <div classname="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div classname="mb-12 text-center">
+          <h1 classname="font-notable text-5xl text-white mb-4">CONNECT</h1>
+          <p classname="text-xl text-gray-300">Get in touch for speaking engagements, consulting, or collaboration</p>
+        </div>
+
+        {/* Speaking at RWA Events Section */}
+        <div classname="mb-16" id="speaker-booking">
+          <card classname="data-card glow-effect">
+            <cardcontent classname="p-8">
+              <div classname="text-center mb-8">
+                <h2 classname="font-notable text-3xl text-white mb-4">SPEAKING AT RWA EVENTS</h2>
+                <p classname="text-lg text-gray-300 max-w-3xl mx-auto">
+                  Expert insights on tokenized real-world assets at leading industry conferences. 
+                  Available for keynotes, panels, and strategic presentations worldwide.
+                </p>
+              </div>
+
+              {/* Speaking Highlights */}
+              <div classname="grid md:grid-cols-3 gap-6 mb-8">
+                <div classname="text-center">
+                  <div classname="bg-gray-900 rounded-lg p-4 mb-4">
+                    <globe classname="text-purple-400 mx-auto mb-2" size="{32}"></globe>
+                    <h3 classname="text-white font-semibold">Global Reach</h3>
+                    <p classname="text-gray-400 text-sm">Speaking across Europe, Americas, and Asia</p>
+                  </div>
+                </div>
+                <div classname="text-center">
+                  <div classname="bg-gray-900 rounded-lg p-4 mb-4">
+                    <award classname="text-purple-400 mx-auto mb-2" size="{32}"></award>
+                    <h3 classname="text-white font-semibold">Industry Expert</h3>
+                    <p classname="text-gray-400 text-sm">Recognized thought leader in RWA tokenization</p>
+                  </div>
+                </div>
+                <div classname="text-center">
+                  <div classname="bg-gray-900 rounded-lg p-4 mb-4">
+                    <calendar classname="text-purple-400 mx-auto mb-2" size="{32}"></calendar>
+                    <h3 classname="text-white font-semibold">Available Now</h3>
+                    <p classname="text-gray-400 text-sm">Booking for 2025 conferences and events</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Speaking Images Grid */}
+              <div classname="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div classname="relative group">
+                  <img alt="Speaking at CryptoAI Conference about RWA Tokenization" classname="w-full h-64 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105" src="{cryptoAiCon2}"/>
+                  <div classname="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                    <p classname="text-white text-center font-semibold">CryptoAI Conference<br/>RWA Tokenization Keynote</p>
+                  </div>
+                </div>
+
+                <div classname="relative group">
+                  <img alt="CryptoAI Conference Lisbon November 2024" classname="w-full h-64 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105" src="{cryptoAiConLisbon}"/>
+                  <div classname="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                    <p classname="text-white text-center font-semibold">CryptoAI Lisbon 2024<br/>Tokenization Trends</p>
+                  </div>
+                </div>
+
+                <div classname="relative group">
+                  <img alt="Panel discussion at CryptoAI Conference" classname="w-full h-64 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105" src="{cryptoAiConPanel}"/>
+                  <div classname="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                    <p classname="text-white text-center font-semibold">Industry Panel<br/>Expert Discussion</p>
+                  </div>
+                </div>
+
+                <div classname="relative group">
+                  <img alt="Speaking at Web3 Amsterdam about The RWA Edge" classname="w-full h-64 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105" src="{web3Amsterdam}"/>
+                  <div classname="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                    <p classname="text-white text-center font-semibold">Web3 Amsterdam<br/>The RWA Edge</p>
+                  </div>
+                </div>
+
+                <div classname="relative group md:col-span-2 lg:col-span-2">
+                  <div classname="w-full h-64 bg-gradient-to-br from-purple-900 to-gray-900 rounded-lg flex items-center justify-center">
+                    <div classname="text-center">
+                      <h4 classname="text-white text-xl font-bold mb-2">Strategic RWA Insights</h4>
+                      <p classname="text-gray-300">Why Tokenization Matters Now</p>
+                      <div classname="mt-4 flex justify-center space-x-2">
+                        <span classname="w-2 h-2 bg-purple-400 rounded-full"></span>
+                        <span classname="w-2 h-2 bg-purple-400 rounded-full"></span>
+                        <span classname="w-2 h-2 bg-purple-400 rounded-full"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div classname="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                    <p classname="text-white text-center font-semibold">Industry Presentation<br/>RWA Market Analysis</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Speaking Topics */}
+              <div classname="mt-8 bg-gray-900 rounded-lg p-6">
+                <h3 classname="text-xl font-bold text-white mb-4">Speaking Topics</h3>
+                <div classname="grid md:grid-cols-2 gap-4">
+                  <ul classname="space-y-2 text-gray-300">
+                    <li classname="flex items-center gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full"></span>
+                      Real-World Asset Tokenization Strategies
+                    </li>
+                    <li classname="flex items-center gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full"></span>
+                      Institutional Adoption of Tokenized Assets
+                    </li>
+                    <li classname="flex items-center gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full"></span>
+                      Risk Management in Digital Asset Markets
+                    </li>
+                  </ul>
+                  <ul classname="space-y-2 text-gray-300">
+                    <li classname="flex items-center gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full"></span>
+                      Regulatory Landscape for RWA Tokenization
+                    </li>
+                    <li classname="flex items-center gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full"></span>
+                      Future of Traditional Finance &amp; DeFi
+                    </li>
+                    <li classname="flex items-center gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full"></span>
+                      Market Intelligence &amp; Investment Strategies
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* CTA for Speaking Requests */}
+              <div classname="mt-6 text-center">
+                <button classname="neon-glow bg-purple-400 text-black hover:bg-purple-300 transition-all duration-300 font-semibold px-8 py-3">
+                  Request Speaking Engagement
+                </button>
+              </div>
+            </cardcontent>
+          </card>
+        </div>
+
+        {/* Consulting Services Section */}
+        <div classname="mb-16" id="consulting">
+          <card classname="data-card glow-effect">
+            <cardcontent classname="p-8">
+              <div classname="text-center mb-8">
+                <h2 classname="font-notable text-3xl text-white mb-4">CONSULTING SERVICES</h2>
+                <p classname="text-lg text-gray-300 max-w-3xl mx-auto">
+                  Strategic advisory and implementation services for organizations entering the tokenized asset ecosystem. 
+                  From market intelligence to project execution, we deliver comprehensive RWA solutions.
+                </p>
+              </div>
+
+              <div classname="grid md:grid-cols-3 gap-8">
+                {/* Market Analysis */}
+                <div classname="bg-gray-900 rounded-lg p-6 hover:bg-gray-800 transition-colors duration-300">
+                  <div classname="text-center mb-4">
+                    <trendingup classname="text-purple-400 mx-auto mb-3" size="{40}"></trendingup>
+                    <h3 classname="text-xl font-bold text-white mb-2">Custom Market Analysis</h3>
+                  </div>
+                  <ul classname="space-y-2 text-gray-300">
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Sector-specific tokenization opportunities</span>
+                    </li>
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Competitive landscape assessment</span>
+                    </li>
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Risk analysis and mitigation strategies</span>
+                    </li>
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Investment thesis development</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Project Implementation */}
+                <div classname="bg-gray-900 rounded-lg p-6 hover:bg-gray-800 transition-colors duration-300">
+                  <div classname="text-center mb-4">
+                    <award classname="text-purple-400 mx-auto mb-3" size="{40}"></award>
+                    <h3 classname="text-xl font-bold text-white mb-2">Project Implementation</h3>
+                  </div>
+                  <ul classname="space-y-2 text-gray-300">
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Tokenization strategy design</span>
+                    </li>
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Technical architecture planning</span>
+                    </li>
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Regulatory compliance frameworks</span>
+                    </li>
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Go-to-market execution</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Strategic Partnerships */}
+                <div classname="bg-gray-900 rounded-lg p-6 hover:bg-gray-800 transition-colors duration-300">
+                  <div classname="text-center mb-4">
+                    <users classname="text-purple-400 mx-auto mb-3" size="{40}"></users>
+                    <h3 classname="text-xl font-bold text-white mb-2">Strategic Partnerships</h3>
+                  </div>
+                  <ul classname="space-y-2 text-gray-300">
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Industry network connections</span>
+                    </li>
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Technology vendor selection</span>
+                    </li>
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Institutional investor introductions</span>
+                    </li>
+                    <li classname="flex items-start gap-2">
+                      <span classname="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Cross-border collaboration facilitation</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Engagement Process */}
+              <div classname="mt-8 bg-gray-900 rounded-lg p-6">
+                <h3 classname="text-xl font-bold text-white mb-4 text-center">Our Engagement Process</h3>
+                <div classname="grid md:grid-cols-4 gap-4">
+                  <div classname="text-center">
+                    <div classname="w-8 h-8 bg-purple-400 text-black rounded-full flex items-center justify-center mx-auto mb-2 font-bold">1</div>
+                    <h4 classname="text-white font-semibold mb-1">Discovery</h4>
+                    <p classname="text-gray-400 text-sm">Requirements assessment and goal alignment</p>
+                  </div>
+                  <div classname="text-center">
+                    <div classname="w-8 h-8 bg-purple-400 text-black rounded-full flex items-center justify-center mx-auto mb-2 font-bold">2</div>
+                    <h4 classname="text-white font-semibold mb-1">Strategy</h4>
+                    <p classname="text-gray-400 text-sm">Comprehensive planning and roadmap development</p>
+                  </div>
+                  <div classname="text-center">
+                    <div classname="w-8 h-8 bg-purple-400 text-black rounded-full flex items-center justify-center mx-auto mb-2 font-bold">3</div>
+                    <h4 classname="text-white font-semibold mb-1">Execution</h4>
+                    <p classname="text-gray-400 text-sm">Implementation with milestone tracking</p>
+                  </div>
+                  <div classname="text-center">
+                    <div classname="w-8 h-8 bg-purple-400 text-black rounded-full flex items-center justify-center mx-auto mb-2 font-bold">4</div>
+                    <h4 classname="text-white font-semibold mb-1">Optimization</h4>
+                    <p classname="text-gray-400 text-sm">Performance monitoring and continuous improvement</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA for Consulting */}
+              <div classname="mt-6 text-center">
+                <button classname="neon-glow bg-purple-400 text-black hover:bg-purple-300 transition-all duration-300 font-semibold px-8 py-3">
+                  Schedule Consultation
+                </button>
+              </div>
+            </cardcontent>
+          </card>
+        </div>
+
+        <div classname="grid lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <card classname="data-card glow-effect">
+            <cardcontent classname="p-8">
+              <h3 classname="text-2xl font-bold text-white mb-6">Send us a Message</h3>
+              <form classname="space-y-6" onsubmit="{handleSubmit}">
+                <div classname="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label classname="text-gray-300 text-sm font-medium">Name</label>
+                    <input =="" onchange="{(e)" placeholder="Your name" type="text" value="{formData.name}"/> handleInputChange("name", e.target.value)}
+                      className="bg-gray-900 border-gray-600 text-white focus:border-purple-400 mt-2"
+                    /&gt;
+                  </div>
+                  <div>
+                    <label classname="text-gray-300 text-sm font-medium">Email</label>
+                    <input =="" onchange="{(e)" placeholder="your@email.com" type="email" value="{formData.email}"/> handleInputChange("email", e.target.value)}
+                      className="bg-gray-900 border-gray-600 text-white focus:border-purple-400 mt-2"
+                    /&gt;
+                  </div>
+                </div>
+
+                <div>
+                  <label classname="text-gray-300 text-sm font-medium">Subject</label>
+                  <select =="" onvaluechange="{(value)"> handleInputChange("subject", value)}&gt;
+                    <selecttrigger classname="bg-gray-900 border-gray-600 text-white focus:border-purple-400 mt-2">
+                      <selectvalue placeholder="Select a subject"></selectvalue>
+                    </selecttrigger>
+                    <selectcontent>
+                      <selectitem value="general">General Inquiry</selectitem>
+                      <selectitem value="speaking">Speaking Request</selectitem>
+                      <selectitem value="consulting">Consulting Services</selectitem>
+                      <selectitem value="media">Media &amp; Press</selectitem>
+                      <selectitem value="partnership">Partnership</selectitem>
+                    </selectcontent>
+                  </select>
+                </div>
+
+                <div>
+                  <label classname="text-gray-300 text-sm font-medium">Message</label>
+                  <textarea =="" onchange="{(e)" placeholder="Tell us about your project or inquiry..." rows="{5}" value="{formData.message}"> handleInputChange("message", e.target.value)}
+                    className="bg-gray-900 border-gray-600 text-white focus:border-purple-400 mt-2"
+                  /&gt;
+                </textarea></div>
+
+                <button classname="neon-glow bg-purple-400 text-black hover:bg-purple-300 transition-all duration-300 w-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed" disabled="{isSubmitting}" type="submit">
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </button>
+              </form>
+            </cardcontent>
+          </card>
+
+          {/* Contact Info &amp; Services */}
+          <div classname="space-y-8">
+            {/* Contact Information */}
+            <card classname="data-card">
+              <cardcontent classname="p-6">
+                <h3 classname="text-xl font-bold text-white mb-4">Get in Touch</h3>
+                <div classname="space-y-4">
+                  <div classname="flex items-center gap-3">
+                    <mail classname="text-purple-400" size="{20}"></mail>
+                    <span classname="text-gray-300">jason@foretoken.co</span>
+                  </div>
+                  <div classname="flex items-center gap-3">
+                    <fatelegram classname="text-purple-400" size="{20}"></fatelegram>
+                    <a classname="text-gray-300 hover:text-purple-400 transition-colors duration-300" href="https://t.me/jasonrowlett" rel="noopener noreferrer" target="_blank">
+                      @jasonrowlett
+                    </a>
+                  </div>
+                  <div classname="flex items-center gap-3">
+                    <mappin classname="text-purple-400" size="{20}"></mappin>
+                    <span classname="text-gray-300">Austin, TX</span>
+                  </div>
+                </div>
+              </cardcontent>
+            </card>
+
+            {/* Services */}
+            <card classname="data-card">
+              <cardcontent classname="p-6">
+                <h3 classname="text-xl font-bold text-white mb-4">Our Services</h3>
+                <div classname="space-y-4">
+                  <div classname="flex items-start gap-3">
+                    <mic classname="text-purple-400 mt-1" size="{20}"></mic>
+                    <div>
+                      <h4 classname="text-white font-semibold">Speaking Engagements</h4>
+                      <p classname="text-gray-400 text-sm">Conferences, workshops, and industry events</p>
+                    </div>
+                  </div>
+                  <div classname="flex items-start gap-3">
+                    <trendingup classname="text-purple-400 mt-1" size="{20}"></trendingup>
+                    <div>
+                      <h4 classname="text-white font-semibold">Market Analysis</h4>
+                      <p classname="text-gray-400 text-sm">Custom research and strategic insights</p>
+                    </div>
+                  </div>
+                  <div classname="flex items-start gap-3">
+                    <users classname="text-purple-400 mt-1" size="{20}"></users>
+                    <div>
+                      <h4 classname="text-white font-semibold">Consulting</h4>
+                      <p classname="text-gray-400 text-sm">Tokenization strategy and implementation</p>
+                    </div>
+                  </div>
+                </div>
+              </cardcontent>
+            </card>
+
+            {/* Social Media */}
+            <card classname="data-card">
+              <cardcontent classname="p-6">
+                <h3 classname="text-xl font-bold text-white mb-4">Follow Us</h3>
+                <div classname="flex gap-4">
+                  <button classname="neon-glow border-gray-600 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300" size="icon" variant="outline">
+                    <fatwitter size="{16}"></fatwitter>
+                  </button>
+                  <button classname="neon-glow border-gray-600 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300" size="icon" variant="outline">
+                    <falinkedin size="{16}"></falinkedin>
+                  </button>
+                  <button classname="neon-glow border-gray-600 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300" size="icon" variant="outline">
+                    <fatelegram size="{16}"></fatelegram>
+                  </button>
+                </div>
+              </cardcontent>
+            </card>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}</pre>
+</main>
+<div id="footer"></div>
+</body>
+</html>

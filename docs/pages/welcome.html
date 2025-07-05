@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Welcome | Foretoken</title>
+<link href="/docs/assets/styles.css" rel="stylesheet"/>
+<script defer="" src="/docs/assets/script.js"></script>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
+<body>
+<div id="header"></div>
+<main>
+<pre>import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useLocation } from "wouter";
+import { LogOut, User, Home } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/use-auth";
+
+export default function Welcome() {
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const { user, isLoading, isAuthenticated } = useAuth();
+
+  // Logout mutation
+  const logoutMutation = useMutation({
+    mutationFn: async () =&gt; {
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Logout failed");
+      }
+      
+      return response.json();
+    },
+    onSuccess: () =&gt; {
+      toast({
+        title: "Logged out",
+        description: "You have been successfully logged out.",
+      });
+      // Clear user cache
+      queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
+      // Redirect to login
+      setLocation("/login");
+    },
+    onError: (error: any) =&gt; {
+      toast({
+        title: "Logout Failed",
+        description: error.message || "Failed to logout",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Redirect to login if not authenticated
+  if (!isLoading &amp;&amp; !isAuthenticated) {
+    setLocation("/login");
+    return null;
+  }
+
+  if (isLoading) {
+    return (
+      <div classname="min-h-screen bg-black flex items-center justify-center">
+        <div classname="text-white text-lg">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div classname="min-h-screen bg-black flex items-center justify-center">
+        <div classname="text-white text-lg">User not found</div>
+      </div>
+    );
+  }
+
+  const handleLogout = () =&gt; {
+    logoutMutation.mutate();
+  };
+
+  return (
+    <div classname="min-h-screen bg-black p-4">
+      <div classname="max-w-4xl mx-auto">
+        {/* Header */}
+        <div classname="flex items-center justify-between mb-8">
+          <div classname="flex items-center space-x-4">
+            <div classname="h-12 w-12 bg-gradient-to-r from-purple-600 to-purple-700 rounded-full flex items-center justify-center">
+              <user classname="h-6 w-6 text-white"></user>
+            </div>
+            <div>
+              <h1 classname="text-2xl font-bold text-white">
+                Welcome back, {user.username}!
+              </h1>
+              <p classname="text-gray-400">
+                You're successfully signed in to your account
+              </p>
+            </div>
+          </div>
+          
+          <div classname="flex items-center space-x-3">
+            <button =="" classname="border-gray-700 text-gray-300 hover:bg-gray-800" onclick="{()" variant="outline"> setLocation("/")}
+            &gt;
+              <home classname="mr-2 h-4 w-4"></home>
+              Home
+            </button>
+            <button classname="border-red-600 text-red-400 hover:bg-red-900/20" disabled="{logoutMutation.isPending}" onclick="{handleLogout}" variant="outline">
+              <logout classname="mr-2 h-4 w-4"></logout>
+              {logoutMutation.isPending ? "Logging out..." : "Logout"}
+            </button>
+          </div>
+        </div>
+
+        {/* User Info Card */}
+        <div classname="grid gap-6 md:grid-cols-2">
+          <card classname="bg-gray-900 border-gray-800">
+            <cardheader>
+              <cardtitle classname="text-white flex items-center">
+                <user classname="mr-2 h-5 w-5"></user>
+                Account Information
+              </cardtitle>
+            </cardheader>
+            <cardcontent classname="space-y-4">
+              <div classname="flex justify-between items-center">
+                <span classname="text-gray-400">Username:</span>
+                <badge classname="bg-purple-900/30 text-purple-300" variant="secondary">
+                  {user.username}
+                </badge>
+              </div>
+              <div classname="flex justify-between items-center">
+                <span classname="text-gray-400">Email:</span>
+                <span classname="text-white">{user.email}</span>
+              </div>
+              <div classname="flex justify-between items-center">
+                <span classname="text-gray-400">User ID:</span>
+                <span classname="text-gray-300 font-mono">#{user.id}</span>
+              </div>
+            </cardcontent>
+          </card>
+
+          <card classname="bg-gray-900 border-gray-800">
+            <cardheader>
+              <cardtitle classname="text-white">Quick Actions</cardtitle>
+            </cardheader>
+            <cardcontent classname="space-y-3">
+              <button =="" classname="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white" onclick="{()"> setLocation("/")}
+              &gt;
+                <home classname="mr-2 h-4 w-4"></home>
+                Go to Homepage
+              </button>
+              <button =="" classname="w-full border-gray-700 text-gray-300 hover:bg-gray-800" onclick="{()" variant="outline"> setLocation("/library")}
+              &gt;
+                Browse Library
+              </button>
+              <button =="" classname="w-full border-gray-700 text-gray-300 hover:bg-gray-800" onclick="{()" variant="outline"> setLocation("/podcast")}
+              &gt;
+                Listen to Podcasts
+              </button>
+            </cardcontent>
+          </card>
+        </div>
+
+        {/* Authentication Status */}
+        <card classname="mt-6 bg-green-900/20 border-green-800">
+          <cardcontent classname="pt-6">
+            <div classname="flex items-center space-x-3">
+              <div classname="h-3 w-3 bg-green-500 rounded-full animate-pulse"></div>
+              <div>
+                <p classname="text-green-400 font-medium">
+                  Authentication Status: Active
+                </p>
+                <p classname="text-green-300 text-sm">
+                  Your session is secure and active. You can safely browse the platform.
+                </p>
+              </div>
+            </div>
+          </cardcontent>
+        </card>
+      </div>
+    </div>
+  );
+}</pre>
+</main>
+<div id="footer"></div>
+</body>
+</html>
