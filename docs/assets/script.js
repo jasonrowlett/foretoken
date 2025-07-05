@@ -1,15 +1,15 @@
-// Line 1 - script.js
-document.addEventListener("DOMContentLoaded", () => {
-  loadPartial("header", "/assets/header.html");
-  loadPartial("footer", "/assets/footer.html");
+window.onload = () => {
+  fetch('/assets/header.html')
+    .then(res => res.text())
+    .then(data => {
+      const header = document.getElementById('header');
+      if (header) header.innerHTML = data;
+    });
 
-});
-
-function loadPartial(id, url) {
-  fetch(url)
-    .then(response => response.text())
-    .then(html => {
-      document.getElementById(id).innerHTML = html;
-    })
-    .catch(error => console.error(`Error loading ${url}:`, error));
-}
+  fetch('/assets/footer.html')
+    .then(res => res.text())
+    .then(data => {
+      const footer = document.getElementById('footer');
+      if (footer) footer.innerHTML = data;
+    });
+};
