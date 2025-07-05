@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Home | Foretoken</title>
-<link href="/docs/assets/styles.css" rel="stylesheet"/>
-<script defer="" src="/docs/assets/script.js"></script>
-<link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | Foretoken</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/docs/assets/styles.css" />
+  <script defer src="/docs/assets/script.js"></script>
+</head>
 <body>
-<div id="header"></div>
-<main>
-<pre>import HeroSection from "@/components/hero-section";
-import NewsletterSignup from "@/components/newsletter-signup";
-import LiveMarketData from "@/components/live-market-data";
+  <div id="header"></div>
 
-export default function Home() {
-  return (
-    &lt;&gt;
-      <div id="header"></div>
-      <div classname="bg-black">
-        <herosection></herosection>
-        <newslettersignup></newslettersignup>
-        <livemarketdata></livemarketdata>
-      </div>
-      <div id="footer"></div>
-    
-  );
-}</pre>
-</main>
-<div id="footer"></div>
+  <main>
+    <section class="hero-section">
+      <h1>Tokenized Real-World Asset Intelligence</h1>
+      <p>The Foretoken platform gives you transparent, trusted market data across commodities, real estate, treasuries, and private credit.</p>
+    </section>
+
+    <section class="newsletter-signup">
+      <form>
+        <label for="email">Subscribe to our newsletter</label>
+        <input type="email" id="email" placeholder="Enter your email" />
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+
+    <section class="live-market-data">
+      <p>Live market data visualizations will appear here...</p>
+    </section>
+  </main>
+
+  <div id="footer"></div>
 </body>
 </html>
