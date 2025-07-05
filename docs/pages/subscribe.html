@@ -5,13 +5,21 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Subscribe | Foretoken</title>
-<link href="/docs/assets/styles.css" rel="stylesheet"/>
-<script defer="" src="/docs/assets/script.js"></script>
+<link href="/assets/styles.css" rel="stylesheet"/>
+<script defer="" src="/assets/script.js"></script>
 <link href="/favicon.ico" rel="icon" type="image/x-icon"/></head>
 <body>
 <div id="header"></div>
 <main>
+<pre>import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Check, X } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
+export default function Subscribe() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
