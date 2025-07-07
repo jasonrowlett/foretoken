@@ -176,6 +176,49 @@ h1, h2, h3, h4 {
   font-weight: bold;
 }
 
+/* Library Page Styles */
+.library-page {
+  padding: 60px 40px;
+}
+
+.library-page h1 {
+  font-size: 40px;
+  font-family: var(--font-header);
+  margin-bottom: 20px;
+}
+
+.library-page p {
+  font-size: 16px;
+  color: var(--silver);
+  margin-bottom: 30px;
+}
+
+.library-page h2 {
+  font-size: 28px;
+  font-family: var(--font-header);
+  margin-bottom: 15px;
+  color: var(--purple);
+}
+
+.article-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.article-links a {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--purple);
+  transition: all 0.2s ease-in-out;
+}
+
+.article-links a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
 .site-footer {
   background-color: #050505;
   padding: 60px 40px 30px;
@@ -253,5 +296,32 @@ h1, h2, h3, h4 {
 
   .footer-links {
     flex-direction: column;
+  }
+
+  .article-container {
+    margin-top: 2rem;
+    padding: 1rem;
+  }
+
+  .article-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .article-list li {
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .article-list li a {
+    color: #bc8cff;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .article-list li a:hover {
+    color: #ffffff;
+    text-decoration: underline;
   }
 }
