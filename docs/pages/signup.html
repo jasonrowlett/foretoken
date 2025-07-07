@@ -1,35 +1,108 @@
+<!-- File: /docs/pages/signup.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign Up | Foretoken</title>
-  <link rel="stylesheet" href="/assets/styles.css" />
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  <script defer src="/assets/script.js"></script>
-</head>
-<body>
-  <div id="navbar"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | Foretoken</title>
 
-  <main class="container center">
-    <section class="auth-section">
-      <h1 class="page-title">Create Your Account</h1>
-      <form action="/signup" method="post" class="form">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" required />
-        
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email" required />
-        
-        <label for="password">Create Password:</label>
-        <input type="password" id="password" name="password" required />
-        
-        <button type="submit">Sign Up</button>
-      </form>
-      <p>Already a member? <a href="/pages/login.html">Login here</a>.</p>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Notable&display=swap" rel="stylesheet" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="icon" href="../assets/img/logo.png" />
+  </head>
+
+  <body class="bg-black text-white font-inter">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="logo-section">
+        <img src="../assets/img/logo.png" alt="Foretoken Logo" class="logo" />
+        <h1 class="site-title">FORETOKEN</h1>
+      </div>
+      <nav class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="library.html">Library</a>
+        <a href="podcasts.html">Podcasts</a>
+        <a href="connect.html">Connect</a>
+        <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+      </nav>
+    </header>
+
+    <!-- Signup Form -->
+    <section class="hero" style="padding-bottom: 60px;">
+      <div class="hero-text" style="max-width: 600px;">
+        <h2 class="hero-title">CREATE ACCOUNT</h2>
+        <p class="hero-description" style="margin-bottom: 30px;">
+          Join Foretoken to access our research library and subscribe to tokenized market intelligence.
+        </p>
+
+        <form action="/signup" method="post" style="display: flex; flex-direction: column; gap: 20px;">
+          <div>
+            <label for="email" style="display: block; margin-bottom: 6px;">Email</label>
+            <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: none; border-radius: 8px; background-color: #111; color: white;" />
+          </div>
+
+          <div>
+            <label for="password" style="display: block; margin-bottom: 6px;">Password</label>
+            <input type="password" id="password" name="password" required style="width: 100%; padding: 12px; border: none; border-radius: 8px; background-color: #111; color: white;" />
+          </div>
+
+          <button type="submit" class="btn-purple">Sign Up</button>
+        </form>
+
+        <p style="margin-top: 20px; font-size: 14px;">
+          Already have an account? <a href="login.html" style="color: var(--purple); text-decoration: underline;">Log in</a>
+        </p>
+      </div>
     </section>
-  </main>
 
-  <div id="footer"></div>
-</body>
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h2>FORETOKEN</h2>
+          <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
+          <div class="social-links">
+            <a href="https://x.com/foretokenrwa" target="_blank">X</a>
+            <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank">LinkedIn</a>
+            <a href="https://t.me/foretokenalerts" target="_blank">Telegram</a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <h4>Platform</h4>
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="library.html">Library</a>
+            <a href="podcasts.html">Podcast</a>
+            <a href="connect.html">Connect</a>
+            <a href="subscribe.html">Subscribe</a>
+          </div>
+          <div>
+            <h4>Resources</h4>
+            <a href="#">Market Data</a>
+            <a href="#">Consulting</a>
+            <a href="#">Speaker Booking</a>
+            <a href="#">Educational Guides</a>
+            <a href="#">API Documentation</a>
+          </div>
+          <div>
+            <h4>Legal</h4>
+            <a href="terms.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="advertising-policy.html">Advertising Policy</a>
+            <a href="#">Disclaimer</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Foretoken. All rights reserved.</p>
+        <small>Market data provided by leading exchanges. Not investment advice.</small>
+      </div>
+    </footer>
+  </body>
 </html>
