@@ -1,117 +1,95 @@
-<!-- File: /docs/pages/podcasts.html -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Podcasts | Foretoken</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Podcasts | Foretoken</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Notable&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <link rel="icon" href="../assets/img/logo.png" />
+</head>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Notable&display=swap" rel="stylesheet" />
+<body>
+  <header>
+    <nav>
+      <a href="/docs/index.html">Home</a>
+      <a href="/docs/pages/library.html">Library</a>
+      <a href="/docs/pages/podcasts.html" class="active">Podcasts</a>
+      <a href="/docs/pages/connect.html">Connect</a>
+      <a href="/docs/pages/subscribe.html" class="subscribe">Subscribe</a>
+    </nav>
+  </header>
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="../assets/styles.css" />
-    <link rel="icon" href="../assets/img/logo.png" />
-  </head>
-
-  <body class="bg-black text-white font-inter">
-    <!-- Navbar -->
-    <header class="navbar">
-      <div class="logo-section">
-        <img src="../assets/img/logo.png" alt="Foretoken Logo" class="logo" />
-        <h1 class="site-title">FORETOKEN</h1>
-      </div>
-      <nav class="nav-links">
-        <a href="home.html">Home</a>
-        <a href="library.html">Library</a>
-        <a href="podcasts.html">Podcasts</a>
-        <a href="connect.html">Connect</a>
-        <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
-      </nav>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero" style="padding-bottom: 30px;">
-      <div class="hero-text">
-        <h2 class="hero-title">PODCAST</h2>
-        <p class="hero-description">Market insights, guest interviews, and tokenization news</p>
-      </div>
+  <main class="content">
+    <section class="hero">
+      <h1>PODCASTS</h1>
+      <p class="subtext">Market insights, guest interviews, and tokenization news</p>
     </section>
 
-    <!-- Stream Buttons -->
-    <section style="padding: 0 40px 40px;">
-      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-        <a href="#" class="btn-purple">Listen on Spotify</a>
-        <a href="#" class="btn-outline">Apple Podcasts</a>
-        <a href="#" class="btn-outline">RSS Feed</a>
-      </div>
+    <section class="stream-links">
+      <a href="#" class="btn-primary">Listen on Spotify</a>
+      <a href="#" class="btn-secondary">Apple Podcasts</a>
+      <a href="#" class="btn-secondary">RSS Feed</a>
     </section>
 
-    <!-- Podcast Episodes -->
-    <section style="padding: 0 40px; display: flex; flex-wrap: wrap; gap: 32px;">
-      <div class="stat-card" style="max-width: 360px;">
-        <img src="../assets/img/ep001.jpg" alt="Episode 1" style="width: 100%; border-radius: 10px; margin-bottom: 12px;" />
-        <p class="label purple">Episode 1</p>
-        <h3 style="margin-bottom: 10px;">The RWA Revolution</h3>
+    <section class="episodes">
+      <div class="stat-card">
+        <img src="../assets/img/ep001.jpg" alt="Episode 1" />
+        <p class="label">Episode 1</p>
+        <h3>The RWA Revolution</h3>
         <p class="subtext">How real-world assets are becoming the key to institutional crypto adoption.</p>
       </div>
 
-      <div class="stat-card" style="max-width: 360px;">
-        <img src="../assets/img/ep002.jpg" alt="Episode 2" style="width: 100%; border-radius: 10px; margin-bottom: 12px;" />
-        <p class="label purple">Episode 2</p>
-        <h3 style="margin-bottom: 10px;">Tokenized Treasuries Explained</h3>
+      <div class="stat-card">
+        <img src="../assets/img/ep002.jpg" alt="Episode 2" />
+        <p class="label">Episode 2</p>
+        <h3>Tokenized Treasuries Explained</h3>
         <p class="subtext">Breaking down the explosive growth of digital government bonds and their yields.</p>
       </div>
-
-      <!-- Add more episodes as needed -->
     </section>
+  </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <h2>FORETOKEN</h2>
-          <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
-          <div class="social-links">
-            <a href="https://x.com/foretokenrwa" target="_blank">X</a>
-            <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank">LinkedIn</a>
-            <a href="https://t.me/foretokenalerts" target="_blank">Telegram</a>
-          </div>
-        </div>
-
-        <div class="footer-links">
-          <div>
-            <h4>Platform</h4>
-            <a href="home.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="library.html">Library</a>
-            <a href="podcasts.html">Podcast</a>
-            <a href="connect.html">Connect</a>
-            <a href="subscribe.html">Subscribe</a>
-          </div>
-          <div>
-            <h4>Resources</h4>
-            <a href="#">Market Data</a>
-            <a href="#">Consulting</a>
-            <a href="#">Speaker Booking</a>
-            <a href="#">Educational Guides</a>
-            <a href="#">API Documentation</a>
-          </div>
-          <div>
-            <h4>Legal</h4>
-            <a href="terms.html">Terms of Service</a>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="#">Cookie Policy</a>
-            <a href="#">Advertising Policy</a>
-            <a href="#">Disclaimer</a>
-          </div>
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h2>FORETOKEN</h2>
+        <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
+        <div class="socials">
+          <a href="https://x.com/foretokenrwa" target="_blank">X</a>
+          <a href="https://linkedin.com/company/foretokenrwa" target="_blank">LinkedIn</a>
+          <a href="https://t.me/foretokenalerts" target="_blank">Telegram</a>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <p>© 2025 Foretoken. All rights reserved.</p>
-        <small>Market data provided by leading exchanges. Not investment advice.</small>
+      <div>
+        <h3>Platform</h3>
+        <ul>
+          <li><a href="/docs/index.html">Home</a></li>
+          <li><a href="/docs/pages/about.html">About</a></li>
+          <li><a href="/docs/pages/library.html">Library</a></li>
+          <li><a href="/docs/pages/podcasts.html">Podcasts</a></li>
+          <li><a href="/docs/pages/connect.html">Connect</a></li>
+          <li><a href="/docs/pages/subscribe.html">Subscribe</a></li>
+        </ul>
       </div>
-    </footer>
-  </body>
+
+      <div>
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="/docs/pages/glossary.html">Glossary</a></li>
+          <li><a href="/docs/pages/advertising-policy.html">Advertising</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="/docs/pages/terms.html">Terms</a></li>
+          <li><a href="/docs/pages/privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 Foretoken. All rights reserved.</p>
+  </footer>
+</body>
 </html>
