@@ -299,15 +299,17 @@ img {
   transform: translateY(-5px);
 }
 
+/* ===== PODCAST-SPECIFIC CARD TWEAKS ===== */
+
 .article-card img {
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  object-fit: contain; /* previously: cover */
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  background-color: #000; /* fallback if image doesn’t fill */
 }
 
-/* ===== PODCAST-SPECIFIC CARD TWEAKS ===== */
 .article-card iframe {
   border-radius: 8px;
   margin-top: 1rem;
