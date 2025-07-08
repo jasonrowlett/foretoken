@@ -1,113 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Library | Foretoken</title>
-    <link rel="stylesheet" href="../assets/styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Notable&family=Inter&display=swap" rel="stylesheet" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Library | Foretoken</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Notable&family=Inter&display=swap" rel="stylesheet" />
+</head>
 
-  <body>
-    <!-- Header -->
-    <header class="navbar">
-      <div class="logo-section">
-        <img src="../assets/img/neon-logo.png" alt="Foretoken Logo" class="logo" />
-        <h1 class="site-title">FORETOKEN</h1>
+<body class="bg-black text-white font-inter">
+  <!-- Header -->
+  <header class="navbar">
+    <div class="logo-section">
+      <img src="../assets/img/neon-logo.png" alt="Foretoken Logo" class="logo" />
+      <h1 class="site-title">FORETOKEN</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="library.html">Library</a>
+      <a href="podcasts.html">Podcasts</a>
+      <a href="connect.html">Connect</a>
+      <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+    </nav>
+  </header>
+
+  <!-- Library Hero -->
+  <section class="hero">
+    <h1 class="hero-title">RESEARCH LIBRARY</h1>
+    <p class="hero-description">Deep analysis, market reports, and educational content</p>
+    <div class="filter-tags">
+      <button class="tag active">All</button>
+      <button class="tag">RWA 101</button>
+      <button class="tag">Glossary</button>
+      <button class="tag">Real Estate</button>
+      <button class="tag">Commodities</button>
+      <button class="tag">Infrastructure</button>
+      <button class="tag">Regulation</button>
+      <button class="tag">Ebooks</button>
+    </div>
+  </section>
+
+  <!-- Article Grid -->
+  <section class="article-grid">
+    <div class="article-card">
+      <img src="../assets/img/article1.jpg" alt="Blockchain Cube" />
+      <div class="card-body">
+        <span class="tag purple">RWA 101</span>
+        <h3>What is the Blockchain? A Beginner’s Guide</h3>
+        <p>Understanding blockchain technology and its real-world applications beyond cryptocurrency.</p>
+        <small>Jason Rowlett • Mar 31 • 3 min read</small>
       </div>
-      <nav class="nav-links">
-        <a href="pages/home.html">Home</a>
-        <a href="pages/library.html">Library</a>
-        <a href="pages/podcasts.html">Podcasts</a>
-        <a href="pages/connect.html">Connect</a>
-        <a href="pages/subscribe.html" class="subscribe-btn">Subscribe</a>
-      </nav>
-    </header>
+    </div>
 
-    <main class="content">
-      <h1>Library</h1>
-      <p class="subtext">
-        In-depth analysis, educational articles, and market insights from the Foretoken team.
-      </p>
+    <div class="article-card">
+      <img src="../assets/img/article2.jpg" alt="Smart Contracts" />
+      <div class="card-body">
+        <span class="tag purple">RWA 101</span>
+        <h3>Smart Contracts: A Traditional Investor's Guide</h3>
+        <p>Understanding smart contracts and how they expand investment horizons while reducing friction.</p>
+        <small>Jason Rowlett • Apr 4 • 3 min read</small>
+      </div>
+    </div>
 
-      <section class="article-container">
-        <h2>RWA 101 Articles</h2>
-        <ul class="article-list">
-          <li>
-            <a href="/docs/pages/library/what-is-blockchain.html">
-              What Is the Blockchain? A Beginner’s Guide for Curious Investors
-            </a>
-          </li>
-          <li>
-            <a href="/docs/pages/library/smart-contracts-guide.html">
-              How Smart Contracts Power Real-World Assets
-            </a>
-          </li>
-          <li>
-            <a href="/docs/pages/library/rwa-tokenization-guide.html">
-              How to Tokenize Real-World Assets: Step-by-Step
-            </a>
-          </li>
-          <li>
-            <a href="/docs/pages/library/analyze-tokenized-assets.html">
-              How to Analyze Tokenized Assets: Tools and Metrics
-            </a>
-          </li>
-          <li>
-            <a href="/docs/pages/library/double-pedigree-strategy.html">
-              The Double Pedigree Strategy for Yield Performance
-            </a>
-          </li>
-        </ul>
-      </section>
-    </main>
+    <div class="article-card">
+      <img src="../assets/img/article3.jpg" alt="Tokenized Asset Analysis" />
+      <div class="card-body">
+        <span class="tag purple">RWA 101</span>
+        <h3>How to Analyze Tokenized Assets Before You Invest</h3>
+        <p>A new approach to tokenized RWA investing comparing traditional and tokenized assets.</p>
+        <small>Jason Rowlett • Apr 3 • 4 min read</small>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <h2>FORETOKEN</h2>
-          <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
-          <div class="social-links">
-            <a href="https://x.com/foretokenrwa" target="_blank">X</a>
-            <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank">LinkedIn</a>
-            <a href="https://t.me/foretokenalerts" target="_blank">Telegram</a>
-          </div>
-        </div>
-
-        <div class="footer-links">
-          <div>
-            <h4>Platform</h4>
-            <a href="home.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="library.html">Library</a>
-            <a href="podcasts.html">Podcast</a>
-            <a href="connect.html">Connect</a>
-            <a href="subscribe.html">Subscribe</a>
-          </div>
-          <div>
-            <h4>Resources</h4>
-            <a href="#">Market Data</a>
-            <a href="#">Consulting</a>
-            <a href="#">Speaker Booking</a>
-            <a href="#">Educational Guides</a>
-            <a href="#">API Documentation</a>
-          </div>
-          <div>
-            <h4>Legal</h4>
-            <a href="terms.html">Terms of Service</a>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="#">Cookie Policy</a>
-            <a href="#">Advertising Policy</a>
-            <a href="#">Disclaimer</a>
-          </div>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2>FORETOKEN</h2>
+        <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
+        <div class="social-links">
+          <a href="https://x.com/foretokenrwa" target="_blank">X</a>
+          <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank">LinkedIn</a>
+          <a href="https://t.me/foretokenalerts" target="_blank">Telegram</a>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <p>© 2025 Foretoken. All rights reserved.</p>
-        <small>Market data provided by leading exchanges. Not investment advice.</small>
+      <div class="footer-links">
+        <div>
+          <h4>Platform</h4>
+          <a href="home.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="library.html">Library</a>
+          <a href="podcasts.html">Podcast</a>
+          <a href="connect.html">Connect</a>
+          <a href="subscribe.html">Subscribe</a>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <a href="#">Market Data</a>
+          <a href="#">Consulting</a>
+          <a href="#">Speaker Booking</a>
+          <a href="#">Educational Guides</a>
+          <a href="#">API Documentation</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">Advertising Policy</a>
+          <a href="#">Disclaimer</a>
+        </div>
       </div>
-    </footer>
-  </body>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Foretoken. All rights reserved.</p>
+      <small>Market data provided by leading exchanges. Not investment advice.</small>
+    </div>
+  </footer>
+</body>
 </html>
