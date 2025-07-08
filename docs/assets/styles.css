@@ -299,6 +299,49 @@ img {
   transform: translateY(-5px);
 }
 
+.newsletter-signup {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #0d0d0d;
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+}
+
+.newsletter-signup h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.newsletter-signup p {
+  color: #ccc;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.newsletter-form input[type="email"] {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: none;
+  width: 280px;
+  font-size: 1rem;
+}
+
+.newsletter-form button {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 /* ===== PODCAST-SPECIFIC CARD TWEAKS ===== */
 
 .article-card img {
