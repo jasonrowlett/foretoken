@@ -236,3 +236,83 @@ img {
   text-align: center;
   color: #666;
 }
+
+/* ===== LIBRARY STYLING ===== */
+.filter-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.tag {
+  background: transparent;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tag:hover,
+.tag.active {
+  background-color: #a855f7;
+  color: #fff;
+  border-color: #a855f7;
+}
+
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem 4rem;
+  background-color: #0c0c0c;
+}
+
+.article-card {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+}
+
+.article-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-body .tag {
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.card-body h3 {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.card-body p {
+  color: #aaa;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-body small {
+  font-size: 0.8rem;
+  color: #666;
+}
