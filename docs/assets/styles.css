@@ -382,3 +382,30 @@ img {
 .platform-icons img:hover {
   transform: scale(1.1);
 }
+
+/*====SPEAKING STYLES====*/
+
+.image-gallery {
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.image-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.image-row img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
+  transition: transform 0.2s ease-in-out;
+}
+
+.image-row img:hover {
+  transform: scale(1.03);
+}
