@@ -1,3 +1,6 @@
+/* ===== IMPORT FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Notable&display=swap');
+
 /* ===== BASE ===== */
 body {
   margin: 0;
@@ -84,6 +87,7 @@ img {
   font-weight: 700;
   margin-bottom: 1rem;
   line-height: 1.3;
+  font-family: 'Notable', sans-serif;
 }
 
 .hero-description {
@@ -270,6 +274,7 @@ img {
   border-color: #a855f7;
 }
 
+/* ===== PODCAST CARDS ===== */
 .article-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -296,7 +301,7 @@ img {
 
 .article-card img {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
