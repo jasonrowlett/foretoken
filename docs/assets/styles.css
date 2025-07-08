@@ -385,6 +385,16 @@ img {
 
 /*====SPEAKING STYLES====*/
 
+.speaker-img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 1rem;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
 .image-gallery {
   padding: 3rem 2rem;
   display: flex;
