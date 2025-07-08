@@ -51,10 +51,13 @@
   <section class="newsletter-signup">
     <h2 class="notable">Foretoken Newsletter Signup</h2>
     <p>Get insights, analysis, and tokenization market news directly to your inbox.</p>
-    <form action="https://foretoken.beehiiv.com/subscribe" method="POST" target="_blank" class="newsletter-form">
-      <input type="email" name="email" placeholder="Enter your email" required />
+    <form action="https://api.beehiiv.com/v2/subscriptions" method="POST" class="newsletter-form" onsubmit="handleBeehiivSubmit(event)">
+      <input type="email" name="email" id="beehiiv-email" placeholder="Enter your email" required />
+      <input type="hidden" name="publication_id" value="pub_c03ab9e9-beb6-4cfe-847e-2b5820fbe828" />
       <button type="submit" class="btn-purple">Subscribe</button>
+      <p id="confirmation-message" class="confirmation-message" style="margin-top: 10px;"></p>
     </form>
+
   </section>
 
   <!-- Stats Cards -->
@@ -124,5 +127,35 @@
       <small>Market data provided by leading exchanges. Not investment advice.</small>
     </div>
   </footer>
+  <script>
+  async function handleBeehiivSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.querySelector("#beehiiv-email").value;
+    const pubId = form.querySelector("[name='publication_id']").value;
+    const messageBox = form.querySelector("#confirmation-message");
+
+    try {
+      const res = await fetch("https://api.beehiiv.com/v2/subscriptions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, publication_id: pubId })
+      });
+
+      if (res.ok) {
+        messageBox.innerText = "Thanks for subscribing!";
+        messageBox.style.color = "lightgreen";
+        form.reset();
+      } else {
+        const error = await res.json();
+        messageBox.innerText = error.message || "Subscription failed.";
+        messageBox.style.color = "tomato";
+      }
+    } catch (err) {
+      messageBox.innerText = "An error occurred. Please try again.";
+      messageBox.style.color = "tomato";
+    }
+  }
+</script>
 </body>
 </html>
