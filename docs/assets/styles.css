@@ -338,4 +338,24 @@ img {
   line-height: 1.4;
 }
 
+.platform-icons {
+  display: flex;
+  justify-content: start;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.platform-icons img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+.platform-icons img:hover {
+  transform: scale(1.1);
+}
+
+.article-grid {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
 
