@@ -8,6 +8,11 @@ body {
   line-height: 1.6;
 }
 
+.notable {
+  font-family: 'Notable', sans-serif;
+  letter-spacing: 1px;
+}
+
 a {
   color: inherit;
   text-decoration: none;
