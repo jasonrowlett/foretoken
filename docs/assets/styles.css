@@ -325,3 +325,17 @@ img {
   color: #fff;
 }
 
+/* ===== PODCAST STYLING ===== */
+
+.article-card iframe {
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.card-body .notable {
+  font-family: 'Notable', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+
