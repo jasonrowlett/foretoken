@@ -266,7 +266,7 @@ img {
 
 .article-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   padding: 2rem 4rem;
   background-color: #0c0c0c;
@@ -280,6 +280,8 @@ img {
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease;
+  text-decoration: none;
+  color: inherit;
 }
 
 .article-card:hover {
@@ -316,3 +318,10 @@ img {
   font-size: 0.8rem;
   color: #666;
 }
+
+.card-body h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
