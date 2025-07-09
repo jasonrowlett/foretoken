@@ -523,3 +523,23 @@ textarea::placeholder {
   align-self: flex-start;
   margin-top: 1rem;
 }
+
+/*==== FOOTER SOCIAL ICONS ===*/
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1); /* forces white-like color on dark bg */
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
