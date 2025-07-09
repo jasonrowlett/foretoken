@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Foretoken | Home</title>
-
-  <!-- CSS -->
   <link rel="stylesheet" href="assets/styles.css" />
-
-  <!-- Favicon -->
-  <link rel="icon" href="assets/img/neon-logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Notable&family=Inter&display=swap" rel="stylesheet" />
 </head>
+
 <body class="bg-black text-white font-inter">
+
   <!-- Header -->
   <header class="navbar">
     <div class="logo-section">
@@ -20,51 +18,100 @@
     </div>
     <nav class="nav-links">
       <a href="pages/home.html">Home</a>
-      <a href="pages/library.html">Library</a>
+      <a href="pages/about.html">About</a>
+      <div class="dropdown">
+        <a href="pages/library.html">Library</a>
+        <div class="dropdown-content">
+          <a href="pages/rwa101.html">RWA 101</a>
+          <a href="pages/glossary.html">Glossary</a>
+          <a href="pages/ebooks.html">eBooks</a>
+        </div>
+      </div>
+      <a href="pages/concourse.html">Concourse</a>
       <a href="pages/podcasts.html">Podcasts</a>
+      <a href="pages/speaking.html">Speaking</a>
+      <a href="pages/consulting.html">Consulting</a>
       <a href="pages/connect.html">Connect</a>
+      <a href="pages/login.html">Login</a>
       <a href="pages/subscribe.html" class="subscribe-btn">Subscribe</a>
     </nav>
   </header>
 
-  <!-- Main Content --> 
-  <main>
-    <section class="hero">
-      <h2>Bringing Transparency to<br />Tokenized Assets</h2>
-      <p>Your definitive source for real-world asset tokenization news, analysis, and market intelligence. From infrastructure to compliance, we decode the future of digital assets.</p>
-      <div class="hero-buttons">
-        <a href="#" class="cta-btn">Explore Markets</a>
-        <a href="#" class="cta-btn-secondary">Start Learning</a>
-      </div>
-    </section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 class="hero-title">Real-World Asset Market Intelligence</h1>
+    <p class="hero-subtitle">Compare on-chain and off-chain assets in real-time</p>
+  </section>
 
-    <section class="newsletter">
-      <h2>Foretoken Newsletter Signup</h2>
-      <p>Get insights, analysis, and tokenization market news directly to your inbox.</p>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Enter your email" required />
-        <button type="submit" class="subscribe-btn">Subscribe</button>
-      </form>
-    </section>
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <h2 class="newsletter-title">Foretoken Newsletter Signup</h2>
+    <form action="#" method="post" class="newsletter-form">
+      <input type="email" placeholder="Your email address" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
 
-    <section class="stats-cards">
-      <div class="card">
-        <h3>Market Cap</h3>
-        <p class="value">$24.52B</p>
-        <span class="label">Tokenized Assets</span>
-        <span class="change up">↑ +12.3%</span>
+  <!-- Card Section -->
+  <section class="features">
+    <div class="feature-card">
+      <img src="assets/img/home1.png" alt="Market Data" />
+      <h3>Token vs Traditional</h3>
+      <p>Side-by-side comparisons of tokenized and real-world asset performance.</p>
+    </div>
+    <div class="feature-card">
+      <img src="assets/img/home2.png" alt="Research" />
+      <h3>Market Context</h3>
+      <p>Explore yields, volatility, and spreads between digital and traditional markets.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2>FORETOKEN</h2>
+        <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
+        <div class="social-links">
+          <a href="https://x.com/foretokenrwa" target="_blank" class="social-text">X</a>
+          <a href="https://facebook.com/foretokenmedia" target="_blank" class="social-text">Facebook</a>
+          <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank" class="social-text">LinkedIn</a>
+          <a href="https://t.me/foretokenalerts" target="_blank" class="social-text">Telegram</a>
+        </div>
       </div>
-      <div class="card">
-        <h3>U.S. Treasuries</h3>
-        <p class="value">$7.5B</p>
-        <span class="change up">↑ +8.7%</span>
+
+      <div class="footer-links">
+        <div>
+          <h4>Platform</h4>
+          <a href="pages/home.html">Home</a>
+          <a href="pages/about.html">About</a>
+          <a href="pages/library.html">Library</a>
+          <a href="pages/podcasts.html">Podcast</a>
+          <a href="pages/connect.html">Connect</a>
+          <a href="pages/subscribe.html">Subscribe</a>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <a href="pages/concourse.html">Market Data</a>
+          <a href="pages/consulting.html">Consulting</a>
+          <a href="pages/speaking.html">Speaker Booking</a>
+          <a href="pages/ebooks.html">Educational Guides</a>
+          <a href="pages/glossary.html">Glossary</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="pages/terms.html">Terms of Service</a>
+          <a href="pages/privacy.html">Privacy Policy</a>
+          <a href="pages/advertising-policy.html">Advertising Policy</a>
+        </div>
       </div>
-      <div class="card">
-        <h3>Commodities</h3>
-        <p class="value">$1.6B</p>
-        <span class="change down">↓ -2.1%</span>
-      </div>
-    </section>
-  </main>
+    </div>
+
+    <div class="footer-bottom">
+      <p>©2025 Foretoken Media. RGI Enterprises LLC. All rights reserved.</p>
+      <small>Market data provided by leading exchanges. Not investment advice.</small>
+    </div>
+  </footer>
+
 </body>
 </html>
