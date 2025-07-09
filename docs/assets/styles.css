@@ -300,6 +300,17 @@ img {
   color: #666;
 }
 
+.social-links img.social-icon {
+  height: 24px;
+  width: 24px;
+  margin-right: 12px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.social-links img.social-icon:hover {
+  transform: scale(1.15);
+}
+
 /* ===== PODCAST CARDS ===== */
 .article-grid {
   display: grid;
