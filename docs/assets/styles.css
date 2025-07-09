@@ -496,6 +496,14 @@ img {
   color: #888;
 }
 
+/* Match placeholder font across all inputs and textarea */
+input::placeholder,
+textarea::placeholder {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #888; /* Optional: tweak to match other fields */
+}
+
 .contact-form textarea {
   resize: vertical;
 }

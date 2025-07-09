@@ -1,161 +1,70 @@
-<!-- File: /docs/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Foretoken | Tokenized RWA Market Intelligence</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Notable&display=swap" rel="stylesheet" />
+  <title>Foretoken | Home</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="../assets/styles.css" />
 
   <!-- Favicon -->
-  <link rel="icon" href="assets/img/neon-logo.png" />
+  <link rel="icon" href="../assets/img/neon-logo.png" />
 </head>
-
 <body class="bg-black text-white font-inter">
   <!-- Header -->
   <header class="navbar">
     <div class="logo-section">
-      <img src="assets/img/neon-logo.png" alt="Foretoken Logo" class="logo" />
+      <img src="../assets/img/neon-logo.png" alt="Foretoken Logo" class="logo" />
       <h1 class="site-title">FORETOKEN</h1>
     </div>
     <nav class="nav-links">
-      <a href="pages/home.html">Home</a>
-      <a href="pages/library.html">Library</a>
-      <a href="pages/podcasts.html">Podcasts</a>
-      <a href="pages/connect.html">Connect</a>
-      <a href="pages/subscribe.html" class="subscribe-btn">Subscribe</a>
+      <a href="home.html">Home</a>
+      <a href="library.html">Library</a>
+      <a href="podcasts.html">Podcasts</a>
+      <a href="connect.html">Connect</a>
+      <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1 class="hero-title">
-      Bringing Transparency to<br />
-      Tokenized Assets
-    </h1>
-    <p class="hero-description">
-      Your definitive source for real-world asset tokenization news, analysis, and market intelligence. From infrastructure to compliance, we decode the future of digital assets.
-    </p>
-    <div class="cta-buttons">
-      <a href="pages/concourse.html" class="btn-purple">Explore Markets</a>
-      <a href="pages/library.html" class="btn-outline">Start Learning</a>
-    </div>
-  </section>
-
-    <!-- Newsletter Signup -->
-  <section class="newsletter-signup">
-    <h2 class="notable">Foretoken Newsletter Signup</h2>
-    <p>Get insights, analysis, and tokenization market news directly to your inbox.</p>
-    <form action="https://api.beehiiv.com/v2/subscriptions" method="POST" class="newsletter-form" onsubmit="handleBeehiivSubmit(event)">
-      <input type="email" name="email" id="beehiiv-email" placeholder="Enter your email" required />
-      <input type="hidden" name="publication_id" value="pub_c03ab9e9-beb6-4cfe-847e-2b5820fbe828" />
-      <button type="submit" class="btn-purple">Subscribe</button>
-      <p id="confirmation-message" class="confirmation-message" style="margin-top: 10px;"></p>
-    </form>
-
-  </section>
-
-  <!-- Stats Cards -->
-  <section class="hero-stats">
-    <div class="stat-card">
-      <p class="label">Market Cap</p>
-      <h3>$24.52B</h3>
-      <p class="subtext">Tokenized Assets</p>
-      <span class="positive">↑ +12.3%</span>
-    </div>
-    <div class="stat-card">
-      <p class="label purple">U.S. Treasuries</p>
-      <h3>$7.5B</h3>
-      <span class="positive">↑ +8.7%</span>
-    </div>
-    <div class="stat-card">
-      <p class="label purple">Commodities</p>
-      <h3>$1.6B</h3>
-      <span class="negative">↓ -2.1%</span>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <h2>Foretoken</h2>
-        <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
-        <div class="social-links">
-          <a href="https://x.com/foretokenrwa" target="_blank">X</a>
-          <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank">LinkedIn</a>
-          <a href="https://t.me/foretokenalerts" target="_blank">Telegram</a>
-        </div>
+  <!-- Main Content -->
+  <main>
+    <section class="hero">
+      <h2>Bringing Transparency to<br />Tokenized Assets</h2>
+      <p>Your definitive source for real-world asset tokenization news, analysis, and market intelligence. From infrastructure to compliance, we decode the future of digital assets.</p>
+      <div class="hero-buttons">
+        <a href="#" class="cta-btn">Explore Markets</a>
+        <a href="#" class="cta-btn-secondary">Start Learning</a>
       </div>
+    </section>
 
-      <div class="footer-links">
-        <div>
-          <h4>Platform</h4>
-          <a href="pages/index.html">Home</a>
-          <a href="pages/about.html">About</a>
-          <a href="pages/library.html">Library</a>
-          <a href="pages/podcasts.html">Podcast</a>
-          <a href="pages/connect.html">Connect</a>
-          <a href="pages/subscribe.html">Subscribe</a>
-        </div>
-        <div>
-          <h4>Resources</h4>
-          <a href="#">Market Data</a>
-          <a href="#">Consulting</a>
-          <a href="#">Speaker Booking</a>
-          <a href="#">Educational Guides</a>
-          <a href="#">API Documentation</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="pages/terms.html">Terms of Service</a>
-          <a href="pages/privacy.html">Privacy Policy</a>
-          <a href="#">Cookie Policy</a>
-          <a href="#">Advertising Policy</a>
-          <a href="#">Disclaimer</a>
-        </div>
+    <section class="newsletter">
+      <h2>Foretoken Newsletter Signup</h2>
+      <p>Get insights, analysis, and tokenization market news directly to your inbox.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email" required />
+        <button type="submit" class="subscribe-btn">Subscribe</button>
+      </form>
+    </section>
+
+    <section class="stats-cards">
+      <div class="card">
+        <h3>Market Cap</h3>
+        <p class="value">$24.52B</p>
+        <span class="label">Tokenized Assets</span>
+        <span class="change up">↑ +12.3%</span>
       </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2025 Foretoken. All rights reserved.</p>
-      <small>Market data provided by leading exchanges. Not investment advice.</small>
-    </div>
-  </footer>
-  <script>
-  async function handleBeehiivSubmit(event) {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.querySelector("#beehiiv-email").value;
-    const pubId = form.querySelector("[name='publication_id']").value;
-    const messageBox = form.querySelector("#confirmation-message");
-
-    try {
-      const res = await fetch("https://api.beehiiv.com/v2/subscriptions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, publication_id: pubId })
-      });
-
-      if (res.ok) {
-        messageBox.innerText = "Thanks for subscribing!";
-        messageBox.style.color = "lightgreen";
-        form.reset();
-      } else {
-        const error = await res.json();
-        messageBox.innerText = error.message || "Subscription failed.";
-        messageBox.style.color = "tomato";
-      }
-    } catch (err) {
-      messageBox.innerText = "An error occurred. Please try again.";
-      messageBox.style.color = "tomato";
-    }
-  }
-</script>
+      <div class="card">
+        <h3>U.S. Treasuries</h3>
+        <p class="value">$7.5B</p>
+        <span class="change up">↑ +8.7%</span>
+      </div>
+      <div class="card">
+        <h3>Commodities</h3>
+        <p class="value">$1.6B</p>
+        <span class="change down">↓ -2.1%</span>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
