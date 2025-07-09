@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Foretoken | Home</title>
   <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="icon" href="assets/img/neon-logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Notable&family=Inter&display=swap" rel="stylesheet" />
 </head>
 
@@ -37,34 +38,46 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1 class="hero-title">Real-World Asset Market Intelligence</h1>
-    <p class="hero-subtitle">Compare on-chain and off-chain assets in real-time</p>
-  </section>
+  <!-- Main Content -->
+  <main>
+    <section class="hero">
+      <h2 class="hero-title">Bringing Transparency to<br />Tokenized Assets</h2>
+      <p class="hero-description">
+        Your definitive source for real-world asset tokenization news, analysis, and market intelligence. From infrastructure to compliance, we decode the future of digital assets.
+      </p>
+      <div class="cta-buttons">
+        <a href="pages/concourse.html" class="btn-purple">Explore Markets</a>
+        <a href="pages/library.html" class="btn-outline">Start Learning</a>
+      </div>
+    </section>
 
-  <!-- Newsletter -->
-  <section class="newsletter">
-    <h2 class="newsletter-title">Foretoken Newsletter Signup</h2>
-    <form action="#" method="post" class="newsletter-form">
-      <input type="email" placeholder="Your email address" required />
-      <button type="submit">Subscribe</button>
-    </form>
-  </section>
+    <section class="newsletter-signup">
+      <h2>Foretoken Newsletter Signup</h2>
+      <p>Get insights, analysis, and tokenization market news directly to your inbox.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email" required />
+        <button type="submit" class="subscribe-btn">Subscribe</button>
+      </form>
+    </section>
 
-  <!-- Card Section -->
-  <section class="features">
-    <div class="feature-card">
-      <img src="assets/img/home1.png" alt="Market Data" />
-      <h3>Token vs Traditional</h3>
-      <p>Side-by-side comparisons of tokenized and real-world asset performance.</p>
-    </div>
-    <div class="feature-card">
-      <img src="assets/img/home2.png" alt="Research" />
-      <h3>Market Context</h3>
-      <p>Explore yields, volatility, and spreads between digital and traditional markets.</p>
-    </div>
-  </section>
+    <section class="hero-stats">
+      <div class="stat-card">
+        <span class="label">Tokenized Assets</span>
+        <h3>$24.52B</h3>
+        <p class="subtext positive">↑ +12.3%</p>
+      </div>
+      <div class="stat-card">
+        <span class="label">U.S. Treasuries</span>
+        <h3>$7.5B</h3>
+        <p class="subtext positive">↑ +8.7%</p>
+      </div>
+      <div class="stat-card">
+        <span class="label">Commodities</span>
+        <h3>$1.6B</h3>
+        <p class="subtext negative">↓ -2.1%</p>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="site-footer">
@@ -112,6 +125,44 @@
       <small>Market data provided by leading exchanges. Not investment advice.</small>
     </div>
   </footer>
+
+  <style>
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #111;
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      display: block;
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .social-text {
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-right: 16px;
+    }
+
+    .social-text:hover {
+      color: #d8b4fe;
+    }
+  </style>
 
 </body>
 </html>
