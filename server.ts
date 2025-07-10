@@ -1,26 +1,22 @@
-// server.ts
-
+// Line 1
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import * as dotenv from 'dotenv';
-import webhookRouter from './stripeWebhook';
-app.use('/api', webhookRouter);
+import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config(); // Load environment variables
 
-const app = express();
-const port = process.env.PORT || 3000;
+const app = express(); // ✅ Declare app BEFORE using it
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 
-// Health check route
+// Root route
 app.get('/', (_req: Request, res: Response) => {
-  res.json({ message: 'Foretoken backend server is running successfully.' });
+  res.send('Foretoken backend server is running.');
 });
 
-// Add your actual routes here (e.g., /api/data, /webhook, etc.)
-
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 });
