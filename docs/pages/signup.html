@@ -7,6 +7,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Notable&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/styles.css" />
   <link rel="icon" href="../assets/img/logo.png" />
+  <!-- Firebase DB Signup -->
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  
+  <script defer src="../assets/js/firebase-init.js"></script>
 </head>
 
 <body class="bg-black text-white font-inter">
@@ -46,19 +52,33 @@
         Join Foretoken to access our research library and subscribe to tokenized market intelligence.
       </p>
 
-      <form action="/signup" method="post" style="display: flex; flex-direction: column; gap: 20px;">
-        <div>
-          <label for="email" style="display: block; margin-bottom: 6px;">Email</label>
-          <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: none; border-radius: 8px; background-color: #111; color: white;" />
-        </div>
-
-        <div>
-          <label for="password" style="display: block; margin-bottom: 6px;">Password</label>
-          <input type="password" id="password" name="password" required style="width: 100%; padding: 12px; border: none; border-radius: 8px; background-color: #111; color: white;" />
-        </div>
-
-        <button type="submit" class="btn-purple">Sign Up</button>
+      <form id="signup-form">
+        <input type="email" id="signup-email" placeholder="Email" required />
+        <input type="password" id="signup-password" placeholder="Password" required />
+        <button type="submit">Sign Up</button>
       </form>
+
+      <p id="signup-msg"></p>
+
+      <script>
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const email = document.getElementById('signup-email').value;
+          const password = document.getElementById('signup-password').value;
+
+          try {
+            const userCred = await auth.createUserWithEmailAndPassword(email, password);
+            await db.collection('users').doc(userCred.user.uid).set({
+              email: email,
+              tier: 'free' // Default tier until upgraded via Stripe webhook
+            });
+            document.getElementById('signup-msg').textContent = 'Signup successful!';
+          } catch (err) {
+            document.getElementById('signup-msg').textContent = 'Error: ' + err.message;
+          }
+        });
+      </script>
+
 
       <p style="margin-top: 20px; font-size: 14px;">
         Already have an account? <a href="login.html" style="color: #a855f7; text-decoration: underline;">Log in</a>
