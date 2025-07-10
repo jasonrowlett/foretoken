@@ -641,17 +641,3 @@ textarea::placeholder {
   }
 }
 
-/*====LOGIN STYLING====*/
-
-.hero {
-  min-height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-text {
-  max-width: 600px;
-  text-align: center;
-}
-
