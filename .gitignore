@@ -1,2 +1,9 @@
+# Environment Variables
+.env
+
+# macOS system files
+.DS_Store
+
+# Node dependencies (if used)
 node_modules/
 foretoken-backup.zip
