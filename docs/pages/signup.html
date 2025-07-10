@@ -11,7 +11,7 @@
   <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-  
+
   <script defer src="../assets/js/firebase-init.js"></script>
 </head>
 
@@ -63,22 +63,21 @@
       <script>
         document.getElementById('signup-form').addEventListener('submit', async (e) => {
           e.preventDefault();
-          const email = document.getElementById('signup-email').value;
-          const password = document.getElementById('signup-password').value;
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
 
           try {
             const userCred = await auth.createUserWithEmailAndPassword(email, password);
             await db.collection('users').doc(userCred.user.uid).set({
               email: email,
-              tier: 'free' // Default tier until upgraded via Stripe webhook
+              tier: 'free'
             });
-            document.getElementById('signup-msg').textContent = 'Signup successful!';
+            window.location.href = 'dashboard.html';
           } catch (err) {
-            document.getElementById('signup-msg').textContent = 'Error: ' + err.message;
+            alert('Signup failed: ' + err.message);
           }
         });
       </script>
-
 
       <p style="margin-top: 20px; font-size: 14px;">
         Already have an account? <a href="login.html" style="color: #a855f7; text-decoration: underline;">Log in</a>
