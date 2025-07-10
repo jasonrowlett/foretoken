@@ -5,7 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { stripeWebhookHandler } from './stripeWebhook.js';
+import stripeWebhookHandler from './stripeWebhook.js';
 
 dotenv.config();
 
