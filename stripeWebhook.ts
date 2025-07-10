@@ -23,7 +23,7 @@ router.post('/webhook', express.raw({ type: 'application/json' }), (req: Request
       throw new Error('Webhook secret is missing in environment variables.');
     }
 
-    event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
+    event = stripe.webhooks.constructEvent(req.rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err: any) {
     console.error(`Webhook signature verification failed: ${err.message}`);
     return res.status(400).send(`Webhook Error: ${err.message}`);
