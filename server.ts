@@ -1,33 +1,29 @@
+// server.js
 import express from 'express';
-import cors from 'cors';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 import stripeWebhookHandler from './stripeWebhook.js';
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
-// ✅ Use raw body ONLY for the webhook route
-app.use('/stripe-webhook', express.raw({ type: 'application/json' }));
+// Stripe webhook route must use raw body for signature verification
+app.post(
+  '/stripe-webhook',
+  bodyParser.raw({ type: 'application/json' }),
+  stripeWebhookHandler
+);
 
-// ✅ Use normal JSON parsing for all other routes
-app.use((req, res, next) => {
-  if (req.originalUrl === '/stripe-webhook') {
-    next();
-  } else {
-    express.json()(req, res, next);
-  }
-});
-
+// All other routes can use JSON parser
+app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', (_req, res) => {
+app.get('/', (req, res) => {
   res.send('Foretoken backend server is running.');
 });
-
-// ✅ Stripe Webhook Route
-app.post('/stripe-webhook', stripeWebhookHandler);
 
 app.listen(PORT, () => {
   console.log(`✅ Server is listening on port ${PORT}`);
