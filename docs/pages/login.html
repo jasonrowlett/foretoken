@@ -8,6 +8,12 @@
   <link rel="stylesheet" href="../assets/styles.css" />
   <link rel="icon" href="../assets/img/neon-logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Notable&display=swap" rel="stylesheet" />
+
+  <!-- Firebase SDKs -->
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script defer src="../assets/js/firebase-init.js"></script>
 </head>
 
 <body class="bg-black text-white font-inter">
@@ -47,18 +53,19 @@
         Access your Foretoken account to view premium dashboards and manage your subscription.
       </p>
 
-      <form action="/login" method="post" style="display: flex; flex-direction: column; gap: 20px;">
+      <form id="login-form" style="display: flex; flex-direction: column; gap: 20px;">
         <div>
-          <label for="email" style="display: block; margin-bottom: 6px; text-align: left;">Email</label>
-          <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: none; border-radius: 8px; background-color: #111; color: white;" />
+          <label for="login-email" style="display: block; margin-bottom: 6px; text-align: left;">Email</label>
+          <input type="email" id="login-email" name="email" required style="width: 100%; padding: 12px; border: none; border-radius: 8px; background-color: #111; color: white;" />
         </div>
 
         <div>
-          <label for="password" style="display: block; margin-bottom: 6px; text-align: left;">Password</label>
-          <input type="password" id="password" name="password" required style="width: 100%; padding: 12px; border: none; border-radius: 8px; background-color: #111; color: white;" />
+          <label for="login-password" style="display: block; margin-bottom: 6px; text-align: left;">Password</label>
+          <input type="password" id="login-password" name="password" required style="width: 100%; padding: 12px; border: none; border-radius: 8px; background-color: #111; color: white;" />
         </div>
 
         <button type="submit" class="btn-purple">Log In</button>
+        <p id="login-error" style="color: #f87171; margin-top: 10px;"></p>
       </form>
 
       <p style="margin-top: 20px; font-size: 14px;">
@@ -113,6 +120,22 @@
       <small>Market data provided by leading exchanges. Not investment advice.</small>
     </div>
   </footer>
+
+  <!-- Firebase Login Script -->
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        document.getElementById('login-error').textContent = 'Login failed: ' + err.message;
+      }
+    });
+  </script>
 
   <style>
     .dropdown {
