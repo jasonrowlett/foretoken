@@ -1,3 +1,4 @@
+<!-- File: /docs/pages/signup.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +8,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Notable&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/styles.css" />
   <link rel="icon" href="../assets/img/logo.png" />
-  <!-- Firebase DB Signup -->
+
+  <!-- Firebase SDKs -->
   <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-
   <script defer src="../assets/js/firebase-init.js"></script>
+  <script>
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        window.location.href = "dashboard.html";
+      }
+    });
+  </script>
 </head>
 
 <body class="bg-black text-white font-inter">
-
   <!-- Header -->
   <header class="navbar">
     <div class="logo-section">
@@ -44,7 +51,7 @@
     </nav>
   </header>
 
-  <!-- Signup Form -->
+  <!-- Signup Section -->
   <section class="hero" style="padding-bottom: 60px;">
     <div class="hero-text" style="max-width: 600px;">
       <h2 class="hero-title">CREATE ACCOUNT</h2>
@@ -63,8 +70,8 @@
       <script>
         document.getElementById('signup-form').addEventListener('submit', async (e) => {
           e.preventDefault();
-          const email = document.getElementById('email').value;
-          const password = document.getElementById('password').value;
+          const email = document.getElementById('signup-email').value;
+          const password = document.getElementById('signup-password').value;
 
           try {
             const userCred = await auth.createUserWithEmailAndPassword(email, password);
@@ -87,45 +94,6 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <h2>FORETOKEN</h2>
-        <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
-        <div class="social-links">
-          <a href="https://x.com/foretokenrwa" target="_blank" class="social-text">X</a>
-          <a href="https://facebook.com/foretokenmedia" target="_blank" class="social-text">Facebook</a>
-          <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank" class="social-text">LinkedIn</a>
-          <a href="https://t.me/foretokenalerts" target="_blank" class="social-text">Telegram</a>
-        </div>
-      </div>
-
-      <div class="footer-links">
-        <div>
-          <h4>Platform</h4>
-          <a href="home.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="library.html">Library</a>
-          <a href="podcasts.html">Podcast</a>
-          <a href="connect.html">Connect</a>
-          <a href="subscribe.html">Subscribe</a>
-        </div>
-        <div>
-          <h4>Resources</h4>
-          <a href="concourse.html">Market Data</a>
-          <a href="consulting.html">Consulting</a>
-          <a href="speaking.html">Speaker Booking</a>
-          <a href="ebooks.html">Educational Guides</a>
-          <a href="glossary.html">Glossary</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="terms.html">Terms of Service</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="advertising-policy.html">Advertising Policy</a>
-        </div>
-      </div>
-    </div>
-
     <div class="footer-bottom">
       <p>©2025 Foretoken Media. RGI Enterprises LLC. All rights reserved.</p>
       <small>Market data provided by leading exchanges. Not investment advice.</small>

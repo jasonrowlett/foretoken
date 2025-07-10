@@ -105,6 +105,7 @@
       <h3>Premium Dashboard Access</h3>
       <p>Welcome! You have access to Pro or Enterprise content.</p>
       <!-- Embed Looker Studio or real-time data here -->
+      <button id="logout-btn" class="btn-purple" style="margin-top: 20px;">Logout</button>
     </section>
   </main>
 
@@ -136,6 +137,13 @@
           window.location.href = "login.html";
         }
       });
+    });
+  </script>
+
+  <script>
+    document.getElementById("logout-btn").addEventListener("click", async () => {
+      await auth.signOut();
+      window.location.href = "login.html";
     });
   </script>
 
