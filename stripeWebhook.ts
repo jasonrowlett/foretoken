@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -10,7 +11,7 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 const stripeWebhookHandler = (req, res) => {
   const sig = req.headers['stripe-signature'];
-  const rawBody = req.body; // Will be a Buffer due to express.raw()
+  const rawBody = req.body; // Express.raw() ensures this is a Buffer
 
   let event;
 
@@ -25,6 +26,7 @@ const stripeWebhookHandler = (req, res) => {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
+
     const metadata = session.metadata || {};
     const priceId = metadata.price_id || 'unknown';
     const customerEmail = session.customer_details?.email || 'no email';

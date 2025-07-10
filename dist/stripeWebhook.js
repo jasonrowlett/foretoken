@@ -7,7 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const stripeWebhookHandler = (req, res) => {
     const sig = req.headers['stripe-signature'];
-    const rawBody = req.body; // Will be a Buffer due to express.raw()
+    const rawBody = req.body; // Express.raw() ensures this is a Buffer
     let event;
     try {
         event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
