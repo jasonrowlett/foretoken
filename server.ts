@@ -1,3 +1,10 @@
+import { IncomingMessage } from 'http';
+
+declare module 'http' {
+  interface IncomingMessage {
+    rawBody: string;
+  }
+}
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
