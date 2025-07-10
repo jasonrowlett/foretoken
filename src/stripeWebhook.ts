@@ -1,23 +1,41 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import stripeWebhookHandler from './stripeWebhook.js';
+import Stripe from 'stripe';
 import dotenv from 'dotenv';
+import { Request, Response } from 'express';
 
 dotenv.config();
 
-const app = express();
-const port = process.env.PORT || 10000;
-
-// Use raw body for Stripe webhook
-app.post('/stripe-webhook',
-  bodyParser.raw({ type: 'application/json' }),
-  stripeWebhookHandler
-);
-
-app.get('/', (req, res) => {
-  res.send('Server is up and running!');
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2022-11-15',
 });
 
-app.listen(port, () => {
-  console.log(`✅ Server is listening on port ${port}`);
-});
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+
+const stripeWebhookHandler = (req: Request, res: Response) => {
+  const sig = req.headers['stripe-signature'];
+  const rawBody = req.body;
+
+  let event: Stripe.Event;
+
+  try {
+    event = stripe.webhooks.constructEvent(rawBody, sig as string, webhookSecret);
+  } catch (err: any) {
+    console.error('❌ Webhook signature verification failed:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  console.log('✅ Stripe webhook event received:', event.type);
+
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object as Stripe.Checkout.Session;
+    const metadata = session.metadata ?? {};
+    const priceId = metadata.price_id ?? 'unknown';
+    const customerEmail = session.customer_details?.email ?? 'no email';
+
+    console.log('💰 Checkout complete for price ID:', priceId);
+    console.log('📧 Customer email:', customerEmail);
+  }
+
+  res.status(200).json({ received: true });
+};
+
+export { stripeWebhookHandler };
