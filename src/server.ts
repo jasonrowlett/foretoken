@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 // Use raw body only for Stripe webhook
 app.use('/stripe-webhook', express.raw({ type: 'application/json' }));
 
-// Use JSON parser for all other routes
+// Middleware / Use JSON parser for all other routes
 app.use((req, res, next) => {
   if (req.originalUrl === '/stripe-webhook') {
     next();
