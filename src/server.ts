@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import path from 'path';
+import webhookRoute from './stripeWebhook.js';
 
 dotenv.config();
 
