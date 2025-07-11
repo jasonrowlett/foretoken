@@ -1,41 +1,51 @@
-// Line 1
+// src/stripeWebhook.ts
 import express from 'express';
 import Stripe from 'stripe';
-import bodyParser from 'body-parser';
+import { buffer } from 'micro';
 import dotenv from 'dotenv';
 
-// Line 6
 dotenv.config();
+
 const router = express.Router();
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2022-11-15' // ✅ FIXED
+// ✅ Use supported version
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2022-11-15',
 });
 
-router.post('/stripe-webhook', bodyParser.raw({ type: 'application/json' }), (req, res) => {
-  const sig = req.headers['stripe-signature'];
-  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+// ✅ Use express.raw() before express.json()
+router.post(
+  '/stripe-webhook',
+  express.raw({ type: 'application/json' }),
+  async (req, res) => {
+    const sig = req.headers['stripe-signature'] as string | undefined;
+    const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
-  let event;
+    let event: Stripe.Event;
 
-  try {
-    event = stripe.webhooks.constructEvent(req.body, sig as string, endpointSecret as string); // ✅ FIXED
-  } catch (err) {
-    console.error('Webhook signature verification failed:', err);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
+    try {
+      if (!sig) throw new Error('Missing Stripe signature header');
+      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : 'Unknown webhook error';
+      console.error(`❌ Webhook signature verification failed: ${errorMessage}`);
+      return res.status(400).send(`Webhook Error: ${errorMessage}`);
+    }
+
+    // ✅ Log the event payload cleanly
+    console.log('✅ Webhook received:', JSON.stringify(event, null, 2));
+
+    // ✅ Example: Respond to subscription success
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object as Stripe.Checkout.Session;
+      console.log('🧾 Checkout session completed:', session.id);
+
+      // TODO: forward to Firebase based on session info
+    }
+
+    res.status(200).send('✅ Webhook handled');
   }
-
-  // ✅ LOG THE EVENT
-  console.log('✅ Received Stripe event:', event);
-
-  // Example: handle completed checkout session
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
-    console.log('🎉 Payment succeeded for session:', session.id);
-    // TODO: Add Firebase user write here
-  }
-
-  res.status(200).json({ received: true });
-});
+);
 
 export default router;
