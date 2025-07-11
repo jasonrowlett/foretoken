@@ -7,7 +7,7 @@ dotenv.config();
 const router = express.Router();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2023-08-16',
+  apiVersion: '2022-11-15',
 });
 
 router.post('/webhook', (req: Request, res: Response) => {
