@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import path from 'path';
-import webhookRoute from './stripeWebhook.js';
+import webhookRoute from './stripeWebhook.js'; // ✅ KEEP THIS ONE — use the `.js` extension for ESM builds
 
 dotenv.config();
 
@@ -20,8 +20,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, '../docs')));
 
-// API routes
-import webhookRoute from './stripeWebhook';
+// ✅ Apply webhook route
 app.use('/', webhookRoute);
 
 const PORT = process.env.PORT || 3000;
