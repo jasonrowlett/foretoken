@@ -26,13 +26,11 @@ router.post('/webhook', (req: Request, res: Response) => {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  // ✅ Handle the event
   switch (event.type) {
     case 'checkout.session.completed':
       const session = event.data.object;
       console.log('✅ Checkout session completed:', session);
       break;
-    // Add more Stripe event cases as needed
     default:
       console.log(`Unhandled event type: ${event.type}`);
   }

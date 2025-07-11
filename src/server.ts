@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 
-// Stripe webhook needs raw body
+// Stripe webhook needs raw body parsing
 app.use((req: Request, res: Response, next: NextFunction) => {
   if (req.originalUrl === '/webhook') {
     bodyParser.raw({ type: 'application/json' })(req, res, next);
@@ -16,7 +16,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-// Serve static files
+// Serve static frontend files
 app.use(express.static(path.join(__dirname, '../docs')));
 
 // API routes
