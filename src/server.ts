@@ -1,27 +1,29 @@
-import express from 'express';
-import cors from 'cors';
+import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
-import stripeWebhookHandler from './stripeWebhook.js';
+import bodyParser from 'body-parser';
+import path from 'path';
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Raw body for Stripe webhook
-app.post('/stripe-webhook', express.raw({ type: 'application/json' }), stripeWebhookHandler);
-
-// JSON body parser for everything else
-app.use(express.json());
-
-// Enable CORS
-app.use(cors());
-
-// Health check route
-app.get('/', (_req, res) => {
-  res.send('Foretoken backend server is running.');
+// Stripe webhook needs raw body
+app.use((req: Request, res: Response, next: NextFunction) => {
+  if (req.originalUrl === '/webhook') {
+    bodyParser.raw({ type: 'application/json' })(req, res, next);
+  } else {
+    bodyParser.json()(req, res, next);
+  }
 });
 
+// Serve static files
+app.use(express.static(path.join(__dirname, '../docs')));
+
+// API routes
+import webhookRoute from './stripeWebhook';
+app.use('/', webhookRoute);
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`✅ Server is listening on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
