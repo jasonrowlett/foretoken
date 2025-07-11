@@ -20,6 +20,6 @@
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.13",
     "@types/stripe": "^8.0.416",
-    "typescript": "^5.2.2"
+    "typescript": "^5.8.3"
   }
 }
