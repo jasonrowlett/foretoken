@@ -1,4 +1,3 @@
-// stripeWebhook.ts
 import express from 'express';
 import Stripe from 'stripe';
 import dotenv from 'dotenv';
@@ -6,38 +5,30 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2024-04-10',
+  // apiVersion not needed — Stripe uses default version from your dashboard
 });
+
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+if (!endpointSecret) throw new Error("Missing STRIPE_WEBHOOK_SECRET in .env");
 
 const stripeWebhookHandler = express.raw({ type: 'application/json' });
 
 const handler = async (req: express.Request, res: express.Response) => {
   const sig = req.headers['stripe-signature'] as string;
-  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
-
   let event;
 
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-
-    // ✅ Log the incoming event type and full payload
-    console.log('✅ Stripe Event Type:', event.type);
-    console.log('📦 Stripe Payload:', JSON.stringify(event.data.object, null, 2));
-  } catch (err) {
-    console.error('❌ Webhook signature verification failed.', err);
-    return res.status(400).send(`Webhook Error: ${(err as Error).message}`);
+  } catch (err: any) {
+    console.error('⚠️  Webhook signature verification failed.', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  // You can expand this to handle different event types later
-  switch (event.type) {
-    case 'checkout.session.completed':
-      console.log('🎉 Payment was successful!');
-      break;
-    default:
-      console.log(`Unhandled event type: ${event.type}`);
-  }
+  console.log('✅ Webhook received:', event.type);
 
-  res.status(200).json({ received: true });
+  // TODO: Forward subscriber to Firebase logic here...
+
+  res.json({ received: true });
 };
 
 export default [stripeWebhookHandler, handler];
