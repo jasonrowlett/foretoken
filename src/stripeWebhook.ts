@@ -1,49 +1,43 @@
+// stripeWebhook.ts
+import express from 'express';
 import Stripe from 'stripe';
 import dotenv from 'dotenv';
-import { Request, Response } from 'express';
 
 dotenv.config();
 
-// Ensure env key is string or throw early
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing STRIPE_SECRET_KEY in environment variables');
-}
-if (!process.env.STRIPE_WEBHOOK_SECRET) {
-  throw new Error('Missing STRIPE_WEBHOOK_SECRET in environment variables');
-}
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2022-11-15',
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+  apiVersion: '2024-04-10',
 });
 
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+const stripeWebhookHandler = express.raw({ type: 'application/json' });
 
-const stripeWebhookHandler = (req: Request, res: Response) => {
+const handler = async (req: express.Request, res: express.Response) => {
   const sig = req.headers['stripe-signature'] as string;
-  const rawBody = req.body; // Express.raw() ensures this is a Buffer
+  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-  let event: Stripe.Event;
+  let event;
 
   try {
-    event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
-  } catch (err: any) {
-    console.error('Webhook signature verification failed:', err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
+    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+
+    // ✅ Log the incoming event type and full payload
+    console.log('✅ Stripe Event Type:', event.type);
+    console.log('📦 Stripe Payload:', JSON.stringify(event.data.object, null, 2));
+  } catch (err) {
+    console.error('❌ Webhook signature verification failed.', err);
+    return res.status(400).send(`Webhook Error: ${(err as Error).message}`);
   }
 
-  console.log('Stripe webhook event received:', event.type);
-
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object as Stripe.Checkout.Session;
-    const metadata = session.metadata ?? {};
-    const priceId = metadata.price_id ?? 'unknown';
-    const customerEmail = session.customer_details?.email ?? 'no email';
-
-    console.log('🪙 Checkout complete for price ID:', priceId);
-    console.log('📧 Customer email:', customerEmail);
+  // You can expand this to handle different event types later
+  switch (event.type) {
+    case 'checkout.session.completed':
+      console.log('🎉 Payment was successful!');
+      break;
+    default:
+      console.log(`Unhandled event type: ${event.type}`);
   }
 
   res.status(200).json({ received: true });
 };
 
-export default stripeWebhookHandler;
+export default [stripeWebhookHandler, handler];
