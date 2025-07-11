@@ -1,34 +1,41 @@
+// Line 1
 import express from 'express';
 import Stripe from 'stripe';
+import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 
+// Line 6
 dotenv.config();
+const router = express.Router();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  // apiVersion not needed — Stripe uses default version from your dashboard
+  apiVersion: '2022-11-15' // ✅ FIXED
 });
 
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
-if (!endpointSecret) throw new Error("Missing STRIPE_WEBHOOK_SECRET in .env");
+router.post('/stripe-webhook', bodyParser.raw({ type: 'application/json' }), (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-const stripeWebhookHandler = express.raw({ type: 'application/json' });
-
-const handler = async (req: express.Request, res: express.Response) => {
-  const sig = req.headers['stripe-signature'] as string;
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-  } catch (err: any) {
-    console.error('⚠️  Webhook signature verification failed.', err.message);
+    event = stripe.webhooks.constructEvent(req.body, sig as string, endpointSecret as string); // ✅ FIXED
+  } catch (err) {
+    console.error('Webhook signature verification failed:', err);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  console.log('✅ Webhook received:', event.type);
+  // ✅ LOG THE EVENT
+  console.log('✅ Received Stripe event:', event);
 
-  // TODO: Forward subscriber to Firebase logic here...
+  // Example: handle completed checkout session
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object;
+    console.log('🎉 Payment succeeded for session:', session.id);
+    // TODO: Add Firebase user write here
+  }
 
-  res.json({ received: true });
-};
+  res.status(200).json({ received: true });
+});
 
-export default [stripeWebhookHandler, handler];
+export default router;
