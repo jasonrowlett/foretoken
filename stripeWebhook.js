@@ -1,16 +1,39 @@
-const express = require('express');
-const Stripe = require('stripe');
-const dotenv = require('dotenv');
+import express from 'express';
+import Stripe from 'stripe';
+import dotenv from 'dotenv';
+import fs from 'fs';
+import admin from 'firebase-admin';
+import { Buffer } from 'buffer';
 
 dotenv.config();
-const router = express.Router();
 
+const router = express.Router();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2022-11-15',
+  apiVersion: '2023-10-16',
 });
 
-router.post('/webhook', (req, res) => {
+// Load and parse Firebase service account credentials from JSON
+const serviceAccount = JSON.parse(
+  fs.readFileSync(process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH, 'utf8')
+);
+
+// Initialize Firebase Admin if not already
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
+
+const db = admin.firestore();
+
+// Middleware to collect raw body
+router.use(
+  express.raw({ type: 'application/json' })
+);
+
+router.post('/stripe-webhook', async (req, res) => {
   const sig = req.headers['stripe-signature'];
+
   let event;
 
   try {
@@ -20,20 +43,31 @@ router.post('/webhook', (req, res) => {
       process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (err) {
-    console.error('Webhook error:', err.message);
+    console.error('Webhook signature verification failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  switch (event.type) {
-    case 'checkout.session.completed':
-      const session = event.data.object;
-      console.log('✅ Checkout session completed:', session);
-      break;
-    default:
-      console.log(`Unhandled event type: ${event.type}`);
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object;
+    const email = session.customer_email || 'unknown_email';
+    const sessionId = session.id;
+
+    try {
+      await db
+        .collection('users')
+        .doc(email)
+        .collection('sessions')
+        .doc(sessionId)
+        .set(session);
+
+      console.log(`✅ Stored session for ${email}`);
+    } catch (err) {
+      console.error('❌ Firestore write failed:', err.message);
+      return res.status(500).send('Firestore error');
+    }
   }
 
-  res.sendStatus(200);
+  res.status(200).send('Webhook received');
 });
 
-module.exports = router;
+export default router;
