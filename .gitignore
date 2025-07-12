@@ -8,3 +8,4 @@ dist/
 node_modules/
 foretoken-backup.zip
 foretoken-4e948-firebase-adminsdk-fbsvc-e99027cd03.json
+.DS_Store

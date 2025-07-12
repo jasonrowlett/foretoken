@@ -1,14 +1,14 @@
 // routes/createCheckoutSession.js
 
-import express from 'express';
-import Stripe from 'stripe';
-import dotenv from 'dotenv';
+const express = require('express');
+const Stripe = require('stripe');
+const dotenv = require('dotenv');
 
 dotenv.config();
 const router = express.Router();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// Adjust these according to your actual plans
+// Replace with your real Stripe price IDs
 const PRODUCT_PRICES = {
   monthly: 'price_1Oxyz123abcMonthly',
   yearly: 'price_1Oxyz123abcYearly'
@@ -45,4 +45,4 @@ router.post('/create-checkout-session', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
