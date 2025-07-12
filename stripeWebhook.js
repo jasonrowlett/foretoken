@@ -1,9 +1,10 @@
-import express from 'express';
-import Stripe from 'stripe';
-import dotenv from 'dotenv';
-import fs from 'fs';
-import admin from 'firebase-admin';
-import { Buffer } from 'buffer';
+// stripeWebhook.js (CommonJS version)
+
+const express = require('express');
+const Stripe = require('stripe');
+const dotenv = require('dotenv');
+const fs = require('fs');
+const admin = require('firebase-admin');
 
 dotenv.config();
 
@@ -12,12 +13,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2023-10-16',
 });
 
-// Load and parse Firebase service account credentials from JSON
+// Load Firebase service account key
 const serviceAccount = JSON.parse(
   fs.readFileSync(process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH, 'utf8')
 );
 
-// Initialize Firebase Admin if not already
+// Initialize Firebase Admin SDK
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -26,10 +27,8 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
-// Middleware to collect raw body
-router.use(
-  express.raw({ type: 'application/json' })
-);
+// Stripe webhook endpoint
+router.use(express.raw({ type: 'application/json' }));
 
 router.post('/stripe-webhook', async (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -70,4 +69,4 @@ router.post('/stripe-webhook', async (req, res) => {
   res.status(200).send('Webhook received');
 });
 
-export default router;
+module.exports = router;
