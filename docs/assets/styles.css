@@ -641,3 +641,90 @@ textarea::placeholder {
   }
 }
 
+
+/* Additional styles for subscription cards to match replitVersion layout */
+.pricing-card {
+  background-color: #1a1a1a;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  border: 1px solid #333;
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.04);
+  transition: transform 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+}
+
+.plan-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.plan-price {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+  color: #a855f7;
+}
+
+.plan-price.yearly {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.plan-desc {
+  flex-grow: 1;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.discount-note {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #a855f7;
+}
+
+.btn-purple {
+  font-size: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  background-color: #a855f7;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.btn-outline {
+  font-size: 1rem;
+  padding: 0.75rem 1.25rem;
+  border: 2px solid #a855f7;
+  border-radius: 10px;
+  color: #a855f7;
+  background-color: transparent;
+  font-weight: 600;
+  text-align: center;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn-purple:hover {
+  background-color: #9333ea;
+}
+
+.btn-outline:hover {
+  background-color: #a855f7;
+  color: #fff;
+}
