@@ -1,0 +1,233 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Clock, User } from "lucide-react";
+import { Link } from "wouter";
+
+export default function DoublePedigreeStrategy() {
+  return (
+    <div className="bg-gray-950 min-h-screen pt-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        {/* Back Button */}
+        <div className="mb-8">
+          <Link href="/library">
+            <Button 
+              variant="outline" 
+              className="neon-glow border-gray-400 text-gray-300 hover:bg-purple-400 hover:text-black hover:border-purple-400 transition-all duration-300"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Library
+            </Button>
+          </Link>
+        </div>
+
+        {/* Article Header */}
+        <div className="mb-12">
+          <div className="flex items-center gap-2 mb-4">
+            <Badge className="bg-purple-400 text-black">RWA 101</Badge>
+            <Badge variant="outline" className="border-purple-400 text-purple-400">Strategy</Badge>
+          </div>
+          
+          <h1 className="font-notable text-4xl md:text-5xl text-white mb-6">
+            What Is the Double Pedigree Investment Strategy?
+          </h1>
+          
+          <p className="text-xl text-gray-300 mb-6">
+            A New Approach to Tokenized RWA Investing
+          </p>
+
+          <div className="flex items-center gap-6 text-gray-400">
+            <div className="flex items-center gap-2">
+              <User className="w-4 h-4" />
+              <span>Jason Rowlett</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              <span>4 min read</span>
+            </div>
+            <span>Apr 3</span>
+          </div>
+        </div>
+
+        {/* Article Content */}
+        <Card className="data-card">
+          <CardContent className="p-8 md:p-12">
+            <div className="prose prose-invert max-w-none">
+              <div className="mb-8">
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  The financial world is experiencing a paradigm shift with the rise of Real-World Asset (RWA) tokenization—a transformative development bridging traditional finance and blockchain technology. Investors are increasingly seeking strategies that merge the stability of traditional assets with the innovation and efficiency of blockchain-based tokenized assets.
+                </p>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  One such strategy is the Double Pedigree Investment Method, a novel approach designed to evaluate and optimize investments by comparing traditional assets and their tokenized counterparts. This method––proposed by Foretoken's founder, Jason Rowlett––provides a comprehensive, data-driven way to assess market opportunities by analyzing key factors such as liquidity, volatility, market cap, and supply mechanics.
+                </p>
+                <p className="text-gray-300 leading-relaxed">
+                  Let's break down how this investment strategy works, its components, and why it presents a new model for risk-adjusted returns in the age of tokenized assets.
+                </p>
+              </div>
+
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-white mb-4">What Is the Double Pedigree Investment Strategy?</h2>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  The Double Pedigree method leverages historical data and real-time market conditions to analyze both traditional and tokenized versions of an asset. The goal is to identify correlations, arbitrage opportunities, and risk-adjusted investment decisions by comparing how these assets behave in different market conditions.
+                </p>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  For example, an investor using the Double Pedigree strategy might analyze:
+                </p>
+                <ul className="text-gray-300 leading-relaxed space-y-2 mb-4 list-disc pl-6">
+                  <li><strong>Gold (XAU)</strong> vs. <strong>Tokenized Gold</strong> (XAUT, PAXG, DGX)</li>
+                  <li><strong>U.S. Treasury Bonds</strong> vs. <strong>Tokenized Treasury Securities</strong> (Ondo Finance, Matrixdock, Backed.fi)</li>
+                  <li><strong>Corporate Real Estate</strong> vs. <strong>Tokenized REITs or Property Tokens</strong> (RealT, RedSwan, Landshare)</li>
+                </ul>
+                <p className="text-gray-300 leading-relaxed">
+                  By analyzing price movement, liquidity, trading volume, and supply constraints across both asset forms, investors can make informed decisions based on historical resilience and emerging market trends.
+                </p>
+              </div>
+
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-white mb-4">Key Components of the Double Pedigree Strategy</h2>
+                
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold text-white mb-3">1. Liquidity: The Lifeblood of Market Efficiency</h3>
+                  <p className="text-gray-300 leading-relaxed mb-4">
+                    Liquidity refers to how easily an asset can be bought or sold without significantly affecting its price. In the Double Pedigree method, investors compare:
+                  </p>
+                  <ul className="text-gray-300 leading-relaxed space-y-2 mb-4 list-disc pl-6">
+                    <li><strong>Traditional Market Liquidity:</strong> Traditional assets like gold, government bonds, and real estate often have deep liquidity pools and established markets, ensuring stability.</li>
+                    <li><strong>Tokenized Asset Liquidity:</strong> Tokenized versions may have lower liquidity initially but could outperform traditional assets in speed of execution and market accessibility.</li>
+                  </ul>
+                  <div className="bg-gray-800 border-l-4 border-purple-400 p-4 rounded-r-lg">
+                    <p className="text-gray-200 text-sm">
+                      <strong>📊 Investment Insight:</strong> If a tokenized asset has growing liquidity relative to its traditional counterpart, it may indicate increasing adoption and price stability.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold text-white mb-3">2. Volatility: Understanding Market Swings</h3>
+                  <p className="text-gray-300 leading-relaxed mb-4">
+                    Volatility measures how much an asset's price fluctuates.
+                  </p>
+                  <ul className="text-gray-300 leading-relaxed space-y-2 mb-4 list-disc pl-6">
+                    <li><strong>Traditional Assets:</strong> Gold and Treasuries, for example, are historically low-volatility assets, making them safe-haven investments.</li>
+                    <li><strong>Tokenized Assets:</strong> The blockchain-based equivalents may experience higher short-term volatility due to factors like early adoption stages, low trading volume, and speculative movements.</li>
+                  </ul>
+                  <div className="bg-gray-800 border-l-4 border-purple-400 p-4 rounded-r-lg">
+                    <p className="text-gray-200 text-sm">
+                      <strong>📊 Investment Insight:</strong> If the tokenized version consistently mirrors traditional asset price action but with amplified movements, this could signal trading opportunities based on market inefficiencies.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold text-white mb-3">3. Market Capitalization: Gauging Growth and Stability</h3>
+                  <p className="text-gray-300 leading-relaxed mb-4">
+                    Market cap measures the total value of an asset in circulation.
+                  </p>
+                  <ul className="text-gray-300 leading-relaxed space-y-2 mb-4 list-disc pl-6">
+                    <li><strong>Traditional Market Cap:</strong> Traditional assets have deep, well-capitalized markets with trillions of dollars in value (e.g., gold's market cap is $13 trillion).</li>
+                    <li><strong>Tokenized Market Cap:</strong> Tokenized RWAs still represent a fraction of their traditional counterparts but are experiencing exponential growth.</li>
+                  </ul>
+                  <div className="bg-gray-800 border-l-4 border-purple-400 p-4 rounded-r-lg">
+                    <p className="text-gray-200 text-sm">
+                      <strong>📊 Investment Insight:</strong> A rising tokenized asset market cap that tracks its traditional version may suggest increasing investor confidence and institutional adoption.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold text-white mb-3">4. Supply Dynamics: Fixed vs. Elastic Models</h3>
+                  <p className="text-gray-300 leading-relaxed mb-4">
+                    Understanding an asset's supply model is crucial for price predictability.
+                  </p>
+                  <ul className="text-gray-300 leading-relaxed space-y-2 mb-4 list-disc pl-6">
+                    <li><strong>Fixed Supply:</strong> Physical assets like gold have relatively fixed supply, while tokenized versions maintain 1:1 backing to their real-world counterpart.</li>
+                    <li><strong>Elastic Supply:</strong> Some tokenized assets offer fractionalized ownership, meaning supply can be expanded more easily to match market demand.</li>
+                  </ul>
+                  <div className="bg-gray-800 border-l-4 border-purple-400 p-4 rounded-r-lg">
+                    <p className="text-gray-200 text-sm">
+                      <strong>📊 Investment Insight:</strong> A tokenized asset with a fixed-supply model, combined with strong demand, could lead to scarcity-based price appreciation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-white mb-4">The Benefits of the Double Pedigree Investment Strategy</h2>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <span className="text-green-400 text-xl">✅</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-2">Better Risk Management Through Diversification</h3>
+                      <p className="text-gray-300 leading-relaxed">By tracking the performance of both traditional and tokenized assets, investors hedge risk against market fluctuations in either category. If one market experiences a downturn, the other may provide stability.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <span className="text-green-400 text-xl">✅</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-2">Enhanced Yield Opportunities</h3>
+                      <p className="text-gray-300 leading-relaxed">Tokenized RWAs often provide higher yields through staking, lending, and DeFi mechanisms, unlike their traditional counterparts. Investors can use the Double Pedigree method to capture yield advantages while maintaining exposure to traditional financial safety nets.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <span className="text-green-400 text-xl">✅</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-2">Identifying Market Inefficiencies & Arbitrage Opportunities</h3>
+                      <p className="text-gray-300 leading-relaxed">Since tokenized assets are still relatively new, price discrepancies between traditional and tokenized markets can occur. Savvy investors can capitalize on mispricings for profitable arbitrage trades.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <span className="text-green-400 text-xl">✅</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-2">Increased Accessibility & Fractional Ownership</h3>
+                      <p className="text-gray-300 leading-relaxed">Traditional assets often require high capital investment (e.g., real estate, gold bullion). Tokenization enables fractional ownership, allowing investors to gain exposure to high-value assets with smaller capital commitments.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <span className="text-green-400 text-xl">✅</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-2">Stronger Data-Driven Decision Making</h3>
+                      <p className="text-gray-300 leading-relaxed">The strategy provides a clear, data-backed approach to investment, reducing speculation and improving long-term wealth-building potential.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-white mb-4">Conclusion: The Future of Tokenized RWA Investing</h2>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  The Double Pedigree Investment Strategy represents a sophisticated way to analyze and invest in tokenized RWAs. By assessing liquidity, volatility, market cap, and supply across both traditional and tokenized assets, investors can make better risk-adjusted decisions while leveraging the best of both worlds.
+                </p>
+                <p className="text-gray-300 leading-relaxed">
+                  As blockchain adoption grows, this method will become increasingly valuable for institutional and retail investors alike. By embracing the Double Pedigree strategy, investors position themselves at the forefront of financial innovation—merging the best elements of traditional stability with blockchain-driven efficiency.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Navigation */}
+        <div className="mt-12 flex justify-between items-center">
+          <Link href="/library">
+            <Button 
+              variant="outline" 
+              className="neon-glow border-gray-400 text-gray-300 hover:bg-purple-400 hover:text-black hover:border-purple-400 transition-all duration-300"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Library
+            </Button>
+          </Link>
+          
+          <div className="flex items-center gap-4">
+            <Badge className="bg-purple-400 text-black">RWA 101</Badge>
+            <span className="text-gray-400">3 of 6</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

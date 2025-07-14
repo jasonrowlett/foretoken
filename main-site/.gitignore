@@ -1,0 +1,6 @@
+# Ignore node and build artifacts
+node_modules/
+dist/
+.vite-temp/
+.env
+.DS_Store

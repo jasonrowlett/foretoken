@@ -7,5 +7,5 @@ dist/
 # Node dependencies (if used)
 node_modules/
 foretoken-backup.zip
-foretoken-4e948-firebase-adminsdk-fbsvc-e99027cd03.json
+firebaseServiceAccount.json
 .DS_Store
