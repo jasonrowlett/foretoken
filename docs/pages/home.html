@@ -1,4 +1,4 @@
-<!-- File: /docs/pages/home.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +12,6 @@
 
 <body class="bg-black text-white font-inter">
 
-  <!-- Header -->
   <header class="navbar">
     <div class="logo-section">
       <img src="../assets/img/neon-logo.png" alt="Foretoken Logo" class="logo" />
@@ -21,28 +20,17 @@
     <nav class="nav-links">
       <a href="home.html">Home</a>
       <a href="about.html">About</a>
-      <div class="dropdown">
-        <a href="library.html">Library</a>
-        <div class="dropdown-content">
-          <a href="rwa101.html">RWA 101</a>
-          <a href="glossary.html">Glossary</a>
-          <a href="ebooks.html">eBooks</a>
-        </div>
-      </div>
-      <a href="concourse.html">Concourse</a>
+      <a href="library.html">Library</a>
       <a href="podcasts.html">Podcasts</a>
-      <a href="speaking.html">Speaking</a>
-      <a href="consulting.html">Consulting</a>
       <a href="connect.html">Connect</a>
       <a href="login.html">Login</a>
-      <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+      <a href="subscribe.html" class="btn-purple">Sign Up</a>
     </nav>
   </header>
 
-  <!-- Main Content -->
   <main>
     <section class="hero">
-      <h2 class="hero-title">Bringing Transparency to<br />Tokenized Assets</h2>
+      <h2 class="hero-title">Bringing Transparency to Tokenized Assets</h2>
       <p class="hero-description">
         Your definitive source for real-world asset tokenization news, analysis, and market intelligence. From infrastructure to compliance, we decode the future of digital assets.
       </p>
@@ -52,45 +40,48 @@
       </div>
     </section>
 
-    <section class="newsletter-signup">
-      <h2>Foretoken Newsletter Signup</h2>
-      <p>Get insights, analysis, and tokenization market news directly to your inbox.</p>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Enter your email" required />
-        <button type="submit" class="subscribe-btn">Subscribe</button>
-      </form>
-    </section>
-
     <section class="hero-stats">
       <div class="stat-card">
-        <span class="label">Tokenized Assets</span>
-        <h3>$24.52B</h3>
+        <span class="label">Market Cap</span>
+        <h3>$847.2B</h3>
         <p class="subtext positive">↑ +12.3%</p>
       </div>
       <div class="stat-card">
-        <span class="label">U.S. Treasuries</span>
-        <h3>$7.5B</h3>
+        <span class="label">Real Estate</span>
+        <h3>$312.4B</h3>
         <p class="subtext positive">↑ +8.7%</p>
       </div>
       <div class="stat-card">
         <span class="label">Commodities</span>
-        <h3>$1.6B</h3>
+        <h3>$189.1B</h3>
         <p class="subtext negative">↓ -2.1%</p>
       </div>
     </section>
+
+    <section class="newsletter-signup">
+      <h2>Stay Informed</h2>
+      <p>Get our weekly market analysis and breaking news delivered to your inbox.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email" class="dark-input" required />
+        <button type="submit" class="btn-purple">Subscribe</button>
+      </form>
+    </section>
+
+    <div class="scroll-hint" style="text-align: center; margin: 3rem 0;">
+      <p style="color: #a855f7; font-size: 2rem;">↑</p>
+      <p style="color: #ccc;">Live Market Data</p>
+    </div>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-top">
       <div class="footer-brand">
         <h2>FORETOKEN</h2>
         <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
         <div class="social-links">
-          <a href="https://x.com/foretokenrwa" target="_blank" class="social-text">X</a>
-          <a href="https://facebook.com/foretokenmedia" target="_blank" class="social-text">Facebook</a>
-          <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank" class="social-text">LinkedIn</a>
-          <a href="https://t.me/foretokenalerts" target="_blank" class="social-text">Telegram</a>
+          <a href="https://x.com/foretokenrwa" target="_blank"><img src="../assets/icons/x.svg" class="social-icon" alt="X" /></a>
+          <a href="https://linkedin.com/company/foretokenrwa" target="_blank"><img src="../assets/icons/linkedin.svg" class="social-icon" alt="LinkedIn" /></a>
+          <a href="https://t.me/foretokenalerts" target="_blank"><img src="../assets/icons/telegram.svg" class="social-icon" alt="Telegram" /></a>
         </div>
       </div>
 
@@ -110,60 +101,23 @@
           <a href="consulting.html">Consulting</a>
           <a href="speaking.html">Speaker Booking</a>
           <a href="ebooks.html">Educational Guides</a>
-          <a href="glossary.html">Glossary</a>
+          <a href="glossary.html">API Documentation</a>
         </div>
         <div>
           <h4>Legal</h4>
           <a href="terms.html">Terms of Service</a>
           <a href="privacy.html">Privacy Policy</a>
+          <a href="cookie.html">Cookie Policy</a>
           <a href="advertising-policy.html">Advertising Policy</a>
+          <a href="disclaimer.html">Disclaimer</a>
         </div>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>©2025 Foretoken Media. RGI Enterprises LLC. All rights reserved.</p>
+      <p>© 2025 Foretoken. All rights reserved.</p>
       <small>Market data provided by leading exchanges. Not investment advice.</small>
     </div>
   </footer>
-
-  <style>
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #111;
-      min-width: 160px;
-      z-index: 1;
-    }
-
-    .dropdown-content a {
-      display: block;
-      color: white;
-      padding: 8px 16px;
-      text-decoration: none;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .social-text {
-      color: #a855f7;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      margin-right: 16px;
-    }
-
-    .social-text:hover {
-      color: #d8b4fe;
-    }
-  </style>
-
 </body>
 </html>
