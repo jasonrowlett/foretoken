@@ -1,31 +1,39 @@
-const express = require('express');
-const router = express.Router();
+// checkout.js (no Express)
+
 const Stripe = require('stripe');
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+async function handleGenericCheckout(req, res) {
+  let data = '';
 
-router.post('/create-checkout-session', async (req, res) => {
-  try {
-    const { priceId } = req.body;
+  req.on('data', chunk => {
+    data += chunk;
+  });
 
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      mode: 'subscription',
-      line_items: [
-        {
-          price: priceId,
-          quantity: 1,
-        },
-      ],
-      success_url: `${process.env.DOMAIN}/checkout-success.html`,
-      cancel_url: `${process.env.DOMAIN}/checkout-cancel.html`,
-    });
+  req.on('end', async () => {
+    let body;
+    try {
+      body = JSON.parse(data);
+    } catch {
+      res.writeHead(400);
+      return res.end('Invalid JSON');
+    }
 
-    res.json({ url: session.url });
-  } catch (error) {
-    console.error('Error creating checkout session:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
+    const { priceId } = body;
+    if (!priceId) {
+      res.writeHead(400);
+      return res.end('Missing priceId');
+    }
 
-module.exports = router;
+    try {
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        mode: 'subscription',
+        line_items: [{ price: priceId, quantity: 1 }],
+        success_url: `${process.env.DOMAIN}/checkout-success.html`,
+        cancel_url: `${process.env.DOMAIN}/checkout-cancel.html`,
+      });
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ url: session.url }));
+    } ca

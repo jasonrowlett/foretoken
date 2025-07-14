@@ -1,11 +1,17 @@
-# Environment Variables
+# Environment variables
 .env
-dist/
+
 # macOS system files
 .DS_Store
 
-# Node dependencies (if used)
+# Node dependencies
 node_modules/
-foretoken-backup.zip
+
+# Firebase credentials (change name if needed)
 firebaseServiceAccount.json
-.DS_Store
+*.json.backup
+foretoken-backup.zip
+
+# Build artifacts (if any)
+dist/
+
