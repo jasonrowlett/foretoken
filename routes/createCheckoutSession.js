@@ -6,10 +6,12 @@ dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// Replace with your real Stripe price IDs
 const PRODUCT_PRICES = {
-  monthly: 'price_1Oxyz123abcMonthly',
-  yearly: 'price_1Oxyz123abcYearly'
+  insider_monthly: 'price_1RPVhwEQSEnAatPzcBLCAqRZ',
+  insider_yearly: 'price_1RUd2pEQSEnAatPzrdY7SY46',
+  pro_monthly: 'price_1RPVfMEQSEnAatPzBflehIb6',
+  pro_yearly: 'price_1Ruct0EQSEnAatPzzvImS36S',
+  enterprise_yearly: 'prod_SefWHwHTH5AnLP'
 };
 
 async function handleCheckoutRequest(req, res) {
@@ -53,5 +55,3 @@ async function handleCheckoutRequest(req, res) {
     }
   });
 }
-
-module.exports = { handleCheckoutRequest };
