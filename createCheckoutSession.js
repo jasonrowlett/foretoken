@@ -55,3 +55,5 @@ async function handleCheckoutRequest(req, res) {
     }
   });
 }
+
+module.exports = { handleCheckoutRequest };
