@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,9 +73,9 @@
           ✅ Priority access to future guides or eBooks<br>
           ❌ No real-time dashboard data or consulting access
         </p>
-        <a href="https://buy.stripe.com/cNi9AT6JG2UXf7W1vW04802" class="btn-purple">Subscribe Monthly</a>
+        <button class="btn-purple" data-plan="insider_monthly">Subscribe Monthly</button>
         <p class="plan-price yearly">$107.89/year <span class="discount-note">(10% off monthly)</span></p>
-        <a href="https://buy.stripe.com/fZu4gz0lifHJbVKb6w04801" class="btn-outline">Subscribe Yearly</a>
+        <button class="btn-outline" data-plan="insider_yearly">Subscribe Yearly</button>
       </div>
 
       <div class="pricing-card">
@@ -92,9 +91,9 @@
           ✅ Downloadable datasets (CSV/Sheets)<br>
           ✅ Priority customer support
         </p>
-        <a href="https://buy.stripe.com/3cI5kD2tqanp7FueiI04804" class="btn-purple">Subscribe Monthly</a>
+        <button class="btn-purple" data-plan="pro_monthly">Subscribe Monthly</button>
         <p class="plan-price yearly">$324.99/year <span class="discount-note">(10% off monthly)</span></p>
-        <a href="https://buy.stripe.com/4gM28rgkg1QT2laeiI04803" class="btn-outline">Subscribe Yearly</a>
+        <button class="btn-outline" data-plan="pro_yearly">Subscribe Yearly</button>
       </div>
 
       <div class="pricing-card">
@@ -108,94 +107,124 @@
           ✅ Early access to datasets and product betas<br>
           ✅ VIP support + onboarding
         </p>
-        <a href="https://buy.stripe.com/cNicN5ec8fHJf7W3E404805" class="btn-outline">Subscribe Yearly</a>
+        <button class="btn-outline" data-plan="enterprise_yearly">Subscribe Yearly</button>
       </div>
 
     </div>
   </section>
-   <!-- Footer -->
-    <footer class="site-footer">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <h2>FORETOKEN</h2>
-          <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
-          <div class="social-links">
-            <a href="https://x.com/foretokenrwa" target="_blank" class="social-text">X</a>
-            <a href="https://facebook.com/foretokenmedia" target="_blank" class="social-text">Facebook</a>
-            <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank" class="social-text">LinkedIn</a>
-            <a href="https://t.me/foretokenalerts" target="_blank" class="social-text">Telegram</a>
-          </div>
-        </div>
 
-        <div class="footer-links">
-          <div>
-            <h4>Platform</h4>
-            <a href="home.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="library.html">Library</a>
-            <a href="podcasts.html">Podcast</a>
-            <a href="connect.html">Connect</a>
-            <a href="subscribe.html">Subscribe</a>
-          </div>
-          <div>
-            <h4>Resources</h4>
-            <a href="concourse.html">Market Data</a>
-            <a href="consulting.html">Consulting</a>
-            <a href="speaking.html">Speaker Booking</a>
-            <a href="ebooks.html">Educational Guides</a>
-            <a href="glossary.html">Glossary</a>
-          </div>
-          <div>
-            <h4>Legal</h4>
-            <a href="terms.html">Terms of Service</a>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="advertising-policy.html">Advertising Policy</a>
-          </div>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2>FORETOKEN</h2>
+        <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
+        <div class="social-links">
+          <a href="https://x.com/foretokenrwa" target="_blank" class="social-text">X</a>
+          <a href="https://facebook.com/foretokenmedia" target="_blank" class="social-text">Facebook</a>
+          <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank" class="social-text">LinkedIn</a>
+          <a href="https://t.me/foretokenalerts" target="_blank" class="social-text">Telegram</a>
         </div>
       </div>
-
-      <div class="footer-bottom">
-        <p>©2025 Foretoken Media. RGI Enterprises LLC. All rights reserved.</p>
-        <small>Market data provided by leading exchanges. Not investment advice.</small>
+      <div class="footer-links">
+        <div>
+          <h4>Platform</h4>
+          <a href="home.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="library.html">Library</a>
+          <a href="podcasts.html">Podcast</a>
+          <a href="connect.html">Connect</a>
+          <a href="subscribe.html">Subscribe</a>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <a href="concourse.html">Market Data</a>
+          <a href="consulting.html">Consulting</a>
+          <a href="speaking.html">Speaker Booking</a>
+          <a href="ebooks.html">Educational Guides</a>
+          <a href="glossary.html">Glossary</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="advertising-policy.html">Advertising Policy</a>
+        </div>
       </div>
-    </footer>
+    </div>
 
-    <style>
-      .dropdown {
-        position: relative;
-        display: inline-block;
-      }
+    <div class="footer-bottom">
+      <p>©2025 Foretoken Media. RGI Enterprises LLC. All rights reserved.</p>
+      <small>Market data provided by leading exchanges. Not investment advice.</small>
+    </div>
+  </footer>
 
-      .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #111;
-        min-width: 160px;
-        z-index: 1;
-      }
+  <script>
+    async function handleSubscribeClick(event) {
+      const plan = event.target.dataset.plan;
+      if (!plan) return;
 
-      .dropdown-content a {
-        display: block;
-        color: white;
-        padding: 8px 16px;
-        text-decoration: none;
-      }
+      try {
+        const response = await fetch("/create-checkout-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ plan })
+        });
 
-      .dropdown:hover .dropdown-content {
-        display: block;
-      }
+        if (!response.ok) {
+          const errorText = await response.text();
+          alert("Checkout failed: " + errorText);
+          return;
+        }
 
-      .social-text {
-        color: #a855f7;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 1rem;
-        margin-right: 16px;
+        const { url } = await response.json();
+        window.location.href = url;
+      } catch (err) {
+        alert("Error creating checkout session: " + err.message);
       }
+    }
 
-      .social-text:hover {
-        color: #d8b4fe;
-      }
-    </style>
-  </body>
+    document.querySelectorAll("button[data-plan]").forEach(btn => {
+      btn.addEventListener("click", handleSubscribeClick);
+    });
+  </script>
+
+  <style>
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #111;
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      display: block;
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .social-text {
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-right: 16px;
+    }
+
+    .social-text:hover {
+      color: #d8b4fe;
+    }
+  </style>
+</body>
 </html>
