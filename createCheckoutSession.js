@@ -4,11 +4,11 @@ module.exports = async function createCheckoutSession(plan) {
   if (!plan) throw new Error('Plan not provided');
 
   const prices = {
-    monthly: 'price_1RdxZZEQSEnAatPzHi8xTC3b',       // Foretoken Insider Monthly – $19.99
-    yearly: 'price_1RdxZZEQSEnAatPzzYA83mdh',        // Foretoken Insider Yearly – $215.89
-    pro_monthly: 'price_1RdxZZEQSEnAatPzqab2Ph5S',   // Foretoken Pro Monthly – $29.99
-    pro_yearly: 'price_1RdxZaEQSEnAatPz23U3dnNN',    // Foretoken Pro Yearly – $324.99
-    enterprise_yearly: 'price_1RjMB8EQSEnAatPzjW7b28bU' // Foretoken Enterprise Yearly – $2,149
+    monthly: 'price_1RlYSGEQSEnAatPzxfUcPt2s',       // Foretoken Insider Monthly – $19.99
+    yearly: 'price_1RlYTHEQSEnAatPzVoCrrLmo',        // Foretoken Insider Yearly – $215.89
+    pro_monthly: 'price_1RlYTiEQSEnAatPziOQxQmq1',   // Foretoken Pro Monthly – $29.99
+    pro_yearly: 'price_1RlYUBEQSEnAatPzmt3U7uTS',    // Foretoken Pro Yearly – $324.99
+    enterprise_yearly: 'price_1RlYUpEQSEnAatPzz9Vj1e7L' // Foretoken Enterprise Yearly – $2,149
   };
 
   const selectedPrice = prices[plan];
