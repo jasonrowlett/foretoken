@@ -17,8 +17,8 @@ function handleStripeWebhook(req, res) {
         // Store session in Firestore
         await db.collection('users').doc(email).collection('sessions').doc(session.id).set(session);
 
-        // Match tier by LIVE price ID
-        const priceId = session?.display_items?.[0]?.price?.id;
+        const priceId = session?.display_items?.[0]?.price?.id || session?.subscription_data?.items?.data[0]?.price?.id;
+
         const tierMap = {
           'price_1RdxZZEQSEnAatPzHi8xTC3b': 'monthly',
           'price_1RdxZZEQSEnAatPzzYA83mdh': 'yearly',

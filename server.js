@@ -8,19 +8,18 @@ const PORT = process.env.PORT || 10000;
 const publicDir = path.join(__dirname, 'docs');
 
 const server = http.createServer((req, res) => {
-  // Handle CORS for all requests
+  // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // Handle preflight request
   if (req.method === 'OPTIONS') {
     res.writeHead(204);
     res.end();
     return;
   }
 
-  // Handle POST to /create-checkout-session
+  // POST /create-checkout-session
   if (req.method === 'POST' && req.url === '/create-checkout-session') {
     let body = '';
     req.on('data', chunk => (body += chunk));
@@ -39,16 +38,15 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // ✅ NEW: Handle Stripe webhook
-  if (req.method === 'POST' && req.url === '/webhook') {
+  // ✅ Stripe webhook support
+  if (req.method === 'POST' && req.url === '/stripe-webhook') {
     return handleStripeWebhook(req, res);
   }
 
-  // Default: serve static files from /docs
+  // Serve static files
   let filePath = path.join(publicDir, req.url === '/' ? 'index.html' : req.url);
 
-  // Prevent backend routes from being treated as static files
-  if (req.url === '/create-checkout-session' || req.url === '/webhook') {
+  if (req.url === '/create-checkout-session' || req.url === '/stripe-webhook') {
     res.writeHead(405, { 'Content-Type': 'text/plain' });
     return res.end('Method Not Allowed');
   }
