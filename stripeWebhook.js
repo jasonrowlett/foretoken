@@ -1,4 +1,3 @@
-// stripeWebhook.js
 function handleStripeWebhook(req, res) {
   let rawBody = '';
 
@@ -8,7 +7,6 @@ function handleStripeWebhook(req, res) {
       const sig = req.headers['stripe-signature'];
       const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
       const admin = require('./firebase-admin');
-
       const event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
       const db = admin.firestore();
 
@@ -16,10 +14,10 @@ function handleStripeWebhook(req, res) {
         const session = event.data.object;
         const email = session.customer_email || 'unknown_email';
 
-        // Store session
+        // Store session in Firestore
         await db.collection('users').doc(email).collection('sessions').doc(session.id).set(session);
 
-        // Assign user tier based on price ID
+        // Assign tier based on test price IDs
         const priceId = session?.display_items?.[0]?.price?.id;
         const tierMap = {
           'price_1RlYSGEQSEnAatPzxfUcPt2s': 'monthly',

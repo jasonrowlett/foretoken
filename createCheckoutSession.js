@@ -4,15 +4,15 @@ module.exports = async function createCheckoutSession(plan) {
   if (!plan) throw new Error('Plan not provided');
 
   const prices = {
-    monthly: 'price_1RlYSGEQSEnAatPzxfUcPt2s',       // Foretoken Insider Monthly – $19.99
-    yearly: 'price_1RlYTHEQSEnAatPzVoCrrLmo',        // Foretoken Insider Yearly – $215.89
-    pro_monthly: 'price_1RlYTiEQSEnAatPziOQxQmq1',   // Foretoken Pro Monthly – $29.99
-    pro_yearly: 'price_1RlYUBEQSEnAatPzmt3U7uTS',    // Foretoken Pro Yearly – $324.99
-    enterprise_yearly: 'price_1RlYUpEQSEnAatPzz9Vj1e7L' // Foretoken Enterprise Yearly – $2,149
+    monthly: 'price_1RlYSGEQSEnAatPzxfUcPt2s',         // Test: Insider Monthly
+    yearly: 'price_1RlYTHEQSEnAatPzVoCrrLmo',          // Test: Insider Yearly
+    pro_monthly: 'price_1RlYTiEQSEnAatPziOQxQmq1',     // Test: Pro Monthly
+    pro_yearly: 'price_1RlYUBEQSEnAatPzmt3U7uTS',      // Test: Pro Yearly
+    enterprise_yearly: 'price_1RlYUpEQSEnAatPzz9Vj1e7L'// Test: Enterprise Yearly
   };
 
   const selectedPrice = prices[plan];
-  if (!selectedPrice) throw new Error('Invalid plan');
+  if (!selectedPrice) throw new Error('Invalid plan: ' + plan);
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
