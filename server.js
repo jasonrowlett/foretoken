@@ -34,6 +34,10 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  } else if (req.url === '/stripe-webhook' && req.method === 'POST') {
+    require('./stripeWebhook')(req, res);
+  }
+
   // Serve static files from /docs
   const filePath = path.join(__dirname, 'docs', req.url === '/' ? 'index.html' : req.url);
   const ext = path.extname(filePath).toLowerCase();

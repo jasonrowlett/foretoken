@@ -1,72 +1,53 @@
-const admin = require('./firebase-admin'); // assumes firebase-admin.js is in same folder
-const db = admin.firestore();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { Firestore } = require('@google-cloud/firestore');
+const firestore = new Firestore();
 
-const stripe = require('stripe')('your_stripe_secret_key'); // replace with your secret key
-const endpointSecret = 'your_stripe_webhook_secret'; // replace with actual signing secret
-
-const crypto = require('crypto');
-
-// Export handler function
 module.exports = async function (req, res) {
   if (req.method !== 'POST') {
     res.writeHead(405, { 'Content-Type': 'text/plain' });
     return res.end('Method Not Allowed');
   }
 
-  let sig = req.headers['stripe-signature'];
-  let buf = '';
-
-  req.on('data', (chunk) => {
-    buf += chunk;
-  });
+  const chunks = [];
+  req.on('data', chunk => chunks.push(chunk));
 
   req.on('end', async () => {
-    let event;
+    const rawBody = Buffer.concat(chunks);
+    const sig = req.headers['stripe-signature'];
 
+    let event;
     try {
-      const rawBody = Buffer.from(buf, 'utf8');
-      event = stripe.webhooks.constructEvent(rawBody, sig, endpointSecret);
+      event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
     } catch (err) {
-      console.error('[Webhook] Signature verification failed:', err.message);
+      console.error('Webhook signature verification error:', err.message);
       res.writeHead(400);
       return res.end(`Webhook Error: ${err.message}`);
     }
 
-    // ✅ Handle successful checkout
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
-      const customerEmail = session.customer_details.email;
-      const subscriptionId = session.subscription;
+      const email = session.customer_email;
+      const priceId = session?.display_items?.[0]?.price?.id || 'unknown';
+      const tier = priceId === 'price_123' ? 'Insider' :
+                   priceId === 'price_456' ? 'Enterprise' : 'Unknown';
 
-      console.log('[Webhook] Checkout completed for:', customerEmail);
-
-      // Optional: Fetch subscription to get price/tier
       try {
-        const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-        const priceId = subscription.items.data[0].price.id;
-
-        await db.collection('users').doc(customerEmail).set({
-          email: customerEmail,
-          stripe_subscription: subscriptionId,
-          stripe_price_id: priceId,
-          created: new Date().toISOString()
+        await firestore.collection('users').doc(email).set({
+          email,
+          tier,
+          createdAt: new Date()
         });
-
-        await db.collection('users').doc(customerEmail).set({
-          email: customerEmail,
-          tier: tier,
-          stripe_subscription: subscriptionId,
-          created: new Date().toISOString()
-        });
-
-        console.log(`[Firestore] User created: ${customerEmail} (${tier})`);
-      } catch (error) {
-        console.error('[Firestore] Failed to create user:', error);
+        console.log(`User ${email} written to Firestore`);
+        res.writeHead(200);
+        return res.end('Success');
+      } catch (err) {
+        console.error('Firestore error:', err);
+        res.writeHead(500);
+        return res.end('Database error');
       }
     }
 
-    // ✅ Respond to Stripe
     res.writeHead(200);
-    res.end('Received');
+    res.end('Event not handled');
   });
 };
