@@ -1,58 +1,63 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
-const { handleStripeWebhook } = require('./stripeWebhook');
-const { handleCheckoutRequest } = require('./createCheckoutSession');
+const http = require("http");
+const fs = require("fs");
+const path = require("path");
+const url = require("url");
+const createCheckoutSession = require("./createCheckoutSession");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
+const PUBLIC_DIR = path.join(__dirname, "docs");
 
 const server = http.createServer((req, res) => {
-  // Handle CORS preflight
-  if (req.method === 'OPTIONS') {
-    res.writeHead(204, {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    });
-    return res.end();
+  const parsedUrl = url.parse(req.url, true);
+  const pathname = parsedUrl.pathname;
+
+  // CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // Handle preflight
+  if (req.method === "OPTIONS") {
+    res.writeHead(204);
+    res.end();
+    return;
   }
 
-  // Stripe webhook
-  if (req.method === 'POST' && req.url === '/stripe-webhook') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    return handleStripeWebhook(req, res);
-  }
-
-  // Stripe checkout session
-  if (req.method === 'POST' && req.url === '/create-checkout-session') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    return handleCheckoutRequest(req, res);
+  // Handle the POST route for checkout
+  if (pathname === "/create-checkout-session" && req.method === "POST") {
+    return createCheckoutSession(req, res);
   }
 
   // Serve static files from /docs
-  let filePath = '.' + (req.url === '/' ? '/signup.html' : req.url);
-  const extname = path.extname(filePath);
+  let filePath = path.join(PUBLIC_DIR, pathname === "/" ? "index.html" : pathname);
 
-  const contentTypeMap = {
-    '.html': 'text/html',
-    '.js': 'application/javascript',
-    '.css': 'text/css',
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.svg': 'image/svg+xml'
-  };
+  // Prevent directory traversal
+  if (!filePath.startsWith(PUBLIC_DIR)) {
+    res.writeHead(403);
+    return res.end("Forbidden");
+  }
 
-  const contentType = contentTypeMap[extname] || 'application/octet-stream';
-
-  fs.readFile(path.join(__dirname, 'docs', filePath), (err, content) => {
+  fs.readFile(filePath, (err, data) => {
     if (err) {
       res.writeHead(404);
-      return res.end('File not found');
+      return res.end("404 Not Found");
     }
-    res.writeHead(200, { 'Content-Type': contentType });
-    res.end(content, 'utf-8');
+
+    const ext = path.extname(filePath).toLowerCase();
+    const mimeTypes = {
+      ".html": "text/html",
+      ".css": "text/css",
+      ".js": "application/javascript",
+      ".json": "application/json",
+      ".png": "image/png",
+      ".jpg": "image/jpeg",
+      ".svg": "image/svg+xml",
+      ".ico": "image/x-icon",
+    };
+
+    const contentType = mimeTypes[ext] || "application/octet-stream";
+    res.writeHead(200, { "Content-Type": contentType });
+    res.end(data);
   });
 });
 
