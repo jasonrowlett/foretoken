@@ -6,14 +6,23 @@ const createCheckoutSession = require('./createCheckoutSession');
 const PORT = process.env.PORT || 10000;
 const publicDir = path.join(__dirname, 'docs');
 
-const server = http.createServer(async (req, res) => {
-  if (req.method === 'POST' && req.url === '/create-checkout-session') {
-    // Collect incoming data
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk;
-    });
+const server = http.createServer((req, res) => {
+  // Handle CORS for all requests
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+
+  // Handle POST to /create-checkout-session
+  if (req.method === 'POST' && req.url === '/create-checkout-session') {
+    let body = '';
+    req.on('data', chunk => (body += chunk));
     req.on('end', async () => {
       try {
         const data = JSON.parse(body);
@@ -26,31 +35,37 @@ const server = http.createServer(async (req, res) => {
         res.end(JSON.stringify({ error: 'Checkout session failed', details: err.message }));
       }
     });
-
     return;
   }
 
-  // Serve static files from /docs
+  // Default: serve static files from /docs
   let filePath = path.join(publicDir, req.url === '/' ? 'index.html' : req.url);
-  const extname = path.extname(filePath);
-  const contentType = {
-    '.html': 'text/html',
-    '.js': 'application/javascript',
-    '.css': 'text/css',
-    '.json': 'application/json',
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.svg': 'image/svg+xml',
-  }[extname] || 'application/octet-stream';
+
+  // Prevent requests to backend route being treated as static
+  if (req.url === '/create-checkout-session') {
+    res.writeHead(405, { 'Content-Type': 'text/plain' });
+    return res.end('Method Not Allowed');
+  }
 
   fs.readFile(filePath, (err, content) => {
     if (err) {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
-      res.end('404 Not Found');
-    } else {
-      res.writeHead(200, { 'Content-Type': contentType });
-      res.end(content);
+      return res.end('404 Not Found');
     }
+
+    const extname = path.extname(filePath);
+    const contentType = {
+      '.html': 'text/html',
+      '.js': 'application/javascript',
+      '.css': 'text/css',
+      '.json': 'application/json',
+      '.png': 'image/png',
+      '.jpg': 'image/jpeg',
+      '.svg': 'image/svg+xml',
+    }[extname] || 'application/octet-stream';
+
+    res.writeHead(200, { 'Content-Type': contentType });
+    res.end(content);
   });
 });
 
