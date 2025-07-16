@@ -74,9 +74,9 @@
           ✅ Priority access to future guides or eBooks<br>
           ❌ No real-time dashboard data or consulting access
         </p>
-        <button class="btn-purple" data-plan="insider_monthly">Subscribe Monthly</button>
+        <button class="btn-purple" data-plan="monthly">Subscribe Monthly</button>
         <p class="plan-price yearly">$107.89/year <span class="discount-note">(10% off monthly)</span></p>
-        <button class="btn-outline" data-plan="insider_yearly">Subscribe Yearly</button>
+        <button class="btn-outline" data-plan="yearly">Subscribe Yearly</button>
       </div>
 
       <div class="pricing-card">
@@ -166,7 +166,7 @@
       if (!plan) return;
 
       try {
-        const response = await fetch("/create-checkout-session", {
+        const response = await fetch("https://foretoken-backend.onrender.com/create-checkout-session", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ plan })

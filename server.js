@@ -1,63 +1,56 @@
-const http = require("http");
-const fs = require("fs");
-const path = require("path");
-const url = require("url");
-const createCheckoutSession = require("./createCheckoutSession");
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const createCheckoutSession = require('./createCheckoutSession');
 
 const PORT = process.env.PORT || 10000;
-const PUBLIC_DIR = path.join(__dirname, "docs");
+const publicDir = path.join(__dirname, 'docs');
 
-const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url, true);
-  const pathname = parsedUrl.pathname;
+const server = http.createServer(async (req, res) => {
+  if (req.method === 'POST' && req.url === '/create-checkout-session') {
+    // Collect incoming data
+    let body = '';
+    req.on('data', chunk => {
+      body += chunk;
+    });
 
-  // CORS headers
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    req.on('end', async () => {
+      try {
+        const data = JSON.parse(body);
+        const sessionUrl = await createCheckoutSession(data.plan);
 
-  // Handle preflight
-  if (req.method === "OPTIONS") {
-    res.writeHead(204);
-    res.end();
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ url: sessionUrl }));
+      } catch (err) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Checkout session failed', details: err.message }));
+      }
+    });
+
     return;
   }
 
-  // Handle the POST route for checkout
-  if (pathname === "/create-checkout-session" && req.method === "POST") {
-    return createCheckoutSession(req, res);
-  }
-
   // Serve static files from /docs
-  let filePath = path.join(PUBLIC_DIR, pathname === "/" ? "index.html" : pathname);
+  let filePath = path.join(publicDir, req.url === '/' ? 'index.html' : req.url);
+  const extname = path.extname(filePath);
+  const contentType = {
+    '.html': 'text/html',
+    '.js': 'application/javascript',
+    '.css': 'text/css',
+    '.json': 'application/json',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.svg': 'image/svg+xml',
+  }[extname] || 'application/octet-stream';
 
-  // Prevent directory traversal
-  if (!filePath.startsWith(PUBLIC_DIR)) {
-    res.writeHead(403);
-    return res.end("Forbidden");
-  }
-
-  fs.readFile(filePath, (err, data) => {
+  fs.readFile(filePath, (err, content) => {
     if (err) {
-      res.writeHead(404);
-      return res.end("404 Not Found");
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('404 Not Found');
+    } else {
+      res.writeHead(200, { 'Content-Type': contentType });
+      res.end(content);
     }
-
-    const ext = path.extname(filePath).toLowerCase();
-    const mimeTypes = {
-      ".html": "text/html",
-      ".css": "text/css",
-      ".js": "application/javascript",
-      ".json": "application/json",
-      ".png": "image/png",
-      ".jpg": "image/jpeg",
-      ".svg": "image/svg+xml",
-      ".ico": "image/x-icon",
-    };
-
-    const contentType = mimeTypes[ext] || "application/octet-stream";
-    res.writeHead(200, { "Content-Type": contentType });
-    res.end(data);
   });
 });
 
