@@ -20,11 +20,11 @@ function handleStripeWebhook(req, res) {
         // Match tier by LIVE price ID
         const priceId = session?.display_items?.[0]?.price?.id;
         const tierMap = {
-          'price_1RPVhwEQSEnAatPzcBLCAgRZ': 'monthly',
-          'price_1RUd2pEQSEnAatPzrdY7SY46': 'yearly',
-          'price_1RPVfMEQSEnAatPzBfIehlb6': 'pro_monthly',
-          'price_1RUct0EQSEnAatPzzvImS36S': 'pro_yearly',
-          'price_1RIMB8EQSEnAatPzjW7b28bU': 'enterprise'
+          'price_1RdxZZEQSEnAatPzHi8xTC3b': 'monthly',
+          'price_1RdxZZEQSEnAatPzzYA83mdh': 'yearly',
+          'price_1RdxZZEQSEnAatPzqab2Ph5S': 'pro_monthly',
+          'price_1RdxZaEQSEnAatPz23U3dnNN': 'pro_yearly',
+          'price_1RjMB8EQSEnAatPzjW7b28bU': 'enterprise'
         };
 
         const tier = tierMap[priceId] || 'unknown';

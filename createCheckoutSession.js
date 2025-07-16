@@ -4,10 +4,10 @@ module.exports = async function createCheckoutSession(plan) {
   if (!plan) throw new Error('Plan not provided');
 
   const prices = {
-    monthly: 'price_1RPVhwEQSEnAatPzcBLCAgRZ',         // Insider Monthly (LIVE)
-    yearly: 'price_1RUd2pEQSEnAatPzrdY7SY46',          // Insider Yearly (LIVE)
-    pro_monthly: 'price_1RPVfMEQSEnAatPzBfIehlb6',     // Pro Monthly (LIVE)
-    pro_yearly: 'price_1RUct0EQSEnAatPzzvImS36S',      // Pro Yearly (LIVE)
+    monthly: 'price_1RdxZZEQSEnAatPzHi8xTC3b',         // Insider Monthly (LIVE)
+    yearly: 'price_1RdxZZEQSEnAatPzzYA83mdh',          // Insider Yearly (LIVE)
+    pro_monthly: 'price_1RdxZZEQSEnAatPzqab2Ph5S',     // Pro Monthly (LIVE)
+    pro_yearly: 'price_1RdxZaEQSEnAatPz23U3dnNN',      // Pro Yearly (LIVE)
     enterprise: 'price_1RIMB8EQSEnAatPzjW7b28bU'        // Enterprise Yearly (LIVE)
   };
 
