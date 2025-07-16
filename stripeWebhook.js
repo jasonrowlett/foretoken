@@ -17,15 +17,16 @@ function handleStripeWebhook(req, res) {
         // Store session in Firestore
         await db.collection('users').doc(email).collection('sessions').doc(session.id).set(session);
 
-        // Assign tier based on test price IDs
+        // Match tier by LIVE price ID
         const priceId = session?.display_items?.[0]?.price?.id;
         const tierMap = {
-          'price_1RlYSGEQSEnAatPzxfUcPt2s': 'monthly',
-          'price_1RlYTHEQSEnAatPzVoCrrLmo': 'yearly',
-          'price_1RlYTiEQSEnAatPziOQxQmq1': 'pro_monthly',
-          'price_1RlYUBEQSEnAatPzmt3U7uTS': 'pro_yearly',
-          'price_1RlYUpEQSEnAatPzz9Vj1e7L': 'enterprise'
+          'price_1RPVhwEQSEnAatPzcBLCAgRZ': 'monthly',
+          'price_1RUd2pEQSEnAatPzrdY7SY46': 'yearly',
+          'price_1RPVfMEQSEnAatPzBfIehlb6': 'pro_monthly',
+          'price_1RUct0EQSEnAatPzzvImS36S': 'pro_yearly',
+          'price_1RIMB8EQSEnAatPzjW7b28bU': 'enterprise'
         };
+
         const tier = tierMap[priceId] || 'unknown';
 
         await db.collection('users').doc(email).set({

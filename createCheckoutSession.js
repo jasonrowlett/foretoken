@@ -1,14 +1,14 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_...');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Use live secret from .env
 
 module.exports = async function createCheckoutSession(plan) {
   if (!plan) throw new Error('Plan not provided');
 
   const prices = {
-    monthly: 'price_1RlYSGEQSEnAatPzxfUcPt2s',         // Test: Insider Monthly
-    yearly: 'price_1RlYTHEQSEnAatPzVoCrrLmo',          // Test: Insider Yearly
-    pro_monthly: 'price_1RlYTiEQSEnAatPziOQxQmq1',     // Test: Pro Monthly
-    pro_yearly: 'price_1RlYUBEQSEnAatPzmt3U7uTS',      // Test: Pro Yearly
-    enterprise_yearly: 'price_1RlYUpEQSEnAatPzz9Vj1e7L'// Test: Enterprise Yearly
+    monthly: 'price_1RPVhwEQSEnAatPzcBLCAgRZ',         // Insider Monthly (LIVE)
+    yearly: 'price_1RUd2pEQSEnAatPzrdY7SY46',          // Insider Yearly (LIVE)
+    pro_monthly: 'price_1RPVfMEQSEnAatPzBfIehlb6',     // Pro Monthly (LIVE)
+    pro_yearly: 'price_1RUct0EQSEnAatPzzvImS36S',      // Pro Yearly (LIVE)
+    enterprise: 'price_1RIMB8EQSEnAatPzjW7b28bU'        // Enterprise Yearly (LIVE)
   };
 
   const selectedPrice = prices[plan];
