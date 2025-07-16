@@ -1,52 +1,52 @@
-function handleStripeWebhook(req, res) {
-  let rawBody = '';
 
-  req.on('data', chunk => rawBody += chunk);
-  req.on('end', async () => {
-    try {
-      const sig = req.headers['stripe-signature'];
-      const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-      const admin = require('./firebase-admin');
-      const event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
-      const db = admin.firestore();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const admin = require('firebase-admin');
+const bodyParser = require('body-parser');
+const fs = require('fs');
 
-      if (event.type === 'checkout.session.completed') {
-        const session = event.data.object;
-        const email = session.customer_email || 'unknown_email';
-
-        // Store session in Firestore
-        await db.collection('users').doc(email).collection('sessions').doc(session.id).set(session);
-
-        const priceId = session?.display_items?.[0]?.price?.id || session?.subscription_data?.items?.data[0]?.price?.id;
-
-        const tierMap = {
-          'price_1RdxZZEQSEnAatPzHi8xTC3b': 'monthly',
-          'price_1RdxZZEQSEnAatPzzYA83mdh': 'yearly',
-          'price_1RdxZZEQSEnAatPzqab2Ph5S': 'pro_monthly',
-          'price_1RdxZaEQSEnAatPz23U3dnNN': 'pro_yearly',
-          'price_1RjMB8EQSEnAatPzjW7b28bU': 'enterprise'
-        };
-
-        const tier = tierMap[priceId] || 'unknown';
-
-        await db.collection('users').doc(email).set({
-          email,
-          tier,
-          subscribed: true,
-          lastCheckout: admin.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
-
-        console.log(`✅ Stored session + assigned tier (${tier}) for ${email}`);
-      }
-
-      res.writeHead(200);
-      res.end('Webhook received');
-    } catch (err) {
-      console.error('❌ Stripe webhook error:', err.message);
-      res.writeHead(400);
-      res.end(`Error: ${err.message}`);
-    }
-  });
+// Lazy initialize Firebase admin
+if (!admin.apps.length) {
+  const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH || './foretoken-4e948-firebase-adminsdk-fbsvc-e99027cd03.json';
+  const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
+  admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
 }
 
-module.exports = { handleStripeWebhook };
+const firestore = admin.firestore();
+
+module.exports = async (req, res) => {
+  let data = '';
+
+  req.on('data', chunk => {
+    data += chunk;
+  });
+
+  req.on('end', async () => {
+    const sig = req.headers['stripe-signature'];
+    let event;
+
+    try {
+      event = stripe.webhooks.constructEvent(data, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    } catch (err) {
+      console.error('Webhook Error:', err.message);
+      res.writeHead(400);
+      return res.end(`Webhook Error: ${err.message}`);
+    }
+
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object;
+      const email = session.customer_email;
+      const priceId = session?.display_items?.[0]?.price?.id || session?.items?.[0]?.price?.id || session?.subscription || 'unknown';
+      const tier = session.metadata?.plan || 'unknown';
+
+      try {
+        await firestore.collection('users').doc(email).set({ email, tier, priceId, timestamp: new Date().toISOString() });
+        console.log(`User ${email} added to Firestore.`);
+      } catch (err) {
+        console.error('Firestore error:', err);
+      }
+    }
+
+    res.writeHead(200);
+    res.end('Received');
+  });
+};
