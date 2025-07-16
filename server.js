@@ -1,59 +1,66 @@
-
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const stripeWebhook = require('./stripeWebhook');
 
+const PORT = process.env.PORT || 3000;
+
 const server = http.createServer((req, res) => {
+  // Handle Stripe webhook
   if (req.method === 'POST' && req.url === '/stripe-webhook') {
-    stripeWebhook(req, res);
+    return stripeWebhook(req, res);
+  }
+
+  // Handle create-checkout-session
+  else if (req.method === 'POST' && req.url === '/api/create-checkout-session') {
+    let body = '';
+    req.on('data', chunk => {
+      body += chunk.toString();
+    });
+    req.on('end', async () => {
+      try {
+        const { plan } = JSON.parse(body);
+        const createCheckoutSession = require('./createCheckoutSession');
+        const session = await createCheckoutSession(plan);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ url: session.url }));
+      } catch (err) {
+        console.error('Error creating checkout session:', err);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Failed to create checkout session.');
+      }
+    });
     return;
   }
 
-  let filePath = '.' + req.url;
-  if (filePath === './') {
-    filePath = './index.html';
-  }
-
-  const extname = String(path.extname(filePath)).toLowerCase();
+  // Serve static files from /docs
+  const filePath = path.join(__dirname, 'docs', req.url === '/' ? 'index.html' : req.url);
+  const ext = path.extname(filePath).toLowerCase();
   const mimeTypes = {
     '.html': 'text/html',
     '.js': 'application/javascript',
     '.css': 'text/css',
-    '.json': 'application/json',
     '.png': 'image/png',
-    '.jpg': 'image/jpg',
-    '.gif': 'image/gif',
-    '.wav': 'audio/wav',
-    '.mp4': 'video/mp4',
-    '.woff': 'application/font-woff',
-    '.ttf': 'application/font-ttf',
-    '.eot': 'application/vnd.ms-fontobject',
-    '.otf': 'application/font-otf',
-    '.svg': 'application/image/svg+xml'
+    '.jpg': 'image/jpeg',
+    '.ico': 'image/x-icon',
+    '.svg': 'image/svg+xml',
+    '.json': 'application/json'
   };
 
-  const contentType = mimeTypes[extname] || 'application/octet-stream';
+  const contentType = mimeTypes[ext] || 'application/octet-stream';
 
-  fs.readFile(filePath, (error, content) => {
-    if (error) {
-      if (error.code == 'ENOENT') {
-        fs.readFile('./404.html', (err, content) => {
-          res.writeHead(404, { 'Content-Type': 'text/html' });
-          res.end(content, 'utf-8');
-        });
-      } else {
-        res.writeHead(500);
-        res.end('Sorry, check with the site admin for error: ' + error.code + ' .');
-
-      }
+  fs.readFile(filePath, (err, content) => {
+    if (err) {
+      res.writeHead(404);
+      res.end('404 - Not Found');
     } else {
       res.writeHead(200, { 'Content-Type': contentType });
-      res.end(content, 'utf-8');
+      res.end(content);
     }
   });
 });
 
-server.listen(process.env.PORT || 10000, () => {
-  console.log(`Server running on port ${process.env.PORT || 10000}`);
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
