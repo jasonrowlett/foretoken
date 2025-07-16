@@ -1,12 +1,8 @@
-// createCheckoutSession.js (no Express)
-
 const Stripe = require('stripe');
 const dotenv = require('dotenv');
 dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-// fallback domain
 const DOMAIN = process.env.DOMAIN || "https://foretoken.xyz";
 
 const PRODUCT_PRICES = {
@@ -17,13 +13,9 @@ const PRODUCT_PRICES = {
   enterprise_yearly: 'prod_SefWHwHTH5AnLP'
 };
 
-async function handleCheckoutRequest(req, res) {
+module.exports = async function (req, res) {
   let data = '';
-
-  req.on('data', chunk => {
-    data += chunk;
-  });
-
+  req.on('data', chunk => (data += chunk));
   req.on('end', async () => {
     let body;
     try {
@@ -46,7 +38,7 @@ async function handleCheckoutRequest(req, res) {
         line_items: [{ price: PRODUCT_PRICES[plan], quantity: 1 }],
         success_url: `${DOMAIN}/checkout-success.html?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${DOMAIN}/checkout-cancel.html`,
-        metadata: { plan },
+        metadata: { plan }
       });
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -57,6 +49,4 @@ async function handleCheckoutRequest(req, res) {
       res.end('Unable to create checkout session');
     }
   });
-}
-
-module.exports = { handleCheckoutRequest };
+};

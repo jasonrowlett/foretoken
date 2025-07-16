@@ -17,13 +17,13 @@ const server = http.createServer((req, res) => {
     return res.end();
   }
 
-  // Handle Stripe Webhook
+  // Stripe webhook
   if (req.method === 'POST' && req.url === '/stripe-webhook') {
     res.setHeader('Access-Control-Allow-Origin', '*');
     return handleStripeWebhook(req, res);
   }
 
-  // Handle Checkout Session
+  // Stripe checkout session
   if (req.method === 'POST' && req.url === '/create-checkout-session') {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
