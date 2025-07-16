@@ -6,6 +6,9 @@ dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+// fallback domain
+const DOMAIN = process.env.DOMAIN || "https://foretoken.xyz";
+
 const PRODUCT_PRICES = {
   insider_monthly: 'price_1RPVhwEQSEnAatPzcBLCAqRZ',
   insider_yearly: 'price_1RUd2pEQSEnAatPzrdY7SY46',
@@ -41,8 +44,8 @@ async function handleCheckoutRequest(req, res) {
         payment_method_types: ['card'],
         mode: 'subscription',
         line_items: [{ price: PRODUCT_PRICES[plan], quantity: 1 }],
-        success_url: `${process.env.DOMAIN}/checkout-success.html?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.DOMAIN}/checkout-cancel.html`,
+        success_url: `${DOMAIN}/checkout-success.html?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${DOMAIN}/checkout-cancel.html`,
         metadata: { plan },
       });
 
