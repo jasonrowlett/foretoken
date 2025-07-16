@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { handleStripeWebhook } = require('./stripeWebhook');
 const createCheckoutSession = require('./createCheckoutSession');
 
 const PORT = process.env.PORT || 10000;
@@ -38,11 +39,16 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // ✅ NEW: Handle Stripe webhook
+  if (req.method === 'POST' && req.url === '/webhook') {
+    return handleStripeWebhook(req, res);
+  }
+
   // Default: serve static files from /docs
   let filePath = path.join(publicDir, req.url === '/' ? 'index.html' : req.url);
 
-  // Prevent requests to backend route being treated as static
-  if (req.url === '/create-checkout-session') {
+  // Prevent backend routes from being treated as static files
+  if (req.url === '/create-checkout-session' || req.url === '/webhook') {
     res.writeHead(405, { 'Content-Type': 'text/plain' });
     return res.end('Method Not Allowed');
   }

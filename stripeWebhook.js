@@ -1,3 +1,4 @@
+// stripeWebhook.js
 function handleStripeWebhook(req, res) {
   let rawBody = '';
 
@@ -6,13 +7,7 @@ function handleStripeWebhook(req, res) {
     try {
       const sig = req.headers['stripe-signature'];
       const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-      const admin = require('firebase-admin');
-      const fs = require('fs');
-
-      const serviceAccount = JSON.parse(fs.readFileSync(process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH, 'utf8'));
-      if (!admin.apps.length) {
-        admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
-      }
+      const admin = require('./firebase-admin');
 
       const event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
       const db = admin.firestore();
@@ -20,8 +15,29 @@ function handleStripeWebhook(req, res) {
       if (event.type === 'checkout.session.completed') {
         const session = event.data.object;
         const email = session.customer_email || 'unknown_email';
+
+        // Store session
         await db.collection('users').doc(email).collection('sessions').doc(session.id).set(session);
-        console.log(`✅ Stored session for ${email}`);
+
+        // Assign user tier based on price ID
+        const priceId = session?.display_items?.[0]?.price?.id;
+        const tierMap = {
+          'price_1RdxZZEQSEnAatPzHi8xTC3b': 'monthly',
+          'price_1RdxZZEQSEnAatPzzYA83mdh': 'yearly',
+          'price_1RdxZZEQSEnAatPzqab2Ph5S': 'pro_monthly',
+          'price_1RdxZaEQSEnAatPz23U3dnNN': 'pro_yearly',
+          'price_1RjMB8EQSEnAatPzjW7b28bU': 'enterprise'
+        };
+        const tier = tierMap[priceId] || 'unknown';
+
+        await db.collection('users').doc(email).set({
+          email,
+          tier,
+          subscribed: true,
+          lastCheckout: admin.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+
+        console.log(`✅ Stored session + assigned tier (${tier}) for ${email}`);
       }
 
       res.writeHead(200);
