@@ -22,11 +22,11 @@ function handleStripeWebhook(req, res) {
         // Assign user tier based on price ID
         const priceId = session?.display_items?.[0]?.price?.id;
         const tierMap = {
-          'price_1RdxZZEQSEnAatPzHi8xTC3b': 'monthly',
-          'price_1RdxZZEQSEnAatPzzYA83mdh': 'yearly',
-          'price_1RdxZZEQSEnAatPzqab2Ph5S': 'pro_monthly',
-          'price_1RdxZaEQSEnAatPz23U3dnNN': 'pro_yearly',
-          'price_1RjMB8EQSEnAatPzjW7b28bU': 'enterprise'
+          'price_1RlYSGEQSEnAatPzxfUcPt2s': 'monthly',
+          'price_1RlYTHEQSEnAatPzVoCrrLmo': 'yearly',
+          'price_1RlYTiEQSEnAatPziOQxQmq1': 'pro_monthly',
+          'price_1RlYUBEQSEnAatPzmt3U7uTS': 'pro_yearly',
+          'price_1RlYUpEQSEnAatPzz9Vj1e7L': 'enterprise'
         };
         const tier = tierMap[priceId] || 'unknown';
 
