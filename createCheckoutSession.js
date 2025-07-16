@@ -8,7 +8,7 @@ module.exports = async function createCheckoutSession(plan) {
     yearly: 'price_1RdxZZEQSEnAatPzzYA83mdh',          // Insider Yearly (LIVE)
     pro_monthly: 'price_1RdxZZEQSEnAatPzqab2Ph5S',     // Pro Monthly (LIVE)
     pro_yearly: 'price_1RdxZaEQSEnAatPz23U3dnNN',      // Pro Yearly (LIVE)
-    enterprise: 'price_1RIMB8EQSEnAatPzjW7b28bU'        // Enterprise Yearly (LIVE)
+    enterprise: 'price_1RjMB8EQSEnAatPzjW7b28bU'        // Enterprise Yearly (LIVE)
   };
 
   const selectedPrice = prices[plan];
