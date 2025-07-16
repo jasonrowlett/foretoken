@@ -1,51 +1,71 @@
+const admin = require('./firebase-admin'); // assumes firebase-admin.js is in same folder
+const db = admin.firestore();
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const admin = require('firebase-admin');
-const bodyParser = require('body-parser');
-const fs = require('fs');
+const stripe = require('stripe')('your_stripe_secret_key'); // replace with your secret key
+const endpointSecret = 'your_stripe_webhook_secret'; // replace with actual signing secret
 
-// Lazy initialize Firebase admin
-if (!admin.apps.length) {
-  const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH || './foretoken-4e948-firebase-adminsdk-fbsvc-e99027cd03.json';
-  const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
-  admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
-}
+const crypto = require('crypto');
 
-const firestore = admin.firestore();
+// Export handler function
+module.exports = async function (req, res) {
+  if (req.method !== 'POST') {
+    res.writeHead(405, { 'Content-Type': 'text/plain' });
+    return res.end('Method Not Allowed');
+  }
 
-module.exports = async (req, res) => {
-  let data = '';
+  let sig = req.headers['stripe-signature'];
+  let buf = '';
 
-  req.on('data', chunk => {
-    data += chunk;
+  req.on('data', (chunk) => {
+    buf += chunk;
   });
 
   req.on('end', async () => {
-    const sig = req.headers['stripe-signature'];
     let event;
 
     try {
-      event = stripe.webhooks.constructEvent(data, sig, process.env.STRIPE_WEBHOOK_SECRET);
+      const rawBody = Buffer.from(buf, 'utf8');
+      event = stripe.webhooks.constructEvent(rawBody, sig, endpointSecret);
     } catch (err) {
-      console.error('Webhook Error:', err.message);
+      console.error('[Webhook] Signature verification failed:', err.message);
       res.writeHead(400);
       return res.end(`Webhook Error: ${err.message}`);
     }
 
+    // ✅ Handle successful checkout
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
-      const email = session.customer_email;
-      const priceId = session?.display_items?.[0]?.price?.id || session?.items?.[0]?.price?.id || session?.subscription || 'unknown';
-      const tier = session.metadata?.plan || 'unknown';
+      const customerEmail = session.customer_details.email;
+      const subscriptionId = session.subscription;
 
+      console.log('[Webhook] Checkout completed for:', customerEmail);
+
+      // Optional: Fetch subscription to get price/tier
       try {
-        await firestore.collection('users').doc(email).set({ email, tier, priceId, timestamp: new Date().toISOString() });
-        console.log(`User ${email} added to Firestore.`);
-      } catch (err) {
-        console.error('Firestore error:', err);
+        const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+        const priceId = subscription.items.data[0].price.id;
+
+        await db.collection('users').doc(customerEmail).set({
+          email: customerEmail,
+          stripe_subscription: subscriptionId,
+          stripe_price_id: priceId,
+          created: new Date().toISOString()
+        });
+
+        await db.collection('users').doc(customerEmail).set({
+          email: customerEmail,
+          tier: tier,
+          stripe_subscription: subscriptionId,
+          created: new Date().toISOString()
+        });
+
+        console.log(`[Firestore] User created: ${customerEmail} (${tier})`);
+      } catch (error) {
+        console.error('[Firestore] Failed to create user:', error);
       }
     }
 
+    // ✅ Respond to Stripe
     res.writeHead(200);
     res.end('Received');
   });
