@@ -1,68 +1,76 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const { admin, db } = require('./firebase-admin');
-const firestore = db;
+const { buffer } = require('micro');
+const Stripe = require('stripe');
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const admin = require('./firebase-admin');
 
-module.exports = async function (req, res) {
-  if (req.method !== 'POST') {
-    res.writeHead(405, { 'Content-Type': 'text/plain' });
-    return res.end('Method Not Allowed');
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+const firestore = admin.firestore();
+
+module.exports = async (req, res) => {
+  const sig = req.headers['stripe-signature'];
+
+  let event;
+
+  try {
+    const rawBody = await getRawBody(req);
+    event = stripe.webhooks.constructEvent(rawBody, sig, endpointSecret);
+    console.log('[Webhook Event Received]', event.type);
+  } catch (err) {
+    console.error('⚠️ Webhook signature verification failed.', err.message);
+    return res.writeHead(400).end(`Webhook Error: ${err.message}`);
   }
 
-  const chunks = [];
-  req.on('data', chunk => chunks.push(chunk));
-
-  req.on('end', async () => {
-    const rawBody = Buffer.concat(chunks);
-    const sig = req.headers['stripe-signature'];
-
-    let event;
-    try {
-      event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
-    } catch (err) {
-      console.error('Webhook signature verification error:', err.message);
-      res.writeHead(400);
-      return res.end(`Webhook Error: ${err.message}`);
-    }
-
-    if (event.type === 'checkout.session.completed') {
+  // Handle the event
+  switch (event.type) {
+    case 'checkout.session.completed': {
       const session = event.data.object;
-      const email = session.customer_email || session.customer_details?.email || 'unknown';
-      const priceId = session?.items?.[0]?.price?.id || session?.display_items?.[0]?.price?.id || 'unknown';
+      const email = session.customer_email || session.customer_details?.email;
 
-      let tier;
-      switch (priceId) {
-        case 'price_1RdxZZEQSEnAatPzHi8xTC3b':
-        case 'price_1RdxZZEQSEnAatPzzYA83mdh':
-          tier = 'Insider';
-          break;
-        case 'price_1RdxZZEQSEnAatPzqab2Ph5S':
-        case 'price_1RdxZaEQSEnAatPz23U3dnNN':
-          tier = 'Pro';
-          break;
-        case 'price_1RjMB8EQSEnAatPzjW7b28bU':
-          tier = 'Enterprise';
-          break;
-        default:
-          tier = 'Unknown';
-      }
-
-      try {
+      if (email) {
+        console.log(`[checkout.session.completed] Email: ${email}`);
         await firestore.collection('users').doc(email).set({
           email,
-          tier,
-          createdAt: admin.firestore.FieldValue.serverTimestamp()
-        });
-        console.log(`✅ User ${email} written to Firestore as ${tier}`);
-        res.writeHead(200);
-        return res.end('Success');
-      } catch (err) {
-        console.error('❌ Firestore error:', err);
-        res.writeHead(500);
-        return res.end('Database error');
+          createdAt: new Date().toISOString(),
+          stripeCustomerId: session.customer,
+          plan: session.metadata?.plan || 'unknown',
+        }, { merge: true });
       }
+      break;
     }
 
-    res.writeHead(200);
-    res.end('Event not handled');
-  });
+    case 'invoice.payment_succeeded': {
+      console.log('[invoice.payment_succeeded] Payment successful');
+      break;
+    }
+
+    case 'invoice.payment_failed': {
+      console.log('[invoice.payment_failed] Payment failed');
+      break;
+    }
+
+    case 'customer.subscription.created': {
+      console.log('[customer.subscription.created] Subscription created');
+      break;
+    }
+
+    case 'customer.subscription.updated': {
+      console.log('[customer.subscription.updated] Subscription updated');
+      break;
+    }
+
+    default:
+      console.log(`[Unhandled event type] ${event.type}`);
+  }
+
+  res.writeHead(200);
+  res.end();
 };
+
+async function getRawBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', chunk => chunks.push(chunk));
+    req.on('end', () => resolve(Buffer.concat(chunks)));
+    req.on('error', reject);
+  });
+}
