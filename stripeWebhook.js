@@ -1,5 +1,4 @@
 const db = require('./firebase-admin');
-const { collection, addDoc } = require('firebase-admin/firestore');
 
 module.exports = async function stripeWebhook(req, res) {
   let body = '';
@@ -23,7 +22,7 @@ module.exports = async function stripeWebhook(req, res) {
           throw new Error('Firestore is not initialized.');
         }
 
-        await addDoc(collection(db, 'users'), {
+        await db.collection('users').add({
           email: customerEmail,
           timestamp,
         });
