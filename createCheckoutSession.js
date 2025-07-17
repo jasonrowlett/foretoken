@@ -1,8 +1,8 @@
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Use live secret from .env
 
-module.exports = async function createCheckoutSession(plan) {
-  if (!plan) throw new Error('Plan not provided');
+module.exports = async function createCheckoutSession(plan, email) {
+  if (!plan || !email) throw new Error('Plan or email not provided');
 
   const prices = {
     monthly: 'price_1RdxZZEQSEnAatPzHi8xTC3b',         // Insider Monthly (LIVE)
@@ -18,7 +18,7 @@ module.exports = async function createCheckoutSession(plan) {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     mode: 'subscription',
-    customer_email: 'test@example.com', // TEMP: Replace later with actual user email
+    customer_email: email,
     line_items: [
       {
         price: selectedPrice,

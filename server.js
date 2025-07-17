@@ -26,9 +26,9 @@ const server = http.createServer((req, res) => {
     });
     req.on('end', async () => {
       try {
-        const { plan } = JSON.parse(body);
+        const { plan, email } = JSON.parse(body);
         const createCheckoutSession = require('./createCheckoutSession');
-        const session = await createCheckoutSession(plan);
+        const session = await createCheckoutSession(plan, email);
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ url: session.url }));
