@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="icon" href="assets/img/neon-logo.png" />
+  <title>Podcasts | Foretoken</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Notable&display=swap" rel="stylesheet" />
+  <style>
+    .podcast-section {
+      padding: 4rem 2rem;
+    }
+
+    .podcast-section h2 {
+      font-size: 2.5rem;
+      font-family: 'Notable', sans-serif;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .podcast-section p {
+      font-size: 1.1rem;
+      text-align: center;
+      color: #ccc;
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .grid-2x {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .podcast-card {
+      background-color: #0d0d0d;
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid #333;
+    }
+
+    .podcast-card img {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .podcast-title {
+      font-family: 'Notable', sans-serif;
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .podcast-desc {
+      color: #ccc;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .platform-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .platform-icons img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .iframe-container {
+      overflow: hidden;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body class="bg-black text-white font-inter">
+  
+  <!-- Header -->
+  <header class="navbar">
+    <div class="logo-section">
+      <img src="assets/img/neon-logo.png" alt="Foretoken Logo" class="logo" />
+      <h1 class="site-title">FORETOKEN</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="library.html">Library</a>
+      <a href="concourse.html">Concourse</a>
+      <a href="podcasts.html">Podcasts</a>
+      <a href="speaking.html">Speaking</a>
+      <a href="consulting.html">Consulting</a>
+      <a href="connect.html">Connect</a>
+      <a href="subscribe.html" class="btn-purple">Subscribe</a>
+      <a href="login.html" class="btn-outline">Login</a>
+    </nav>
+  </header>
+
+  <section class="podcast-section">
+    <h2>FORETOKEN SIGNAL NETWORK</h2>
+    <p>Your global intelligence network for real-world asset tokenization. Regional reports and breaking news from every corner of the tokenization ecosystem.</p>
+
+    <div class="podcast-card">
+      <img src="assets/img/podcast-newswire.png" alt="Newswire">
+      <h3 class="podcast-title">FORETOKEN NEWSWIRE</h3>
+      <p class="podcast-desc">Stay ahead of the tokenization curve with breaking news, market analysis, and insider insights from the world of real-world asset tokenization.</p>
+      <div class="platform-icons">
+        <a href="https://open.spotify.com/show/1OJbSDAJftc164PE5la9wz?si=bd00e9127cd24fea" target="_blank"><img src="assets/img/icon-spotify.svg" alt="Spotify"></a>
+        <a href="https://podcasts.apple.com/us/podcast/foretoken-newswire/id1822379157" target="_blank"><img src="assets/img/icon-applepodcasts.svg" alt="Apple"></a>
+        <a href="https://iheart.com/podcast/282587964/" target="_blank"><img src="assets/img/icon-iheartradio.svg" alt="iHeart"></a>
+      </div>
+      <div class="iframe-container">
+        <iframe src="https://embed.acast.com/682b9cacbc0e758152321dec?feed=true" frameborder="0" width="100%" height="630px"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="podcast-section">
+    <h2>REGIONAL REPORTS</h2>
+    <p>In-depth analysis from every major tokenization market worldwide</p>
+
+    <div class="grid-2x">
+      <!-- Each card copied from original file for each region -->
+      
+      <!-- Africa -->
+      <div class="podcast-card">
+        <img src="assets/img/podcast-africa.png" alt="Africa">
+        <h3 class="podcast-title">AFRICA RWA REPORT</h3>
+        <p class="podcast-desc">Explore the emerging tokenization landscape across African markets, from real estate to commodities and infrastructure development.</p>
+        <div class="platform-icons">
+          <a href="https://open.spotify.com/show/5uHVJ6Gl8vdRAPArG3vZiq?si=a6e4d140ba3e4327"><img src="assets/img/icon-spotify.svg"></a>
+          <a href="https://podcasts.apple.com/us/podcast/africa-rwa-report/id1822383433"><img src="assets/img/icon-applepodcasts.svg"></a>
+          <a href="https://iheart.com/podcast/282760688/"><img src="assets/img/icon-iheartradio.svg"></a>
+        </div>
+        <div class="iframe-container">
+          <iframe src="https://embed.acast.com/6858baf0cb9b8b85b9903735?feed=true" frameborder="0" width="100%" height="630px"></iframe>
+        </div>
+      </div>
+
+      <!-- Asia -->
+      <div class="podcast-card">
+        <img src="assets/img/podcast-asia.png" alt="Asia">
+        <h3 class="podcast-title">ASIA RWA REPORT</h3>
+        <p class="podcast-desc">Deep dive into Asia-Pacific tokenization trends, regulatory developments, and investment opportunities across the region.</p>
+        <div class="platform-icons">
+          <a href="https://open.spotify.com/show/1fEQFWSgR43lKlOEs0VwKB?si=2c7a9974b2c441a3"><img src="assets/img/icon-spotify.svg"></a>
+          <a href="https://podcasts.apple.com/us/podcast/asia-rwa-report/id1822383900"><img src="assets/img/icon-applepodcasts.svg"></a>
+          <a href="https://iheart.com/podcast/282587952/"><img src="assets/img/icon-iheartradio.svg"></a>
+        </div>
+        <div class="iframe-container">
+          <iframe src="https://embed.acast.com/6858bdc0cb9b8b85b991152f?feed=true" frameborder="0" width="100%" height="630px"></iframe>
+        </div>
+      </div>
+
+      <!-- Europe -->
+      <div class="podcast-card">
+        <img src="assets/img/podcast-europe.png" alt="Europe">
+        <h3 class="podcast-title">EUROPE RWA REPORT</h3>
+        <p class="podcast-desc">Navigate European tokenization regulations, market developments, and institutional adoption across the continent.</p>
+        <div class="platform-icons">
+          <a href="https://open.spotify.com/show/0Kwo4srhm08XsbPXfEtnof?si=b839fa9d3dbc47e4"><img src="assets/img/icon-spotify.svg"></a>
+          <a href="https://podcasts.apple.com/us/podcast/europe-rwa-report/id1822384288"><img src="assets/img/icon-applepodcasts.svg"></a>
+          <a href="https://iheart.com/podcast/282587955/"><img src="assets/img/icon-iheartradio.svg"></a>
+        </div>
+        <div class="iframe-container">
+          <iframe src="https://embed.acast.com/6858bcfdcb9b8b85b990ed04?feed=true" frameborder="0" width="100%" height="630px"></iframe>
+        </div>
+      </div>
+
+      <!-- Americas -->
+      <div class="podcast-card">
+        <img src="assets/img/podcast-americas.png" alt="Americas">
+        <h3 class="podcast-title">THE AMERICAS RWA REPORT</h3>
+        <p class="podcast-desc">Comprehensive coverage of tokenization initiatives across North and South America, from policy to practice.</p>
+        <div class="platform-icons">
+          <a href="https://open.spotify.com/show/3Qzh5jUks4Lj73P3y7X6WV?si=3947267a63ea400e"><img src="assets/img/icon-spotify.svg"></a>
+          <a href="https://podcasts.apple.com/us/podcast/the-americas-rwa-report/id1822378526"><img src="assets/img/icon-applepodcasts.svg"></a>
+          <a href="https://iheart.com/podcast/282587974/"><img src="assets/img/icon-iheartradio.svg"></a>
+        </div>
+        <div class="iframe-container">
+          <iframe src="https://embed.acast.com/6858be98dc316de3df2586e0?feed=true" frameborder="0" width="100%" height="630px"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/img/neon-logo.png" alt="Foretoken Logo" class="logo" />
+        <h2 class="site-title">FORETOKEN</h2>
+        <p class="tagline">Global market intelligence for tokenized assets</p>
+        <div class="social-links">
+          <a href="https://x.com/foretokenrwa" target="_blank" class="social-text">X</a>
+          <a href="https://facebook.com/foretokenmedia" target="_blank" class="social-text">Facebook</a>
+          <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank" class="social-text">LinkedIn</a>
+          <a href="https://t.me/foretokenalerts" target="_blank" class="social-text">Telegram</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Platform</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="library.html">Library</a>
+          <a href="concourse.html">Concourse</a>
+          <a href="subscribe.html">Subscribe</a>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <a href="podcasts.html">Podcasts</a>
+          <a href="consulting.html">Consulting</a>
+          <a href="speaking.html">Speaking</a>
+          <a href="ebooks.html">eBooks</a>
+          <a href="glossary.html">Glossary</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="advertising-policy.html">Ads Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>©2025 Foretoken Media. All rights reserved.</p>
+      <small>Not investment advice. Market data via 3rd-party APIs.</small>
+    </div>
+  </footer>
+</body>
+</html>

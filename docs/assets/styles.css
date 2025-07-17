@@ -1,0 +1,215 @@
+/* Base Typography */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #fff;
+}
+
+h1 {
+  font-family: 'Notable', sans-serif;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+h2, h3, h4 {
+  font-family: 'Inter', sans-serif;
+  margin: 1rem 0;
+  color: #fff;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background-color: #111;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 32px;
+  margin-right: 0.5rem;
+}
+
+.site-title {
+  font-family: 'Notable', sans-serif;
+  font-size: 1.5rem;
+  color: #a855f7;
+}
+
+.nav-links a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #ccc;
+  font-weight: 500;
+}
+
+.nav-links a:hover,
+.subscribe-btn {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Hero Section */
+.hero {
+  background-color: #1e1e1e;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  color: #a855f7;
+}
+
+.hero-description {
+  margin-top: 1rem;
+  color: #ccc;
+  font-size: 1.2rem;
+}
+
+/* Buttons */
+.btn-purple {
+  background-color: #a855f7;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.btn-purple:hover {
+  background-color: #9333ea;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #a855f7;
+  border: 2px solid #a855f7;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.btn-outline:hover {
+  background-color: #a855f7;
+  color: #fff;
+}
+
+/* Pricing Section */
+.pricing-section {
+  padding: 2rem;
+  background-color: #111;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.pricing-card {
+  background-color: #222;
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+}
+
+.plan-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.plan-price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #a855f7;
+}
+
+.plan-desc {
+  margin: 1rem 0;
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.discount-note {
+  font-size: 0.85rem;
+  color: #a855f7;
+}
+
+/* Footer */
+.site-footer {
+  background-color: #000;
+  padding: 2rem;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.footer-brand {
+  max-width: 300px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 3rem;
+}
+
+.footer-links h4 {
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  display: block;
+  color: #aaa;
+  text-decoration: none;
+  margin-bottom: 0.25rem;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  padding-top: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.social-text {
+  color: #a855f7;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+
+.social-text:hover {
+  color: #d8b4fe;
+}

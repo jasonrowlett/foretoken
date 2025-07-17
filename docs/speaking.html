@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Speaking | Foretoken</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="icon" href="assets/img/neon-logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Notable&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-black text-white font-inter">
+
+  <!-- Header -->
+  <header class="navbar">
+    <div class="logo-section">
+      <img src="assets/img/neon-logo.png" alt="Foretoken Logo" class="logo" />
+      <h1 class="site-title">FORETOKEN</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <div class="dropdown">
+        <a href="library.html">Library</a>
+        <div class="dropdown-content">
+          <a href="rwa101.html">RWA 101</a>
+          <a href="glossary.html">Glossary</a>
+          <a href="ebooks.html">eBooks</a>
+        </div>
+      </div>
+      <a href="concourse.html">Concourse</a>
+      <a href="podcasts.html">Podcasts</a>
+      <a href="speaking.html">Speaking</a>
+      <a href="consulting.html">Consulting</a>
+      <a href="connect.html">Connect</a>
+      <a href="login.html">Login</a>
+      <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1 class="hero-title">Speaker Booking</h1>
+      <p class="hero-description">
+        Book Jason Rowlett, founder of Foretoken and creator of the Double Pedigree strategy,<br>
+        for your next crypto or tokenization event.
+      </p>
+    </div>
+  </section>
+
+  <!-- Image Gallery -->
+  <section class="image-gallery" style="padding: 20px 40px;">
+    <div class="image-row" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+      <img src="assets/img/CryptoAI_CON_Lisbon_speech_1.png" alt="Jay speaking in Lisbon" style="width: 300px;" />
+      <img src="assets/img/CryptoAI_CON_panel_1.png" alt="Jay on Lisbon panel" style="width: 300px;" />
+      <img src="assets/img/CryptoAI_CON_speech_2.png" alt="Jay keynote" style="width: 300px;" />
+    </div>
+  </section>
+
+  <!-- Event Cards -->
+  <section class="hero-stats" style="padding-bottom: 40px;">
+    <div class="stat-card">
+      <p class="label">CryptoAI:CON Lisbon</p>
+      <h3>Panel & Keynote</h3>
+      <p class="subtext">Ethical AI, trust layers & tokenization adoption.</p>
+    </div>
+    <div class="stat-card">
+      <p class="label">Web3 Amsterdam</p>
+      <h3>Keynote Speaker</h3>
+      <p class="subtext">Historical context for RWA investing & Double Pedigree strategy.</p>
+    </div>
+    <div class="stat-card">
+      <p class="label">Book Now</p>
+      <h3>Available Worldwide</h3>
+      <p class="subtext">Live, virtual, or hybrid formats welcomed.</p>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="contact-form-section">
+    <h2 class="notable">Contact Us</h2>
+    <p>We’d love to hear from you. Please fill out the form and we’ll get back to you shortly.</p>
+    <form action="https://formspree.io/f/xkgblqby" method="POST" class="contact-form">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <input type="text" name="subject" placeholder="Subject" required />
+      <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn-purple">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2>FORETOKEN</h2>
+        <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
+        <div class="social-links">
+          <a href="https://x.com/foretokenrwa" target="_blank" class="social-text">X</a>
+          <a href="https://facebook.com/foretokenmedia" target="_blank" class="social-text">Facebook</a>
+          <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank" class="social-text">LinkedIn</a>
+          <a href="https://t.me/foretokenalerts" target="_blank" class="social-text">Telegram</a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div>
+          <h4>Platform</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="library.html">Library</a>
+          <a href="podcasts.html">Podcast</a>
+          <a href="connect.html">Connect</a>
+          <a href="subscribe.html">Subscribe</a>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <a href="concourse.html">Market Data</a>
+          <a href="consulting.html">Consulting</a>
+          <a href="speaking.html">Speaker Booking</a>
+          <a href="ebooks.html">Educational Guides</a>
+          <a href="glossary.html">Glossary</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="advertising-policy.html">Advertising Policy</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>©2025 Foretoken Media. RGI Enterprises LLC. All rights reserved.</p>
+      <small>Market data provided by leading exchanges. Not investment advice.</small>
+    </div>
+  </footer>
+
+  <!-- Inline dropdown + social-text styles -->
+  <style>
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #111;
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      display: block;
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .social-text {
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-right: 16px;
+    }
+
+    .social-text:hover {
+      color: #d8b4fe;
+    }
+  </style>
+
+</body>
+</html>
