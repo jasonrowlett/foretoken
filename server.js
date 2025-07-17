@@ -31,9 +31,12 @@ const server = http.createServer((req, res) => {
     });
     req.on('end', async () => {
       try {
+        console.log('[Incoming POST body]', body);
         const { plan, email } = JSON.parse(body);
         const createCheckoutSession = require('./createCheckoutSession');
         const session = await createCheckoutSession(plan, email);
+
+        console.log('[Stripe session created]', session.url);
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ url: session.url }));
