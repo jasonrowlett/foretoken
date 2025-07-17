@@ -1,10 +1,9 @@
-const { buffer } = require('micro');
 const Stripe = require('stripe');
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const admin = require('./firebase-admin');
+const firestore = admin.firestore();
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
-const firestore = admin.firestore();
 
 module.exports = async (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -16,11 +15,10 @@ module.exports = async (req, res) => {
     event = stripe.webhooks.constructEvent(rawBody, sig, endpointSecret);
     console.log('[Webhook Event Received]', event.type);
   } catch (err) {
-    console.error('⚠️ Webhook signature verification failed.', err.message);
+    console.error('⚠️ Webhook signature verification failed:', err.message);
     return res.writeHead(400).end(`Webhook Error: ${err.message}`);
   }
 
-  // Handle the event
   switch (event.type) {
     case 'checkout.session.completed': {
       const session = event.data.object;
@@ -38,25 +36,21 @@ module.exports = async (req, res) => {
       break;
     }
 
-    case 'invoice.payment_succeeded': {
+    case 'invoice.payment_succeeded':
       console.log('[invoice.payment_succeeded] Payment successful');
       break;
-    }
 
-    case 'invoice.payment_failed': {
+    case 'invoice.payment_failed':
       console.log('[invoice.payment_failed] Payment failed');
       break;
-    }
 
-    case 'customer.subscription.created': {
+    case 'customer.subscription.created':
       console.log('[customer.subscription.created] Subscription created');
       break;
-    }
 
-    case 'customer.subscription.updated': {
+    case 'customer.subscription.updated':
       console.log('[customer.subscription.updated] Subscription updated');
       break;
-    }
 
     default:
       console.log(`[Unhandled event type] ${event.type}`);
