@@ -1,6 +1,7 @@
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const { Firestore } = require('@google-cloud/firestore');
-const firestore = new Firestore();
+const admin = require('./firebase-admin');
+const firestore = admin.firestore();
 
 module.exports = async function (req, res) {
   if (req.method !== 'POST') {
@@ -26,22 +27,37 @@ module.exports = async function (req, res) {
 
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
-      const email = session.customer_email;
-      const priceId = session?.display_items?.[0]?.price?.id || 'unknown';
-      const tier = priceId === 'price_123' ? 'Insider' :
-                   priceId === 'price_456' ? 'Enterprise' : 'Unknown';
+      const email = session.customer_email || session.customer_details?.email || 'unknown';
+      const priceId = session?.items?.[0]?.price?.id || session?.display_items?.[0]?.price?.id || 'unknown';
+
+      let tier;
+      switch (priceId) {
+        case 'price_1RdxZZEQSEnAatPzHi8xTC3b':
+        case 'price_1RdxZZEQSEnAatPzzYA83mdh':
+          tier = 'Insider';
+          break;
+        case 'price_1RdxZZEQSEnAatPzqab2Ph5S':
+        case 'price_1RdxZaEQSEnAatPz23U3dnNN':
+          tier = 'Pro';
+          break;
+        case 'price_1RjMB8EQSEnAatPzjW7b28bU':
+          tier = 'Enterprise';
+          break;
+        default:
+          tier = 'Unknown';
+      }
 
       try {
         await firestore.collection('users').doc(email).set({
           email,
           tier,
-          createdAt: new Date()
+          createdAt: admin.firestore.FieldValue.serverTimestamp()
         });
-        console.log(`User ${email} written to Firestore`);
+        console.log(`✅ User ${email} written to Firestore as ${tier}`);
         res.writeHead(200);
         return res.end('Success');
       } catch (err) {
-        console.error('Firestore error:', err);
+        console.error('❌ Firestore error:', err);
         res.writeHead(500);
         return res.end('Database error');
       }

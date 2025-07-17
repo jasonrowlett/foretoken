@@ -1,3 +1,4 @@
+
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -6,8 +7,14 @@ const stripeWebhook = require('./stripeWebhook');
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
+  // Set CORS headers (optional but useful for MVP)
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   // Handle Stripe webhook
   if (req.method === 'POST' && req.url === '/stripe-webhook') {
+    req.headers['content-type'] = 'application/json'; // Required for raw body verification
     return stripeWebhook(req, res);
   }
 
@@ -32,10 +39,6 @@ const server = http.createServer((req, res) => {
       }
     });
     return;
-  }
-
-  } else if (req.url === '/stripe-webhook' && req.method === 'POST') {
-    require('./stripeWebhook')(req, res);
   }
 
   // Serve static files from /docs
