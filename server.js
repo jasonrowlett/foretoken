@@ -1,4 +1,3 @@
-
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -7,19 +6,25 @@ const stripeWebhook = require('./stripeWebhook');
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
-  // Set CORS headers (optional but useful for MVP)
+  // Set CORS headers for all requests
   res.setHeader('Access-Control-Allow-Origin', 'https://foretoken.xyz');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   // Handle Stripe webhook
   if (req.method === 'POST' && req.url === '/stripe-webhook') {
-    req.headers['content-type'] = 'application/json'; // Required for raw body verification
+    req.headers['content-type'] = 'application/json';
     return stripeWebhook(req, res);
   }
 
+  // Handle preflight for checkout session
+  if (req.method === 'OPTIONS' && req.url === '/api/create-checkout-session') {
+    res.writeHead(204); // No Content
+    return res.end();
+  }
+
   // Handle create-checkout-session
-  else if (req.method === 'POST' && req.url === '/api/create-checkout-session') {
+  if (req.method === 'POST' && req.url === '/api/create-checkout-session') {
     let body = '';
     req.on('data', chunk => {
       body += chunk.toString();
@@ -54,7 +59,6 @@ const server = http.createServer((req, res) => {
     '.svg': 'image/svg+xml',
     '.json': 'application/json'
   };
-
   const contentType = mimeTypes[ext] || 'application/octet-stream';
 
   fs.readFile(filePath, (err, content) => {
