@@ -12,6 +12,7 @@ node_modules/
 firebaseServiceAccount.json
 *.json.backup
 foretoken-backup.zip
+firebase-service-account.json
 
 # Build artifacts (if any)
 dist/
