@@ -1,7 +1,6 @@
-
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const admin = require('./firebase-admin.js');
-const firestore = admin.firestore();
+const { admin, db } = require('./firebase-admin');
+const firestore = db;
 
 module.exports = async function (req, res) {
   if (req.method !== 'POST') {
