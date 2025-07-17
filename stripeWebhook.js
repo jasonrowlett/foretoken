@@ -1,4 +1,5 @@
 const db = require('./firebase-admin');
+const { collection, addDoc } = require('firebase-admin/firestore');
 
 module.exports = async function stripeWebhook(req, res) {
   let body = '';
@@ -18,7 +19,11 @@ module.exports = async function stripeWebhook(req, res) {
 
         console.log('[🔥 Writing to Firestore]', customerEmail);
 
-        await db.collection('users').add({
+        if (!db) {
+          throw new Error('Firestore is not initialized.');
+        }
+
+        await addDoc(collection(db, 'users'), {
           email: customerEmail,
           timestamp,
         });
@@ -29,7 +34,7 @@ module.exports = async function stripeWebhook(req, res) {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ received: true }));
     } catch (err) {
-      console.error('❌ Webhook handler error:', err);
+      console.error('❌ Webhook handler error:', err.message || err);
       res.writeHead(400, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ error: 'Webhook error' }));
     }
