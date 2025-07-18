@@ -1,41 +1,68 @@
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const db = require('./firebase-admin');
 
-module.exports = async function stripeWebhook(req, res) {
-  let body = '';
+const express = require('express');
+const app = express();
 
-  req.on('data', chunk => {
-    body += chunk.toString();
-  });
+app.use(express.raw({ type: 'application/json' }));
 
-  req.on('end', async () => {
-    try {
-      const event = JSON.parse(body);
-      console.log('[Webhook Event]', event.type);
+app.post('/webhook', async (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  let event;
 
-      if (event.type === 'invoice.payment_succeeded') {
-        const customerEmail = event.data.object.customer_email || 'unknown';
-        const timestamp = new Date().toISOString();
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+  } catch (err) {
+    console.error('❌ Webhook signature verification failed:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
 
-        console.log('[🔥 Writing to Firestore]', customerEmail);
+  const log = (...args) => console.log(`[Webhook Event]`, ...args);
 
-        if (!db) {
-          throw new Error('Firestore is not initialized.');
+  try {
+    switch (event.type) {
+      case 'checkout.session.completed': {
+        const session = event.data.object;
+        const email = session.customer_email;
+        const subscriptionId = session.subscription;
+
+        log(`🔥 Writing to Firestore`, email);
+
+        const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+        const productId = subscription.items.data[0].price.product;
+        const product = await stripe.products.retrieve(productId);
+
+        const tier = product.name.toLowerCase(); // e.g. 'insider', 'pro', 'enterprise'
+
+        if (!['insider', 'pro', 'enterprise'].includes(tier)) {
+          throw new Error(`Unknown tier: ${tier}`);
         }
 
-        await db.collection('users').add({
-          email: customerEmail,
-          timestamp,
-        });
+        const userDoc = {
+          email,
+          tier,
+          timestamp: new Date().toISOString(),
+        };
 
-        console.log('[✅ Firestore Write Successful]');
+        if (!db) {
+          throw new Error('Firestore DB not initialized.');
+        }
+
+        await db.collection('users').add(userDoc);
+        log(`✅ Firestore write complete`, userDoc);
+        break;
       }
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ received: true }));
-    } catch (err) {
-      console.error('❌ Webhook handler error:', err.message || err);
-      res.writeHead(400, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Webhook error' }));
+      default:
+        log(`Unhandled event type: ${event.type}`);
     }
-  });
-};
+
+    res.status(200).send();
+  } catch (err) {
+    console.error('❌ Webhook handler error:', err);
+    res.status(500).send(`Internal error: ${err.message}`);
+  }
+});
+
+module.exports = app;

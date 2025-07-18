@@ -1,26 +1,17 @@
 const admin = require('firebase-admin');
-const fs = require('fs');
-
-const secretPath = '/etc/secrets/firebase-service-account.json';
-
-let db = null;
+const path = '/etc/secrets/firebase-service-account.json';
 
 try {
-  if (!fs.existsSync(secretPath)) {
-    throw new Error(`Secret file not found at ${secretPath}`);
-  }
-
-  const serviceAccount = require(secretPath);
+  const serviceAccount = require(path);
 
   if (!admin.apps.length) {
     admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount)
+      credential: admin.credential.cert(serviceAccount),
     });
   }
-
-  db = admin.firestore();
-} catch (err) {
-  console.error('❌ Firebase initialization failed:', err.message);
+} catch (error) {
+  console.error('❌ Failed to initialize Firebase Admin SDK:', error);
 }
 
+const db = admin.firestore();
 module.exports = db;
