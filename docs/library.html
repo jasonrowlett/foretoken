@@ -1,4 +1,4 @@
-<!-- File: /docs/pages/library.html -->
+<!-- File: /docs/library.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,52 +12,43 @@
 
 <body class="bg-black text-white font-inter">
 
-  <!-- Header -->
+  <!-- HEADER -->
   <header class="navbar">
-    <div class="logo-section">
-      <img src="assets/img/neon-logo.png" alt="Foretoken Logo" class="logo" />
-      <h1 class="site-title">FORETOKEN</h1>
+    <div class="logo-section" style="display: flex; align-items: center;">
+      <a href="/">
+        <img src="assets/img/neon-logo.png" alt="Foretoken Logo" class="logo" style="height: 36px;" />
+      </a>
+      <span class="site-title" style="margin-left: 0.5rem;">FORETOKEN</span>
     </div>
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
-      <div class="dropdown">
-        <a href="library.html">Library</a>
-        <div class="dropdown-content">
-          <a href="rwa101.html">RWA 101</a>
-          <a href="glossary.html">Glossary</a>
-          <a href="ebooks.html">eBooks</a>
-        </div>
-      </div>
+      <a href="library.html">Library</a>
       <a href="concourse.html">Concourse</a>
       <a href="podcasts.html">Podcasts</a>
       <a href="speaking.html">Speaking</a>
       <a href="consulting.html">Consulting</a>
       <a href="connect.html">Connect</a>
-      <a href="login.html">Login</a>
-      <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+      <a href="login.html" style="margin-left: 2rem;">Login</a>
+      <a href="subscribe.html" class="btn-purple" style="margin-left: 1rem; color: #ffffff;">Sign Up</a>
     </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- HERO -->
   <section class="hero">
     <h1 class="hero-title" style="font-family: 'Notable', sans-serif;">Library</h1>
     <p class="hero-description">Deep analysis, market reports, and educational content</p>
-    <div class="filter-tags">
-      <button class="tag active">All</button>
-      <button class="tag">RWA 101</button>
-      <button class="tag">Real Estate</button>
-      <button class="tag">Commodities</button>
-      <button class="tag">Infrastructure</button>
-      <button class="tag">Regulation</button>
-      <button class="tag">Ebooks</button>
-    </div>
   </section>
+
+  <!-- Glossary Link -->
+  <div style="padding: 0 2rem 1rem;">
+    <a href="glossary.html" style="color: #a855f7; font-weight: bold; text-decoration: none;">→ Glossary</a>
+  </div>
 
   <!-- Article Grid -->
   <section class="article-grid">
     <a href="what-is-blockchain.html" class="article-card">
-      <img src="assets/img/article1.jpg" alt="Blockchain Cube" />
+      <img src="assets/img/article-blockchain-cube.png" alt="Blockchain Cube" />
       <div class="card-body">
         <span class="tag purple">RWA 101</span>
         <h3>What is the Blockchain? A Beginner’s Guide</h3>
@@ -67,7 +58,7 @@
     </a>
 
     <a href="smart-contracts-guide.html" class="article-card">
-      <img src="assets/img/article2.jpg" alt="Smart Contracts" />
+      <img src="assets/img/article-smart-contracts.png" alt="Smart Contracts" />
       <div class="card-body">
         <span class="tag purple">RWA 101</span>
         <h3>Smart Contracts: A Traditional Investor's Guide</h3>
@@ -77,7 +68,7 @@
     </a>
 
     <a href="rwa-tokenization-guide.html" class="article-card">
-      <img src="assets/img/article3.jpg" alt="Tokenization Guide" />
+      <img src="assets/img/article-tokenization-guide.png" alt="Tokenization Guide" />
       <div class="card-body">
         <span class="tag purple">RWA 101</span>
         <h3>How to Tokenize Real-World Assets</h3>
@@ -87,7 +78,7 @@
     </a>
 
     <a href="analyze-tokenized-assets.html" class="article-card">
-      <img src="assets/img/article4.jpg" alt="Token Analysis" />
+      <img src="assets/img/article-token-analysis.png" alt="Token Analysis" />
       <div class="card-body">
         <span class="tag purple">RWA 101</span>
         <h3>How to Analyze Tokenized Assets</h3>
@@ -97,7 +88,7 @@
     </a>
 
     <a href="double-pedigree-strategy.html" class="article-card">
-      <img src="assets/img/article5.jpg" alt="Double Pedigree" />
+      <img src="assets/img/article-double-pedgree.png" alt="Double Pedigree" />
       <div class="card-body">
         <span class="tag purple">RWA 101</span>
         <h3>The Double Pedigree Strategy</h3>
@@ -107,90 +98,63 @@
     </a>
   </section>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-top">
       <div class="footer-brand">
-        <h2>FORETOKEN</h2>
+        <h2 class="site-title">FORETOKEN</h2>
         <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
-        <div class="social-links">
-          <a href="https://x.com/foretokenrwa" target="_blank" class="social-text">X</a>
-          <a href="https://facebook.com/foretokenmedia" target="_blank" class="social-text">Facebook</a>
-          <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank" class="social-text">LinkedIn</a>
-          <a href="https://t.me/foretokenalerts" target="_blank" class="social-text">Telegram</a>
+        <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+          <a href="https://t.me/foretokenalerts" target="_blank">
+            <img src="assets/img/icon-telegram.png" alt="Telegram" width="32" height="32" />
+          </a>
+          <a href="https://x.com/foretokenrwa" target="_blank">
+            <img src="assets/img/icon-x.png" alt="X" width="32" height="32" />
+          </a>
+          <a href="https://www.facebook.com/foretokenmedia" target="_blank">
+            <img src="assets/img/icon-facebook.png" alt="Facebook" width="32" height="32" />
+          </a>
+          <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank">
+            <img src="assets/img/icon-linkedin.png" alt="LinkedIn" width="32" height="32" />
+          </a>
+          <a href="https://foretoken.medium.com/" target="_blank">
+            <img src="assets/img/icon-medium.png" alt="Medium" width="32" height="32" />
+          </a>
         </div>
       </div>
 
       <div class="footer-links">
         <div>
           <h4>Platform</h4>
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="library.html">Library</a>
-          <a href="podcasts.html">Podcast</a>
-          <a href="connect.html">Connect</a>
-          <a href="subscribe.html">Subscribe</a>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/library">Library</a>
+          <a href="/podcast">Podcast</a>
+          <a href="/connect">Connect</a>
+          <a href="/subscribe">Subscribe</a>
         </div>
         <div>
           <h4>Resources</h4>
-          <a href="concourse.html">Market Data</a>
-          <a href="consulting.html">Consulting</a>
-          <a href="speaking.html">Speaker Booking</a>
-          <a href="ebooks.html">Educational Guides</a>
-          <a href="glossary.html">Glossary</a>
+          <a href="/concourse">Market Data</a>
+          <a href="/consulting">Consulting</a>
+          <a href="/speaking">Speaker Booking</a>
+          <a href="/guides">Educational Guides</a>
+          <a href="/glossary">Glossary</a>
         </div>
         <div>
           <h4>Legal</h4>
-          <a href="terms.html">Terms of Service</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="advertising-policy.html">Advertising Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/ads">Advertising Policy</a>
+          <a href="/disclaimer">Disclaimer</a>
         </div>
       </div>
     </div>
-
     <div class="footer-bottom">
-      <p>©2025 Foretoken Media. RGI Enterprises LLC. All rights reserved.</p>
-      <small>Market data provided by leading exchanges. Not investment advice.</small>
+      <p>© 2025 Foretoken. All rights reserved.</p>
+      <p>Market data provided by leading exchanges. Not investment advice.</p>
     </div>
   </footer>
-
-  <style>
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #111;
-      min-width: 160px;
-      z-index: 1;
-    }
-
-    .dropdown-content a {
-      display: block;
-      color: white;
-      padding: 8px 16px;
-      text-decoration: none;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .social-text {
-      color: #a855f7;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      margin-right: 16px;
-    }
-
-    .social-text:hover {
-      color: #d8b4fe;
-    }
-  </style>
 
 </body>
 </html>
