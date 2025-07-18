@@ -12,3 +12,4 @@ Foretoken is a lightweight, static HTML + Node.js backend application with Fireb
 
 ## 📁 File Structure
 
+
