@@ -11,19 +11,23 @@
 
 <body class="bg-black text-white font-inter">
 
-  <!-- Header -->
+  <!--HEADER-->
   <header class="navbar">
-    <div class="logo-section">
-      <img src="logo.png" alt="Foretoken Logo" class="logo" />
-      <span class="site-title">FORETOKEN</span>
+    <div class="logo-section" style="display: flex; align-items: center;">
+      <a href="/">
+        <img src="/docs/assets/img/neon-logo.png" alt="Foretoken Logo" class="logo" style="height: 36px; vertical-align: middle;" />
+      </a>
+      <span class="site-title" style="margin-left: 0.5rem;">FORETOKEN</span>
     </div>
     <nav class="nav-links">
       <a href="/">Home</a>
       <a href="/library">Library</a>
       <a href="/podcast">Podcasts</a>
-      <a href="/connect">Connect ▼</a>
-      <a href="/login" style="margin-left:2rem;">🔐 Login</a>
-      <a href="/subscribe" class="btn-purple" style="margin-left:1rem;">Sign Up</a>
+      <a href="/connect">
+        Connect <span style="font-size: 0.5em;">▼</span>
+      </a>
+      <a href="/login" style="margin-left: 2rem;">Login</a>
+      <a href="/subscribe" class="btn-purple" style="margin-left: 1rem; color: #ffffff;">Sign Up</a>
     </nav>
   </header>
 
@@ -73,18 +77,34 @@
     </div>
   </main>
 
-  <!-- Footer -->
+  <!--FOOTER--> 
   <footer class="site-footer">
     <div class="footer-top">
-      <div class="footer-brand">
-        <h1 class="site-title">FORETOKEN</h1>
-        <p>Bringing transparency to tokenized assets through comprehensive market intelligence and analysis.</p>
-        <div style="margin-top: 1rem;">
-          <a href="#" class="social-text">𝕏</a>
-          <a href="#" class="social-text">in</a>
-          <a href="#" class="social-text">✈️</a>
+      <div class="footer-brand" style="margin-right: 3rem;">
+        <h1 class="site-title" style="margin-bottom: 0.5rem;">FORETOKEN</h1>
+        <p>
+          Bringing transparency to tokenized assets through comprehensive market
+          intelligence and analysis.
+        </p>
+        <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+          <a href="https://t.me/foretokenalerts" target="_blank">
+            <img src="/docs/assets/img/icon-telegram.png" alt="Telegram" width="32" height="32" />
+          </a>
+          <a href="https://x.com/foretokenrwa" target="_blank">
+            <img src="/docs/assets/img/icon-x.png" alt="X" width="32" height="32" />
+          </a>
+          <a href="https://www.facebook.com/foretokenmedia" target="_blank">
+            <img src="/docs/assets/img/icon-facebook.png" alt="Facebook" width="32" height="32" />
+          </a>
+          <a href="https://www.linkedin.com/company/foretokenrwa" target="_blank">
+            <img src="/docs/assets/img/icon-linkedin.png" alt="LinkedIn" width="32" height="32" />
+          </a>
+          <a href="https://foretoken.medium.com/" target="_blank">
+            <img src="/docs/assets/img/icon-medium.png" alt="Medium" width="32" height="32" />
+          </a>
         </div>
       </div>
+
       <div class="footer-links">
         <div>
           <h4>Platform</h4>
@@ -119,7 +139,7 @@
     </div>
   </footer>
 
-  <!-- Beehiiv Newsletter Integration -->
+  <!-- Beehiiv Newsletter Integration (Double Opt-In) -->
   <script>
     document.getElementById("beehiiv-form").addEventListener("submit", async function(e) {
       e.preventDefault();
@@ -131,13 +151,13 @@
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer 4DFCY1milZuAcgvp3ql87J4BvXNVi8ogtnwFFnl4K8CR52w4UuYC271dxlcHYotQ"
+            "Authorization": "Bearer YOUR_API_KEY_HERE"
           },
-          body: JSON.stringify({ email, send_welcome_email: true })
+          body: JSON.stringify({ email }) // No send_welcome_email = triggers double opt-in
         });
 
         if (res.ok) {
-          alert("You're subscribed! 🎉");
+          alert("Please check your inbox to confirm your subscription.");
           document.getElementById("email").value = "";
         } else {
           const data = await res.json();
